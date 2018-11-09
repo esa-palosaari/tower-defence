@@ -4,7 +4,7 @@
 int main(){
     std::cout<<"Game is starting.."<<std::endl;
     GameTitle title;
-    title.Starta();
+    title.StartTitle();
     std::cout<<"Game is closed."<<std::endl;
 }
 
