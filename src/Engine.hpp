@@ -56,8 +56,12 @@ private:
     float spawnPointX = 0;
     float spawnPointY = 0;
     int SpawnNumber = 0;
+    int MaxEnemies=0;
+    int enemiesSpawned = 0;
+    int BaseLevels[3][1] = {{1},{2},{3}};
     
     //Game's state information
+    int Interval = 1000;
     int TimeOutTime = 10;
     bool GameEnd = false;
     bool TimeOut = true;
@@ -69,9 +73,12 @@ private:
     
     //Required functions
     void loadMap(int Id);
-    void newLevel();
-    void watchForTimeout();
+    void LevelUp();
+    void CheckTimeOut();
 }
+
+
+
 
 
 
