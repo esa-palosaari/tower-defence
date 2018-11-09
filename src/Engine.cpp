@@ -23,12 +23,10 @@ void Engine::EndGame(){
         GameEnd=true;
     }
 }
-void Engine::saveGame(std::string targetPath){   //boost needed! -> investigate.
+void Engine::saveGame(std::string targetPath){  
     std::ofstream out;
-    out.open(targetPath, std::ios:app); /*boost::archive::text_oarchive archive(out);   archive << this;*/
+    out.open(targetPath, std::ios:app);
     out<<points<<';'<<round<<';'<<HP<<';';
-    
-    //boost
     std::ostringstream archive_streamT;
     boost::archive::text_oarchive archiveT(archive_streamT);
     archiveT << towers;
