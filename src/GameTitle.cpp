@@ -11,7 +11,7 @@ GameTitle::GameTitle() : nWindow(sf::VideoMode(1920, 1080), "GameTitle", sf::Sty
     }
 }
 
-void GameTitle::Starta(){
+void GameTitle::StartTitle(){
     while(nWindow.isOpen()){
         manageEvents();
         render();
