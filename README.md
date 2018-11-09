@@ -22,7 +22,8 @@ It contains the following:
 
 
 ## Updating Makefile
-Add the .cpp files to add
+1. Edit file `CMakeLists.txt` and add the .cpp files to add_executable()
+2. run `cmake ..` in directory `build/`
 
 ## Compiling the the program
 Run `make` in the directory `build/`.
