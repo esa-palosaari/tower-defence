@@ -6,7 +6,7 @@
 class GameTitle{
 public:
     GameTitle();
-    void Starta();
+    void StartTitle();
     void manageEvents();
     void render();
 private:
