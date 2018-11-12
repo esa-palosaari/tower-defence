@@ -1,5 +1,28 @@
 #include "Enemy.hpp"
 
+Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled) : type(Type), IdNum(IDNUM), Muuttuja(muuttuja), LengthTravelled(lengthtravelled), Forward(200.f, 0.f), UpDown(0.f, 200.f), Hold(0.f,0.f) {
+    switch(type){
+        case(Types::NPC::Slow):
+            Bounty = 50;
+            Hp=1500;
+            Speed=0.75;
+            break;
+    
+        case(Types::NPC::Medium):
+            Bounty = 50;
+            Hp=1000;
+            Speed=1.0;
+            break;
+            
+        case(Types::NPC::Fast):
+            Bounty=50;
+            Hp=500;
+            Speed=1.25;
+            break;
+    }
+}
+
+
 void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     if(Dead){
         return;
