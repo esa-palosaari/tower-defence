@@ -10,6 +10,7 @@ class Enemy {
         Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
         Enemy() {};
         move(sf::Vector2f position, sf::Time time); //Pathfinding
+        int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
         Types::NPC getType() const; //Getter
         float getLengthTravelled() const; //Getter
         int getIdNum() const //Getter
@@ -17,7 +18,7 @@ class Enemy {
         int getBounty() const //Getter
         void setDead(); //Changes enemy's status to Dead=true;
         bool CheckDead(); //Checks if enemy is dead or not
-        getHit();
+        
     private:
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
@@ -30,8 +31,5 @@ class Enemy {
         sf::Vector2f Forward; //Move-function: Moves object 'forward'
         sf::Vector2f UpDown; //Move-function: Moves object down or up depending on position.
         sf::Vector2f Hold; //Move-function: Stops object from moving.
-        int DMG;
-        int x;
-        int y;
 };
 #endif
