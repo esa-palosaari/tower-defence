@@ -19,7 +19,11 @@ class Enemy {
         int getBounty() const //Getter
         void setDead(); //Changes enemy's status to Dead=true;
         bool CheckDead(); //Checks if enemy is dead or not
-        
+    
+        sf::Sprite enemy;
+        sf::RectangleShape HealthBar;
+        sf::RectangleShape base;
+        sf::Clock clock;
     private:
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
