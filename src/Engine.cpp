@@ -20,7 +20,7 @@ void Engine::Update(sf::Time elapsedTime){
         CheckTimeout();
     } else {
         for(auto& enemy:enemies){
-            auto EnemyPlacement = enemy.enemy.getPlacement(); //Enemy
+            auto EnemyPlacement = enemy.enemy.getPosition(); //Enemy
             enemy.Move(EnemyPlacement, elapsedTime); //Enemy
             if(enemy.enemy.getPlacement().x >= 1984 && !enemy.isDead()){
                 if(HP>0){
