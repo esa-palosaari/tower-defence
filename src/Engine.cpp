@@ -20,9 +20,9 @@ void Engine::Update(sf::Time elapsedTime){
         CheckTimeout();
     } else {
         for(auto& enemy:enemies){
-            auto EnemyPlacement = enemy.enemy.getPosition(); //Enemy
-            enemy.Move(EnemyPlacement, elapsedTime); //Enemy
-            if(enemy.enemy.getPlacement().x >= 1984 && !enemy.isDead()){
+            auto EnemyPlacement = enemy.enemy.getPosition(); //getPosition is SFML-based function.
+            enemy.move(EnemyPlacement, elapsedTime); //Move implemented in Enemy-class.
+            if(enemy.enemy.getPosition().x >= 1984 && !enemy.isDead()){
                 if(HP>0){
                     switch(enemy.getType()){
                         case(Types::NPC::Type_4):
