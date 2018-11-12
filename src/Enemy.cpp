@@ -101,6 +101,6 @@ int Enemy::getBounty() const{
 void Enemy::setDead(){
     Dead=true;
 }
-bool Enemy::CheckDead(){  //Muuta kaikki isDeadit!
+bool Enemy::CheckDead(){ 
     return Dead;
 }
