@@ -21,8 +21,6 @@ Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled) : 
             break;
     }
 }
-
-
 void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     if(Dead){
         return;
@@ -84,4 +82,25 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
         HealthBar.setPosition(enemy.getPosition().x, enemy.getPosition().y+40.f);
     }
     base.setPosition(HealthBar.getPosition());
+}
+Types::NPC Enemy::getType() const{
+    return type;
+}
+float Enemy::getLengthTravelled() const{
+    return LengthTravelled;
+}
+int Enemy::getIdNum() const{
+    return IdNum;
+}
+int Enemy::getHp(){
+    return Hp;
+}
+int Enemy::getBounty() const{
+    return Bounty;
+}
+void Enemy::setDead(){
+    Dead=true;
+}
+bool Enemy::CheckDead(){  //Muuta kaikki isDeadit!
+    return Dead;
 }
