@@ -57,8 +57,10 @@ private:
     float spawnPointY = 0;
     int SpawnNumber = 0;
     int MaxEnemies = 0;
-    int enemiesSpawned = 0;
-    int BaseLevels[3][1] = {{1},{2},{3}};
+    int SpawnedSlows = 0;
+    int SpawnedMediums = 0;
+    int SpawnedFasts = 0;
+    int BaseLevels[3][3] = {{5,0,0},{0,5,0},{0,0,5}};
 
     // Game's state information
     int Interval = 1000;
