@@ -11,6 +11,7 @@ class Enemy {
         Enemy() {};
         move(sf::Vector2f position, sf::Time time); //Pathfinding
         int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
+        void InitializeSprite(float PointX, float PointY); //Initializes enemy's sprite to spawnpoint.
         Types::NPC getType() const; //Getter
         float getLengthTravelled() const; //Getter
         int getIdNum() const //Getter
