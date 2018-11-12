@@ -104,3 +104,23 @@ void Enemy::setDead(){
 bool Enemy::CheckDead(){ 
     return Dead;
 }
+int Enemy::getHit(int DMG){
+    Hp -= DMG;
+    if(Hp<0){
+        Hp=0;
+    }
+    if(type==Types::NPC::Slow || type==Types::NPC::Medium || type==Type::NPC::Fast){
+        HealthBar.setSize(sf::Vector2f(HP * 8 / 125, 3));
+    }
+    if(Hp<=0){
+        enemy.setColor(sf::Color::Black);
+        base.setFillColor(sf::Color::Transparent);
+        Dead=true;
+        clock.restart();
+        return Bounty;
+    }
+    else{
+        return 0;
+    }
+}
+
