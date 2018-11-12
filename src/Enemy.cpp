@@ -83,6 +83,20 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     }
     base.setPosition(HealthBar.getPosition());
 }
+void Enemy::InitializeSprite(float PointX, float PointY){
+    enemy.setPosition(PointX, PointY);
+    HealthBar.setSize(sf::vector2f(64,3));
+    base.setSize(sf::Vector2f(64,3));
+    HealthBar.setOrigin(32.f, 3/2.f);
+    base.setOrigin(sf::Vector2f(32.f, 3/2.f));
+    HealthBar.setFillColor(sf::Color::Green);
+    base.setFillColor(sf::Color::Red);
+    if(type==Types::NPC::Slow || type==Types::NPC::Medium || type==Types::NPC::Fast){
+        enemy.setOrigin(32.f, 32.f);
+        HealthBar.setPosition(0.f, 140.f);
+        base.setPosition(0.f, 140.f);
+    }
+}
 Types::NPC Enemy::getType() const{
     return type;
 }
