@@ -22,7 +22,7 @@ void Engine::Update(sf::Time elapsedTime){
         for(auto& enemy:enemies){
             auto EnemyPlacement = enemy.enemy.getPosition(); //getPosition is SFML-based function.
             enemy.move(EnemyPlacement, elapsedTime); //Move implemented in Enemy-class.
-            if(enemy.enemy.getPosition().x >= 1984 && !enemy.isDead()){
+            if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
                 if(HP>0){
                     switch(enemy.getType()){
                         case(Types::NPC::Type_4):
@@ -82,7 +82,7 @@ bool Engine::isAllDead(){
         return false;
     }
     for(int i = 0; i < enemies.size(); i++){
-        if(!enemies[i].isDead()){   //Enemy class: isDead()
+        if(!enemies[i].CheckDead()){ 
             return false;
         }
     }
@@ -129,7 +129,7 @@ void Engine::CheckTimeOut(){
 
 void Engine::spawnEnemies(Types::NPC type){
     Enemy&& temp = Enemy(type, SpawnNumber, 0, 0);
-    temp.initSprite(0.f, 160.f);
+    temp.InitializeSprite(0.f, 160.f);
     enemies.push_back(temp);
     SpawnNumber++;
 }
@@ -137,7 +137,7 @@ void Engine::spawnEnemies(Types::NPC type){
 
 void Engine:spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
     Enemy&& temp = Enemy(type, SpawnNumber, flag, distance);
-    temp.initSprite(x, y);
+    temp.InitializeSprite(x, y);
     enemies.push_back(temp);
     SpawnNumber++;
 }
@@ -145,7 +145,7 @@ void Engine:spawnEnemies(Types::NPC type, float x, float y, int flag, float dist
 
 void Engine::spawnTower(Types::NPC type, float x, float y){
     Tower&& temp = Tower(this, type, x, y);
-    temp.initSprite();
+    temp.InitializeSprite();
     towers.push_back(temp);
 }
 
