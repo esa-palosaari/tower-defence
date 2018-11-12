@@ -10,10 +10,14 @@ class Enemy {
         Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
         Enemy() {};
         move(sf::Vector2f position, sf::Time time); //Pathfinding
+        Types::NPC getType() const; //Getter
+        float getLengthTravelled() const; //Getter
+        int getIdNum() const //Getter
+        int getHp(); //Getter
+        int getBounty() const //Getter
+        void setDead(); //Changes enemy's status to Dead=true;
+        bool CheckDead(); //Checks if enemy is dead or not
         getHit();
-        EShoot();
-        checkDistance();
-        hit();
     private:
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
