@@ -18,19 +18,26 @@ void Engine::StartEngine(){
 void Engine::Update(sf::Time elapsedTime){
     if(Level == 0 || FileLoaded){
         CheckTimeout();
-    } else {
+    } 
+    else {
         for(auto& enemy:enemies){
-            auto EnemyPlacement = enemy.enemy.getPosition(); //getPosition is SFML-based function.
-            enemy.move(EnemyPlacement, elapsedTime); //Move implemented in Enemy-class.
+            auto EnemyPlacement = enemy.enemy.getPosition();
+            enemy.move(EnemyPlacement, elapsedTime); 
             if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
                 if(HP>0){
                     switch(enemy.getType()){
-                        case(Types::NPC::Type_4):
+                        case(Types::NPC::Slow):
+                            HP--;
+                            break;
+                        case(Types::NPC::Medium):
+                            HP--;
+                            break;
+                        case(Types::NPC::Fast):
                             HP--;
                             break;
                     }
                 }
-                enemy.Die();    //Enemy
+                enemy.Die();
             }
         }
 
@@ -58,15 +65,36 @@ void Engine::Update(sf::Time elapsedTime){
             }
         }
         if(Level<=3){
-            if(Clock.getElapsedTime().asMilliseconds() > Interval && enemiesSpawned < BaseLevels[Level-1][0]){
-                spawnEnemies(Types::NPC::Type_4);
-                enemiesSpawned++;
+            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
+                spawnEnemies(Types::NPC::Slow);
+                SpawnedSlows++;
+                Clock.restart();
+            }
+            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
+                spawnEnemies(Types::NPC::Medium);
+                SpawnedMediums++;
+                Clock.restart();
+            }
+            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
+                spawnEnemies(Types::NPC::Fast);
+                SpawnedFasts++;
                 Clock.restart();
             }
         }
         else{
             if(Clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies){
-                spawnEnemies(Types::NPC::Type_4);
+                int DetermineType = rand() % 3 + 1;
+                switch(DetermineType){
+                    case 1:
+                        spawnEnemies(Types::NPC::Slow);
+                        break;
+                    case 2:
+                        spawnEnemies(Types::NPC::Medium);
+                        break;
+                    case 3:
+                        spawnEnemies(Types::NPC::Fast);
+                        break;
+                }
                 Clock.restart();
             }
         }
