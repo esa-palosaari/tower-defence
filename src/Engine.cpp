@@ -10,8 +10,8 @@
 // Starts the engine, loads the game map from file, starts the clock and calls UserGraphics
 void Engine::StartEngine(){
     loadMap(1);
-    Clock.restart();
-    UserGraphics graph(this); //Kannattaako lähettää olio vai tietorakenne?
+    clock.restart();
+    UserGraphics graph(this); 
     graph.StartEngine();
 }
 
@@ -65,24 +65,24 @@ void Engine::Update(sf::Time elapsedTime){
             }
         }
         if(Level<=3){
-            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
+            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
                 spawnEnemies(Types::NPC::Slow);
                 SpawnedSlows++;
-                Clock.restart();
+                clock.restart();
             }
-            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
+            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
                 spawnEnemies(Types::NPC::Medium);
                 SpawnedMediums++;
-                Clock.restart();
+                clock.restart();
             }
-            if(Clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
+            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
                 spawnEnemies(Types::NPC::Fast);
                 SpawnedFasts++;
-                Clock.restart();
+                clock.restart();
             }
         }
         else{
-            if(Clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies){
+            if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies){
                 int DetermineType = rand() % 3 + 1;
                 switch(DetermineType){
                     case 1:
@@ -95,7 +95,7 @@ void Engine::Update(sf::Time elapsedTime){
                         spawnEnemies(Types::NPC::Fast);
                         break;
                 }
-                Clock.restart();
+                clock.restart();
             }
         }
         if(enemies.size() == MaxEnemies && HP > 0){
