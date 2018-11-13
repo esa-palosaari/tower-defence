@@ -179,27 +179,24 @@ void Engine::spawnTower(Types::NPC type, float x, float y){
 
 // Loads the map from .txt - file into array
 void Engine::loadMap(int id){
-  std::string map_path = "map" + std::to_string(id) + ".txt";
-  std::ifstream map_file(map_path);
-  std::string pixel;
 
-  int i = 0;
-  int pixels[510];
-
-  if(map_file.is_open()) {
-    while(std::getline(map_file, pixel, ',')){
-        pixels[i] = std::stoi(pixel);
-        i++;
-    }
-    map_file.close();
+  std::vector<int> level;
+  std::string number_as_string;
+  std::string fname = "../src/maps/Map" + std::to_string(id) + ".txt";
+  std::ifstream istr(fname.c_str());
+  if(istr.rdstate() & (istr.failbit | istr.badbit)) {
+    std::cerr << "Failed to read file" << std::endl;
+  } else {
+    while (std::getline(istr, number_as_string, ',')) {
+    level.push_back(atoi(number_as_string.c_str()));
+  }
   }
 
-// Create the tilemap from the level definition
+  // create the tilemap from the level definition
   TileMap map;
-  if(!map.load("tilesheet.png", sf::Vector2u(32, 32), &pixels[0], 16, 8)){
-      std::cout << "Can not load the map." << std::endl;
-  }
-
+  if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))
+      std::cout << "Cannot load the map" << std::endl;
+      return -1;
 }
 
 // Updates the player to a next level
