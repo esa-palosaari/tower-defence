@@ -71,7 +71,7 @@ private:
 
     // SFML properties
     sf::Clock TimeOutClock;
-    sf::Clock Clock;
+    sf::Clock clock;
 
     // Required functions
     void loadMap(int Id);
