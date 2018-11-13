@@ -28,7 +28,7 @@ int main(){
     // Read text file
     std::vector<int> level;
     std::string number_as_string;
-    std::string fname = "../src/maps/Map1.txt";
+    std::string fname = "../src/maps/Map2.txt";
     std::ifstream istr(fname.c_str());
     if(istr.rdstate() & (istr.failbit | istr.badbit)) {
       std::cerr << "Failed to read file" << std::endl;
@@ -40,7 +40,7 @@ int main(){
     
     // create the tilemap from the level definition
     TileMap map;
-    if (!map.load("../src/photos/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), &level[0], 16, 8))
+    if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))
         return -1;
 
     // run the main loop
@@ -66,4 +66,4 @@ int main(){
     std::cout<<"Game is closed."<<std::endl;
 }
 
-
+// /Users/oskartainio/Documents/Ohjelmointi/C++ -ohjelmointi/Projekti/GameTitle/GameTitle/ExternalLibraries/SFML/include/SFML
