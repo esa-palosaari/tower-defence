@@ -11,18 +11,18 @@
 void Engine::StartEngine(){
     loadMap(1);
     clock.restart();
-    UserGraphics graph(this); 
+    UserGraphics graph(this);
     graph.StartEngine();
 }
 
 void Engine::Update(sf::Time elapsedTime){
     if(Level == 0 || FileLoaded){
         CheckTimeout();
-    } 
+    }
     else {
         for(auto& enemy:enemies){
             auto EnemyPlacement = enemy.enemy.getPosition();
-            enemy.move(EnemyPlacement, elapsedTime); 
+            enemy.move(EnemyPlacement, elapsedTime);
             if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
                 if(HP>0){
                     switch(enemy.getType()){
@@ -110,7 +110,7 @@ bool Engine::isAllDead(){
         return false;
     }
     for(int i = 0; i < enemies.size(); i++){
-        if(!enemies[i].CheckDead()){ 
+        if(!enemies[i].CheckDead()){
             return false;
         }
     }
@@ -196,7 +196,7 @@ void Engine::loadMap(int id){
 
 // Create the tilemap from the level definition
   TileMap map;
-  if(!map.load("TileRange.png", sf::Vector2u(64, 64), pixels, 30, 17)){
+  if(!map.load("tilesheet.png", sf::Vector2u(32, 32), &pixels[0], 16, 8)){
       std::cout << "Can not load the map." << std::endl;
   }
 
