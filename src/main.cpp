@@ -66,4 +66,4 @@ int main(){
     std::cout<<"Game is closed."<<std::endl;
 }
 
-// /Users/oskartainio/Documents/Ohjelmointi/C++ -ohjelmointi/Projekti/GameTitle/GameTitle/ExternalLibraries/SFML/include/SFML
+
