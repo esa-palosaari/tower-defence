@@ -18,14 +18,14 @@ void UserGraphics::StartUserGraphics(){
                 timeSLU -= FPSTime;                 //Time per frame is substituted and overtime remains in time reserves.
                 if(Game->getHP() > 0 && !GamePaused){
                     manageEvents();
-                    Game->Update(FPSTime);         //Update is requested.
+                    Game->Update(FPSTime);         //Update is requested to update the current frame to next frame.
                 }
                 else if(GamePaused){               //If game is paused, additional measurements are requested.
-                    managePause();
+                    managePause();                  //Manages possible user input while game is paused.
                 }
                 else{                              //If there is no HP left, ending must be managed as well.
-                    Game->Update(FPSTime);
-                    manageEnd();
+                    Game->Update(FPSTime);      //Engine's Update-function is called.
+                    manageEnd();                //End-times user input is managed.
                 }
             }
             render();                             //Window and graphics must be rendered at the end of each loop.
