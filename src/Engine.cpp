@@ -12,7 +12,7 @@ void Engine::StartEngine(){
     loadMap(1);
     clock.restart();
     UserGraphics graph(this);
-    graph.StartEngine();
+    graph.StartUserGraphics();
 }
 
 void Engine::Update(sf::Time elapsedTime){
