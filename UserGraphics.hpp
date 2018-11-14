@@ -11,7 +11,7 @@ public:
     void processPause();
 private:
     Engine* Game;
-    const sf::Time FPSTime = sf::seconds(1.f / 60.f); //Frames per second.
+    const sf::Time FPSTime = sf::seconds(1.f / 60.f); //Time until an update is called to update the current frame to next one.
     bool GamePaused = false;
 }
 
