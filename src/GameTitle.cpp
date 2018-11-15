@@ -3,7 +3,7 @@
 #include <iostream>
 
 GameTitle::GameTitle() : nWindow(sf::VideoMode(1920, 1080), "GameTitle", sf::Style::None), title(), titleTexture() {
-    if(!titleTexture.loadFromFile("photos/title.png")){
+    if(!titleTexture.loadFromFile("../src/photos/title.png")){
         std::cout << "Opening title.png failed!" << std::endl;
     }
     else{

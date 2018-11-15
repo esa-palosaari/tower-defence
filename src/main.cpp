@@ -28,7 +28,7 @@ int main(){
     // Read text file
     std::vector<int> level;
     std::string number_as_string;
-    std::string fname = "../src/maps/Map3.txt";
+    std::string fname = "../src/maps/Map4.txt";
     std::ifstream istr(fname.c_str());
     if(istr.rdstate() & (istr.failbit | istr.badbit)) {
       std::cerr << "Failed to read file" << std::endl;
