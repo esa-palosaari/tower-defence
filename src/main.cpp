@@ -16,7 +16,7 @@ int main(){
     //    title.StartTitle();
 
     // create the window
-    sf::RenderWindow window(sf::VideoMode(512, 256), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Tilemap");
 
     // fake test file input
     /*    std::istringstream is("0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0, 0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0, 2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,"); */
@@ -34,13 +34,13 @@ int main(){
       std::cerr << "Failed to read file" << std::endl;
     } else {
       while (std::getline(istr, number_as_string, ',')) {
-      level.push_back(atoi(number_as_string.c_str()));
+      level.push_back(atoi(number_as_string.c_str()) - 1);	// get the right id starting from 0
     }
     }
     
     // create the tilemap from the level definition
     TileMap map;
-    if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))
+    if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))	// muuta speksit (60, 34) 
         return -1;
 
     // run the main loop
