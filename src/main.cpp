@@ -40,7 +40,7 @@ int main(){
     
     // create the tilemap from the level definition
     TileMap map;
-    if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 60, 33))	// muuta speksit (60, 34) 
+    if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 60, 34))	// muuta speksit (60, 34) 
         return -1;
 
     // run the main loop
