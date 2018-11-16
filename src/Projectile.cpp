@@ -1,138 +1,110 @@
-#include "Projectile.hpp"
+#include "Projectiles.hpp"
 
-Projectile::Projectile(int damage, float x, float y, Types::NPC type, int target) : damage(damage), x(x), y(y), type(type), target(target) {}
+Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId) : DMG(dmg), x(x), y(y), type(Type), TargetID(targetId) {}
 
-void Projectile::initTexture()
-{
-	textureInit = true;
+void Projectile::InitializeTexture(){
+    textureInitialize = true;
 }
 
-sf::Sprite Projectile::getProjectile() const
-{
-	return projectile_spr;
+sf::Sprite Projectile::getProjectileSprite() const{
+    return ProjectileSprite;
 }
 
-Types::NPC Projectile::getOriginType() const
-{
-	return type;
+Types::NPC Projectile::getProjectileType() const{
+    return type;
 }
 
-bool Projectile::isDestroyed()
-{
-	return destroyed;
+bool Projectile::isBlownUp(){   //Check's if projectile exists or not.
+    return BlownUp;
 }
 
-void Projectile::move(sf::Time elapsedTime, std::vector<Monster>& monsters)
-{
-	for (auto& mons : monsters)
-	{
-		if (mons.getId() == target)
-		{
-			sf::Vector2f aim = -projectile_spr.getPosition() + mons.monster.getPosition();
-			float angle = 2 * 3.1415 - atan2(aim.x, aim.y);
-			angle = angle * 360 / (2 * 3.1415); // to radians
-			projectile_spr.setRotation(angle + 180);
-			float magnitude = sqrt(pow(aim.x, 2) + pow(aim.y, 2));
-			sf::Vector2f unit_vector(aim.x / magnitude, aim.y / magnitude);
-
-			projectile_spr.move(velocity*unit_vector*elapsedTime.asSeconds());
-			break;
-		}
-	}
+void Projectile::Move(sf::Time elapsedTime, std::vector<Enemy>& enemies){
+    for(auto& enemy : enemies){
+        if(enemy.getIdNum()==TargetID){     //Check's if targeted enemy is right one for all existing enemies.
+            sf::Vector2f AimAtTarget = -ProjectileSprite.getPosition() + enemy.enemy.getPosition();     //Builds a vector to targeted enemy.
+            float AimAngle = 2 * 3.1415 - atan2(AimAtTarget.x, AimAtTarget.y);      //Builds a required angle to guide projectile to right position.
+            AimAngle = AimAngle * 360/(2*3.1415);       //Changes angle to radians.
+            ProjectileSprite.setRotation(AimAngle+180); //Rotates projectile correctly.
+            float AimPower = sqrt(pow(AimAtTarget.x,2)+pow(AimAtTarget.y,2));   //Calculates distance to target.
+            sf::Vector2f UnitVector(AimAtTarget.x / AimPower, AimAtTarget.y / AimPower);    //Creates unit vector to target.
+            ProjectileSprite.move(Speed*UnitVector*elapsedTine.asSeconds());    //Calls sprite's move-function (need to implement this!) to move projectile. move() is SFML-based function.
+            break;
+        }
+    }
 }
 
-TurretProjectile::TurretProjectile(int damage, float x, float y, Types::NPC type, int target) : Projectile(damage, x, y, type, target) 
-{
-	projectile_spr.setPosition(x, y);
-	projectile_spr.setOrigin(32.f, 32.f);
+MachinegunProjectile::MachinegunProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
+    ProjectileSprite.setPosition(x,y):
+    ProjectileSprite.setOrigin(32.f, 32.f);
 }
 
-int TurretProjectile::impact(std::vector<Monster>& monsters)
-{
-	int value = 0;
-	for (auto& mons : monsters)
-	{
-		if (mons.getId() == target && abs(getProjectile().getPosition().x - mons.monster.getPosition().x) <= 10 && abs(getProjectile().getPosition().y - mons.monster.getPosition().y) <= 10 && destroyed == false)
-		{
-			if (!mons.isDead() && !mons.isInvisible())
-			{
-				value = mons.getHit(damage);
-			}
-			destroyed = true; // projectile
-			break;
-		}
-	}
-	return value;
+int MachinegunProjectile::HitTarget(std::vector<Enemy>& enemies){
+    int number = 0;
+    for(auto& enemy : enemies){
+        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){ //Checks if enemy is close enough to projectile and projectile still exists.
+            if(!enemy.CheckDead()){
+                number = enemy.getHit(DMG);     //if enemy is not dead, it gets hit. It drops bounty if it dies, otherwise returns zero.
+            }
+            BlownUp=true;              //Projectile itself is "blown up" and doesn't exist anymore.
+            break;
+        }
+    }
+    return number;
+}
+
+FlameProjectile::FlameProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
+    ProjectileSprite.setPosition(x,y);
+    ProjectileSprite.setOrigin(32.f, 32.f);
+}
+
+int FlameProjectile::HitTarget(std::vector<Enemy>& enemies){
+    int number=0;
+    for(auto& enemy : enemies){
+        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+            if(!enemy.CheckDead()){
+                value = enemy.getHit(DMG);      //Same as machinegun's projectile. Additional features will be added here once the basic mechanism works.
+            }
+            BlownUp = true;
+            break;
+        }
+    }
+    return value;
+}
+
+RocketProjectile::RocketProjectile(int dmg, float x, float y, Types::NPC, int targetId) : Projectile(dmg, x, y, type, targetId){
+    ProjectileSprite.setPosition(x,y);
+    ProjectileSprite.setOrigin(32.f, 32.f);
+}
+
+int RocketProjectile::HitTarget(std::vector<Enemy>& enemies){
+    int number = 0;
+    for(auto& enemy : enemies){
+        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+            if(!enemy.CheckDead()){
+                number = enemy.getHit(DMG);    //Target itself gets hit as normally.
+            }
+            AoE.setOrigin(46.f, 45.f);      //Area of effect damage is implicated.
+            Aoe.setScale(2,2);
+            AoE.setPosition(enemy.enemy.getPosition().x, enemy.enemy.getPosition().y);  //Are of effect sprite is placed above enemy hit.
+            AoD.setOrigin(100.f, 100.f);                                                //This is just a sprite, it doesn't "hurt" enemies.
+            AoD.setRadius(100); //Damage area's radius is set.
+            AoD.setPosition(enemy.enemy.getPosition().x, enemy.enemy.getPosition().y);  //Area of damage sprite is placed above enemy hit.
+            AoD.setFillColor(sf::Color(216,30,0,100));                                  //This effect hurts all enemies that are inside its radius.
+            for(auto& enemi: enemies){  //Damages all enemies that are caught inside are of damage.
+                if(AoD.getGlobalBounds().contains(enemi.enemy.getPosition().x, enemi.enemy.getPosition().y) && !enemi.CheckDead()){
+                    if(!enemi.CheckDead()){
+                        number+=enemi.getHit(DMG);
+                    }
+                }
+            }
+            GraphArea = true;       //Changes GraphArea to true.
+            clock.restart();        //Restarts the clock.
+            BlownUp=true;           //Destroys projetile.
+            break;
+        }
+    }
+    return number;
 }
 
 
-FireProjectile::FireProjectile(int damage, float x, float y, Types::NPC type, int target) : Projectile(damage, x, y, type, target) 
-{
-	projectile_spr.setPosition(x, y);
-	projectile_spr.setOrigin(32.f, 32.f);
-}
 
-int FireProjectile::impact(std::vector<Monster>& monsters)
-{
-	int value = 0;
-	for (auto& mons : monsters)
-	{
-		if (mons.getId() == target && abs(getProjectile().getPosition().x - mons.monster.getPosition().x) <= 10 && abs(getProjectile().getPosition().y - mons.monster.getPosition().y) <= 10 && destroyed == false)
-		{
-			if (!mons.isDead() && !mons.isInvisible())
-			{
-				if (mons.getType() == Types::NPC::Tank)
-					value = mons.getHit(damage*0.5);
-				else
-					value = mons.getHit(damage);
-			}
-			destroyed = true; // projectile
-			break;
-		}
-	}
-	return value;
-}
-
-MissileProjectile::MissileProjectile(int damage, float x, float y, Types::NPC type, int target) : Projectile(damage, x, y, type, target) 
-{
-	projectile_spr.setPosition(x, y);
-	projectile_spr.setOrigin(32.f, 32.f);
-}
-
-int MissileProjectile::impact(std::vector<Monster>& monsters)
-{
-	int value = 0;
-	for (auto& mons : monsters)
-	{
-		if (mons.getId() == target && abs(getProjectile().getPosition().x - mons.monster.getPosition().x) <= 10 && abs(getProjectile().getPosition().y - mons.monster.getPosition().y) <= 10 && destroyed == false)
-		{
-			if (!mons.isDead() && !mons.isInvisible())
-			{
-				value = mons.getHit(damage);
-			}
-			explosion.setOrigin(46.f, 45.f);
-			explosion.setScale(2, 2);
-			explosion.setPosition(mons.monster.getPosition().x, mons.monster.getPosition().y);
-			damageArea.setOrigin(100.f, 100.f);
-			damageArea.setRadius(100);
-			damageArea.setPosition(mons.monster.getPosition().x, mons.monster.getPosition().y);
-			damageArea.setFillColor(sf::Color(216, 30, 0, 100));
-			for (auto& m : monsters)
-			{
-				if (damageArea.getGlobalBounds().contains(m.monster.getPosition().x, m.monster.getPosition().y) && !m.isDead()) // surroundings will get hit even if the target is already dead
-				{
-					if (!m.isDead() && !m.isInvisible())  //adding value if area damage kills additional monsters
-					{
-						value += m.getHit(damage);
-					}
-				}
-			}
-			drawArea = true;
-			clock.restart();
-			destroyed = true; // projectile
-			
-			break;
-		}
-	}
-	return value;
-}
