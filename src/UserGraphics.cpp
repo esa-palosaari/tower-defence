@@ -21,6 +21,24 @@ UserGraphics::UserGraphics(Engine* engine) : Game(engine){
     std::cout << "Error loading image towerBase2.png" << std::endl;
   }
   sf::Sprite spriteTowerBase2(textureTowerBase2);
+
+  sf::Texture textureEnemy1;
+  if(textureEnemy1.loadFromFile("../src/photos/enemy1.png")) {
+    std::cout << "Error loading image enemy1.png" << std::endl;
+  }
+  sf::Sprite spriteEnemy1(textureEnemy1);
+
+  sf::Texture textureEnemy2;
+  if(textureEnemy1.loadFromFile("../src/photos/enemy2.png")) {
+    std::cout << "Error loading image enemy2.png" << std::endl;
+  }
+  sf::Sprite spriteEnemy2(textureEnemy2);  
+
+  sf::Texture textureEnemy3;
+  if(textureEnemy1.loadFromFile("../src/photos/enemy3.png")) {
+    std::cout << "Error loading image enemy3.png" << std::endl;
+  }
+  sf::Sprite spriteEnemy3(textureEnemy3);  
 }
 
 void UserGraphics::StartUserGraphics(){

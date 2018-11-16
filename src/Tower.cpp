@@ -12,6 +12,7 @@ Tower::Tower(Engine* game, Types::NPC type, float x, float y) : game(game), type
         firerate = 100;
         damage = 100;
         price = 100;
+	tower = game.graph.spriteTowerBase0;
         // tarvitaanko muita muuttujia?
         break;
     
@@ -20,6 +21,7 @@ Tower::Tower(Engine* game, Types::NPC type, float x, float y) : game(game), type
         firerate = 100;
         damage = 100;
         price = 100;
+	tower = game.graph.spriteTowerBase1;	
         break;
 
         case(Types::NPC::type_3):
@@ -27,6 +29,7 @@ Tower::Tower(Engine* game, Types::NPC type, float x, float y) : game(game), type
         firerate = 100;
         damage = 100;
         price = 100;
+	tower = game.graph.spriteTowerBase2;	
         break;
     }
 }
