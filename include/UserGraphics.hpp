@@ -18,7 +18,13 @@ private:
   sf::Texture textureTowerBase2;
   sf::Sprite spriteTowerBase0;
   sf::Sprite spriteTowerBase2;
-  sf::Sprite spriteTowerBase1;  
+  sf::Sprite spriteTowerBase1;
+  sf::Texture textureEnemy1;
+  sf::Texture textureEnemy2;
+  sf::Texture textureEnemy3;
+  sf::Sprite spriteEnemy1;
+  sf::Sprite spriteEnemy2;
+  sf::Sprite spriteEnemy3;  
 };
 
 #endif 
