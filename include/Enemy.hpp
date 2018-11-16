@@ -7,7 +7,7 @@
 
 class Enemy {
     public:
-        Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
+  Enemy(Engine* game, Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
         Enemy() {};
         move(sf::Vector2f position, sf::Time time); //Pathfinding
         int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
@@ -27,6 +27,7 @@ class Enemy {
         sf::RectangleShape base;
         sf::Clock clock;
     private:
+        Engine* game;
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
         int IdNum;  //Identification number, check engine cpp.
