@@ -3,6 +3,24 @@
 
 UserGraphics::UserGraphics(Engine* engine) : Game(engine){
     //Textuurit ja fontit + muut alustetaan tässä!
+
+  sf::Texture textureTowerBase0;
+  if(textureTowerBase0.loadFromFile("../src/photos/towerBase0.png")) {
+    std::cout << "Error loading image towerBase0.png" << std::endl;
+  }
+  sf::Sprite spriteTowerBase0(textureTowerBase0);
+
+  sf::Texture textureTowerBase1;
+  if(textureTowerBase1.loadFromFile("../src/photos/towerBase1.png")) {
+    std::cout << "Error loading image towerBase1.png" << std::endl;
+  }
+  sf::Sprite spriteTowerBase1(textureTowerBase1);
+
+  sf::Texture textureTowerBase2;
+  if(textureTowerBase2.loadFromFile("../src/photos/towerBase2.png")) {
+    std::cout << "Error loading image towerBase2.png" << std::endl;
+  }
+  sf::Sprite spriteTowerBase2(textureTowerBase2);
 }
 
 void UserGraphics::StartUserGraphics(){
