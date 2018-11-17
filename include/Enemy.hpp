@@ -19,6 +19,7 @@ class Enemy {
         int getBounty() const //Getter
         void setDead(); //Changes enemy's status to Dead=true;
         bool CheckDead(); //Checks if enemy is dead or not
+        void setTimePause(float Time);
         
         bool operator<(const Enemy& E) const{return (LengthTravelled < E.LengthTravelled);} //Operator overloading for sorting different enemies when calculating which one to shoot at.
     
