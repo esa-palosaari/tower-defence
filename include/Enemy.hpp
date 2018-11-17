@@ -36,6 +36,7 @@ class Enemy {
         int Bounty; //Amount of money enemy drops when it dies.
         float Speed; //Enemy moves this fast.
         float LengthTravelled=0 //Distance from spawn
+        float PauseTime = 0;
         bool Dead=false; //If object is dead or not
         sf::Vector2f Forward; //Move-function: Moves object 'forward'
         sf::Vector2f UpDown; //Move-function: Moves object down or up depending on position.
