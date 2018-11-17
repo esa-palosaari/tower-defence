@@ -23,7 +23,7 @@ public:
 
     bool isTimeOut() {return TimeOut;}
     void resetTimeOut() {TimeOutTime = 0;}
-    void increaseTimeOut(TimeOutTime += time;)
+    void increaseTimeOut(int time){TimeOutTime += time;}
     bool isAllDead()
     bool isEnd() {return GameEnd;}
 
