@@ -77,4 +77,5 @@ private:
     void loadMap(int Id);
     void LevelUp();
     void CheckTimeOut();
+    void resetTimeOut() { TimeOutTime = 0; }
 }
