@@ -141,9 +141,9 @@ int Enemy::getHit(int DMG){
     }
 }
 
-void Monster::setTimePause(float Time){
+void Enemy::setTimePause(float Time){
 	PauseTime = Time;
 }
-void Monster::InitializeTexture(){
+void Enemy::InitializeTexture(){
 	TextureInitialize = true;
 }
