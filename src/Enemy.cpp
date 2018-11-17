@@ -141,3 +141,7 @@ int Enemy::getHit(int DMG){
     }
 }
 
+void Monster::setTimePause(float Time)
+{
+	PauseTime = Time;
+}
