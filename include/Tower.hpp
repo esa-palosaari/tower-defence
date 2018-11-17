@@ -7,7 +7,7 @@
 #include "Engine.hpp"
 #include "Types.hpp"
 
-class Engine; // taytyyko engine forward declaroida?
+class Engine; 
 
 class Tower {
 public:
