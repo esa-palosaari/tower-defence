@@ -38,7 +38,25 @@ UserGraphics::UserGraphics(Engine* engine) : Game(engine){
   if(textureEnemy1.loadFromFile("../src/photos/enemy3.png")) {
     std::cout << "Error loading image enemy3.png" << std::endl;
   }
-  sf::Sprite spriteEnemy3(textureEnemy3);  
+  sf::Sprite spriteEnemy3(textureEnemy3);
+
+  sf::Texture textureFlame;
+  if(textureEnemy1.loadFromFile("../src/photos/flameProjectile.png")) {
+    std::cout << "Error loading image flameProjectile.png" << std::endl;
+  }
+  sf::Sprite spriteFlame(textureFlame);
+
+  sf::Texture textureMissile;
+  if(textureEnemy1.loadFromFile("../src/photos/missileProjectile.png")) {
+    std::cout << "Error loading image missileProjectile.png" << std::endl;
+  }
+  sf::Sprite spriteMissile(textureMissile);
+
+  sf::Texture textureGun;
+  if(textureEnemy1.loadFromFile("../src/photos/gunProjectile.png")) {
+    std::cout << "Error loading image gunProjectile.png" << std::endl;
+  }
+  sf::Sprite spriteGun(textureGun);    
 }
 
 void UserGraphics::StartUserGraphics(){

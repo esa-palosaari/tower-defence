@@ -24,7 +24,14 @@ private:
   sf::Texture textureEnemy3;
   sf::Sprite spriteEnemy1;
   sf::Sprite spriteEnemy2;
-  sf::Sprite spriteEnemy3;  
+  sf::Sprite spriteEnemy3;
+
+  sf::Texture textureFlame;
+  sf::Texture textureMissile;
+  sf::Texture textureGun;  
+  sf::Sprite spriteFlame;
+  sf::Sprite spriteMissile;
+  sf::Sprite spriteGun;  
 };
 
 #endif 
