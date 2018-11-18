@@ -23,7 +23,11 @@ It contains the following:
 
 ## Updating Makefile
 1. Edit file `CMakeLists.txt` and add the .cpp files to add_executable()
-2. run `cmake ..` in directory `build/`
+2. If there is something old from another system for example, delete all files from `build/` (e.g. `cd build` and `rm * -rf`)
+3. run `cmake ..` in directory `build/`
 
 ## Compiling the the program
 Run `make` in the directory `build/`.
+
+## Run the program
+The executable is in the `build/` directory
