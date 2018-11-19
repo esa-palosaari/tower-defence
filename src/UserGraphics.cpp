@@ -6,7 +6,7 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
     engine->window.create(sf::VideoMode(1920, 1080), "Tower Defense Group 3", sf::Style::None);
     engine->window.setMouseCursorVisible(false);
     
-    if (!Font.loadFromFile("FontFile.ttf")) {       //FontFile is needed here!
+    if (!Font.loadFromFile("photos/FontFile.ttf")) {
         std::cout << "Can't load font" << std::endl;
     }
     
@@ -76,9 +76,9 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
     CircleMissile.setRadius(500.f);
     CircleMissile.setFillColor(sf::Color(0, 102, 102, 100));
     
-    TextureTowerMachinegun.loadFromFile("TowerBasicPhoto.png"); //Tee tämä!
-    TextureTowerFlameThrower.loadFromFile("TowerFlamePhoto.png");   //Tee tämä!
-    TextureTowerRocketlauncher.loadFromFile("TowerRocketPhoto.png");    //Tee tämä!
+    TextureTowerMachinegun.loadFromFile("photos/TowerBasicPhoto.png"); 
+    TextureTowerFlameThrower.loadFromFile("photos/TowerFlamePhoto.png");
+    TextureTowerRocketlauncher.loadFromFile("photos/TowerRocketPhoto.png");
     
     TowerMachine.setTexture(TextureTowerMachinegun);
     TowerMachine.setPosition(1740, 220);
@@ -92,18 +92,18 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
     TowerRocket.setPosition(1740, 420);
     TowerRocket.setOrigin(32.f, 32.f);
     
-    TextureMouseCursor.loadFromFile("MouseCursorPhoto.png");    //Tee tämä!
+    TextureMouseCursor.loadFromFile("photos/MouseCursorPhoto.png");
     MouseCursor.setTexture(TextureMouseCursor);
     
-    TextureProjectileMachine.loadFromFile("TextureProjectileMachinePhoto.png");     //Tee tämä!
-    TextureProjectileFlame.loadFromFile("TextureProjectileFlamePhoto.png");     //Tee tämä!
-    TextureProjectileRocket.loadFromFile("TextureProjectileRocketPhoto.png");   //Tee tämä!
-    TextureAoE.loadFromFile("AoePhoto.png");    //Tee tämä!
-    TextureEnemySlow.loadFromFile("TextureEnemySlow.png");  //Tee tämä!!
-    TextureEnemyMedium.loadFromFile("TextureEnemyMedium.png");  //Tee tämä!!
-    TextureEnemyFast.loadFromFile("TextureEnemyFast.png");  //Tee tämä!!
+    TextureProjectileMachine.loadFromFile("photos/TextureProjectileMachinePhoto.png");
+    TextureProjectileFlame.loadFromFile("photos/TextureProjectileFlamePhoto.png");
+    TextureProjectileRocket.loadFromFile("photos/TextureProjectileRocketPhoto.png");
+    TextureAoE.loadFromFile("photos/AoePhoto.png");
+    TextureEnemySlow.loadFromFile("photos/TextureEnemySlow.png");
+    TextureEnemyMedium.loadFromFile("photos/TextureEnemyMedium.png");
+    TextureEnemyFast.loadFromFile("photos/TextureEnemyFast.png");
     
-    RedMarker.loadFromFile("RedMarker.png");    //Tee tämä!
+    RedMarker.loadFromFile("photos/RedMarker.png");
     CrossMarker.setTexture(RedMarker);
     CrossMarker.setScale(0.25f, 0.25f);
     

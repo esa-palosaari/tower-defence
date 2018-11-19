@@ -3,7 +3,7 @@
 
 #include "Enemy.hpp"
 #include "Tower.hpp"
-#include "Projectile"
+#include "Projectile.hpp"
 #include "TileMap.hpp"
 
 #include "Types.hpp"    //U
@@ -80,4 +80,6 @@ private:
     void loadMap(int Id);
     void LevelUp();
     void CheckTimeOut();
-}
+};
+
+#endif 
