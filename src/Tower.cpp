@@ -1,37 +1,37 @@
 #include "Tower.hpp"
 #include "Engine.hpp"
-#include <memory> // tarvitaanko tata?
-#include <vector>
+#include <memory> //Jotta voidaan hallinnoida uusien tornien spawnaaminen ja mahdollinen tallentaminen save game-funktiossa.
 
-Tower::Tower(Engine* game, Types::NPC type, float x, float y) : game(game), type(type), x(x), y(y), target = -1
+Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine), type(type), x(x), y(y)
 {
     switch (type)
     {
-        case(Types::NPC::type_1): // korjaa type ja arvot oikeaksi
-        range =  100;
-        firerate = 100;
-        damage = 100;
-        price = 100;
-        // tarvitaanko muita muuttujia?
+        case(Types::NPC::Machinegun):
+        Range =  100;
+        Firerate = 100;
+        DMG = 100;
+        Price = 100;
         break;
     
-        case(Types::NPC::type_2):
-        range =  100;
-        firerate = 100;
-        damage = 100;
-        price = 100;
+        case(Types::NPC::Flamethrower):
+        Range =  100;
+        Firerate = 100;
+        DMG = 100;
+        Price = 100;
         break;
 
-        case(Types::NPC::type_3):
-        range =  100;
-        firerate = 100;
-        damage = 100;
-        price = 100;
+        case(Types::NPC::Rocketlauncher):
+        Range =  100;
+        Firerate = 100;
+        DMG = 100;
+        Price = 100;
         break;
     }
 }
 
-void Tower::initializeTower()
+//SFML initialization.
+
+void Tower::InitializeSprite()      //Initializes tower's sprite
 {
     tower.setPosition(x,y);
     tower.setOrigin(32.f,32.f);
@@ -42,37 +42,20 @@ void Tower::initializeTower()
     circle.setFillColor(sf::Color(125, 125, 125, 255));
 }
 
-void initializeTexture()
+void Tower::InitializeTexture() //Initializes texture for tower.
 {
-    textureInit = true;
+    textureInitialize = true;
 }
 
-bool Tower::checkRange(Enemy enemy)
-{
-    if (enemy.CheckDead())
-        return false;
-    float xDiff = abs(enemy.enemy.getPosition().x - tower.getPosition().x);
-    float yDiff = abs(enemy.enemy.getPosition().y - tower.getPosition().y);
-    return sqrt(pow(xDiff,2) + pow(yDiff,2)) < range;
-    // KORJAA!!!
-}
-void Tower::setAngle(Enemy enemy)
-{
-    sf::Vector2f aim = -tower.getPosition() + enemy.enemy.getPosition();
-    double angle = 2 * 3.14159265 - atan2(aim.x, aim.y);
-    angle = angle * 360 / (2*3.14159265);
-    tower.setRotation(angle + 180);
-}
-
-// getterit
+//Getters
 int Tower::getRange()
 {
-    return range;
+    return Range;
 }
 
 int Tower::getPrice()
 {
-    return price;
+    return Price;
 }
 
 Types::NPC type Tower::getType()
@@ -82,56 +65,60 @@ Types::NPC type Tower::getType()
 
 int Tower::getFirerate()
 {
-    return firerate;
+    return Firerate;
 }
 
-sf::Sprite Tower::getTower()
+sf::Sprite Tower::getTower()    //Sprite is named 'tower'
 {
     return tower;
 }
 
-void Tower::selectTarget(game.enemies) // ???
+//Shooting phase functions.
+
+void Tower::ReTarget(){ //Called from Engine.cpp to every tower after every tower has fired per frame.
+    TargetID = -1;
+}
+
+void Tower::Shoot(Enemy& enemy)     //Called from Engine.cpp
 {
-    float distance=0;
-    std::vector<Enemy> temp; // tahan kopiot kaikista enemyista jotka inrange
-    for (auto i = enemies.begin() : i!=enemies.end() : i++){
-        if checkRange(i)
-        {
-            temp.push_back(i)
-        }
+    if (TargetID == -1 && inRange(enemy)){  //TargetID is -1, when there is not target, butchanges when there is potential enemy in range.
+        TargetID = enemy.getIdNum();
     }
-    if temp.size == 0
+    if (TargetID == enemy.getIdNum() && inRange(enemy)) //Checks if targeted enemy has same targetID compared to turret's.
     {
-        return;
+        AimAngle(enemy);    //If so, turret aims at the enemy.
     }
-    else
-    {
-        for (auto i = temp.begin() : i != temp.end() : i++){
-            if(i.LengthTravelled > distance){
-                distance = i.LenghtTravelled;
-                target = i.IdNum;
-            }
+    if (TargetID == enemy.getIdNum() && inRange(enemy) && clock.getElapsetTime().asMilliseconds() - TimePause > Firerate){  //Lastly, turret checks whether enough time has passed since last shot. Time hast to be more than firerate.
+        clock.restart();    //clock is restarted, which means that shots are fired.
+        TimePause = 0;      //TimePause is resetted.
+        if(type==Types::NPC::Machinegun){       //Depending on each turrets type, different kind of projectile is fired.
+            std::shared_ptr<MachinegunProjectile> projectile = std::make_shared<MachinegunProjectile>(DMG, x, y, type, enemy.getIdNum());   //Projectiles are tracked using shared pointers.
+            engine->projectiles.pusch_back(projectile); //Projectiles vector is updated.
         }
-        if (target != -1)
-        {
-            Shoot() // referenssi id:tä vastaavaan enemyyn !?
+        else if(type == Types::NPC::Flamethrower){
+            std::shared_ptr<FlameProjectile> p = std::make_shared<FlameProjectile>(DMG, x, y, type, enemy.getIdNum());
+            engine->projectiles.push_back(p);
+        }
+        else if(type == Types::NPC::Rocketlauncher){
+            std::shared_ptr<RocketProjectile> p = std::make_shared<RocketProjectile>(DMG, x, y, type, enemy.getIdNum());
+            engine->projectiles.push_back(p);
         }
     }
 }
-void Tower::Shoot(Enemy& enemy)
+
+bool Tower::inRange(Enemy enemy)    //This checks if targeted enemy is in range. Called from tower's Shoot()-function.
 {
-    if (target == -1 && checkRange(enemy)){
-        target = enemy.getID(); // LAITA OIKEA FUNKTIO TAHAN
+    if (enemy.CheckDead()){
+         return false;
     }
-    if (target == enemy.getID() && checkRange(enemy))
-    {
-        setAngle(enemy);
-    }
-    if (target == enemy.getID() && checkRange(enemy) && clock.getElapsetTime().asMilliseconds() - pauseTime > firerate)
-
-    clock.restart();
-    pauseTime = 0;
-
-    // JOKAISELLE TOWER TYYPILLE PROJEKTIILIT ?
+    float XLength = abs(enemy.enemy.getPosition().x - tower.getPosition().x);
+    float YLength = abs(enemy.enemy.getPosition().y - tower.getPosition().y);
+    return sqrt(pow(XLength,2) + pow(YLength,2)) < Range;
 }
-
+void Tower::AimAngle(Enemy enemy)   //This alters tower's sprite to face enemy's direction. Called from tower's Shoot() -function.
+{
+    sf::Vector2f SightAngle = -tower.getPosition() + enemy.enemy.getPosition();
+    double Angle = 2 * 3.14159265 - atan2(SightAngle.x, SightAngle.y);
+    Angle = Angle * 360 / (2*3.14159265);
+    tower.setRotation(Angle + 180);
+}

@@ -7,7 +7,7 @@
 
 class Enemy {
     public:
-        Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
+  Enemy(Engine* game, Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); //Object creator
         Enemy() {};
         move(sf::Vector2f position, sf::Time time); //Pathfinding
         int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
@@ -19,7 +19,10 @@ class Enemy {
         int getBounty() const //Getter
         void setDead(); //Changes enemy's status to Dead=true;
         bool CheckDead(); //Checks if enemy is dead or not
+        void setTimePause(float Time);
+        void InitializeTexture();
         
+        bool TextureInitialize = false;
         bool operator<(const Enemy& E) const{return (LengthTravelled < E.LengthTravelled);} //Operator overloading for sorting different enemies when calculating which one to shoot at.
     
         sf::Sprite enemy;
@@ -27,6 +30,7 @@ class Enemy {
         sf::RectangleShape base;
         sf::Clock clock;
     private:
+        Engine* game;
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
         int IdNum;  //Identification number, check engine cpp.
@@ -34,6 +38,7 @@ class Enemy {
         int Bounty; //Amount of money enemy drops when it dies.
         float Speed; //Enemy moves this fast.
         float LengthTravelled=0 //Distance from spawn
+        float PauseTime = 0;
         bool Dead=false; //If object is dead or not
         sf::Vector2f Forward; //Move-function: Moves object 'forward'
         sf::Vector2f UpDown; //Move-function: Moves object down or up depending on position.

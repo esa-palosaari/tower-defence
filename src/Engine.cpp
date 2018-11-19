@@ -156,7 +156,7 @@ void Engine::CheckTimeOut(){
 }
 
 void Engine::spawnEnemies(Types::NPC type){
-    Enemy&& temp = Enemy(type, SpawnNumber, 0, 0);
+  Enemy&& temp = Enemy(this, type, SpawnNumber, 0, 0);
     temp.InitializeSprite(0.f, 160.f);
     enemies.push_back(temp);
     SpawnNumber++;
@@ -164,7 +164,7 @@ void Engine::spawnEnemies(Types::NPC type){
 
 
 void Engine:spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
-    Enemy&& temp = Enemy(type, SpawnNumber, flag, distance);
+  Enemy&& temp = Enemy(this, type, SpawnNumber, flag, distance);
     temp.InitializeSprite(x, y);
     enemies.push_back(temp);
     SpawnNumber++;
