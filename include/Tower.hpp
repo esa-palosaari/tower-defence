@@ -11,7 +11,7 @@ class Engine;
 
 class Tower {
 public:
-    Tower {Engine* game, Types::NPC type, float x, float y);
+    Tower (Engine* game, Types::NPC type, float x, float y);
     void InitializeSprite();
     void InitializeTexture();
     void Shoot(Enemy& enemy);
@@ -37,6 +37,7 @@ public:
         ValueType &range;
         ValueType &firerate;
     }
+
 private:
     void AimAngle(Enemy const enemy);
     bool inRange(Enemy const enemy);
@@ -51,4 +52,5 @@ private:
     float y;
     float TimePause = 0;
 };
+
 #endif
