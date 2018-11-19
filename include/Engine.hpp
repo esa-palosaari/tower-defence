@@ -6,6 +6,9 @@
 #include "Projectile"
 #include "TileMap.hpp"
 
+#include "Types.hpp"    //U
+#include "memory"   //U
+
 #include <fstream>
 #include <ctime>
 
