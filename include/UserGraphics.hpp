@@ -1,8 +1,8 @@
 #ifndef UserGraphics_hpp
-#define UserGraphics_hpp
+#define UserGraphics_hppOB
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "Tilemap.hpp"
+#include "TileMap.hpp"
 #include "Enemy.hpp"
 #include "Engine.hpp"
 
@@ -50,7 +50,7 @@ private:
     sf::Texture TextureProjectileMachine;
     sf::Texture TextureProjectileFlame;
     sf::Texture TextureProjectileRocket;
-    sf::Texture TextureEnemySlow
+    sf::Texture TextureEnemySlow;
     sf::Texture TextureEnemyMedium;
     sf::Texture TextureEnemyFast;
     sf::Texture TextureTowerMachinegun;

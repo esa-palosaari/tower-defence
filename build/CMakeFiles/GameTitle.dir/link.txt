@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/GameTitle.dir/src/GameTitle.o CMakeFiles/GameTitle.dir/src/main.o  -o GameTitle -rdynamic -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system 

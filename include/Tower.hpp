@@ -28,15 +28,6 @@ public:
     sf::CircleShape circle;
     bool textureInitialize = false;
             
-    template <typename Archive>
-    void serialize(Archive& statistics, const unsigned int version){
-        ValueType & type;
-        ValueType & x;
-        ValueType &y;
-        ValueType &Damage;
-        ValueType &range;
-        ValueType &firerate;
-    }
 
 private:
     void AimAngle(Enemy const enemy);

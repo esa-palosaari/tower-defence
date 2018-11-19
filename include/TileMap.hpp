@@ -1,6 +1,12 @@
 // Copied from SFML tutorial:
 // https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php
 
+#ifndef TileMap_hpp
+#define TileMap_hpp
+
+#include <SFML/Graphics.hpp>
+#include <string>
+
 class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
@@ -62,3 +68,5 @@ private:
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
 };
+
+#endif

@@ -26,11 +26,12 @@ public:
     bool GraphArea = false; //Contains information whether Aoe is graphde or not.
     
     //These are needed to complete rule of five.
-    virtual ~Projectile() {}    //Destructor
+   /* virtual ~Projectile() {}    //Destructor
     Projectile(const Projectile&) = default;    //Copy constructor
     Projectile(Projectile&&) = default;          //Move constructor
     Projectile& operator=(const Projectile&) & = default;  //Copy assignment
-    Projectile& operator=(Projectile&&) & = default;     //move assignment
+    Projectile& operator=(Projectile&&) & = default;     //move assignment*/
+
 protected:
     Types::NPC type;    //type of projectile, specific to each turret
     int DMG;    //Damage of each projectile

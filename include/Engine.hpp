@@ -12,7 +12,14 @@
 #include <fstream>
 #include <ctime>
 
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/serialization/vector.hpp>
 
+    class Tower;
+    class Projectile;    // forward declaration?
+    
 class Engine{
 public:
     void StartEngine();
@@ -27,7 +34,7 @@ public:
     bool isTimeOut() {return TimeOut;}
     void resetTimeOut() {TimeOutTime = 0;}
     void increaseTimeOut(int time){TimeOutTime += time;}
-    bool isAllDead()
+    bool isAllDead();
     bool isEnd() {return GameEnd;}
 
     void EndGame();
@@ -35,7 +42,7 @@ public:
 
     void spawnTower(Types::NPC type, float x, float y);
     void spawnEnemies(Types::NPC type);
-    void spawnEnemies(Types::NPC type, float x, float y, int flag, float distance)
+    void spawnEnemies(Types::NPC type, float x, float y, int flag, float distance);
 
     void setMoney(int startmoney) {money = startmoney;}
     void setHP(int startHP) {HP = startHP;}
@@ -43,9 +50,10 @@ public:
     void setGameTag(std::string UserTag) {GameTag = UserTag;}
 
     TileMap map;
+    sf::RenderWindow window;
     std::vector<Enemy> enemies;
     std::vector<Tower> towers;
-    std::vector<Projectile> projectiles;
+    std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
 
 
 private:

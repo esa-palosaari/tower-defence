@@ -22,7 +22,7 @@ void Engine::Update(sf::Time elapsedTime){
     else {
         for(auto& enemy:enemies){
             auto EnemyPlacement = enemy.enemy.getPosition();
-            enemy.move(EnemyPlacement, elapsedTime);
+            enemy.Move(EnemyPlacement, elapsedTime);
             if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
                 if(HP>0){
                     switch(enemy.getType()){
@@ -37,7 +37,7 @@ void Engine::Update(sf::Time elapsedTime){
                             break;
                     }
                 }
-                enemy.Die();
+                enemy.setDead();
             }
         }
 
@@ -55,9 +55,9 @@ void Engine::Update(sf::Time elapsedTime){
             tower.ReTarget();   //Tower
         }
 
-        for(std::vector<std::shared_ptr<Projectile>>iterator i=projectiles.begin(); i != projectiles.end(); ){
+        for(std::vector<std::shared_ptr<Projectile>>::iterator i=projectiles.begin(); i != projectiles.end();){
             if(!i->get()->isBlownUp()){       // Projectile
-                i->get()->move(elapsedTime, enemies);   // Projectile
+                i->get()->Move(elapsedTime, enemies);   // Projectile
                 money += i->get()->HitTarget(enemies);
                 i++;
             }
@@ -130,7 +130,7 @@ void Engine::EndGame(){
 // Saves the game into a .txt - file
 void Engine::saveGame(std::string targetPath){
     std::ofstream out;
-    out.open(targetPath, std::ios:app);
+    out.open(targetPath, std::ios::app);
     out << money << ';' << Level << ';' << HP << ';';
     std::ostringstream AstreamT;
     boost::archive::text_oarchive ArchiveT(AstreamT);
@@ -150,7 +150,7 @@ void Engine::CheckTimeOut(){
     if(TimeOutClock.getElapsedTime().asSeconds() > TimeOutTime && TimeOut){
         FileLoaded = false;
         enemies.clear();
-        newLevel();
+        LevelUp();
         TimeOut = false;
         TimeOutTime = 10;
     }
@@ -164,7 +164,7 @@ void Engine::spawnEnemies(Types::NPC type){
 }
 
 
-void Engine:spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
+void Engine::spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
   Enemy&& temp = Enemy(type, SpawnNumber, flag, distance);
     temp.InitializeSprite(x, y);
     enemies.push_back(temp);
@@ -197,13 +197,12 @@ void Engine::loadMap(int id){
   TileMap map;
   if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))
       std::cout << "Cannot load the map" << std::endl;
-      return -1;
 }
 
 // Updates the player to a next level
 void Engine::LevelUp(){
-    enemiesSpawned = 0;
-    if(round < 3){
+    SpawnNumber = 0;
+    if(Level < 3){
         MaxEnemies = BaseLevels[Level][0];
     } else {
         MaxEnemies = Level * 2;
