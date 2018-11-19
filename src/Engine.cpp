@@ -17,7 +17,7 @@ void Engine::StartEngine(){
 
 void Engine::Update(sf::Time elapsedTime){
     if(Level == 0 || FileLoaded){
-        CheckTimeout();
+        CheckTimeOut();
     }
     else {
         for(auto& enemy:enemies){
@@ -56,12 +56,13 @@ void Engine::Update(sf::Time elapsedTime){
         }
 
         for(std::vector<std::shared_ptr<Projectile>>iterator i=projectiles.begin(); i != projectiles.end(); ){
-            if(!i->get()->DoesntExist()){       // Projectile
+            if(!i->get()->isBlownUp()){       // Projectile
                 i->get()->move(elapsedTime, enemies);   // Projectile
+                money += i->get()->HitTarget(enemies);
                 i++;
             }
             else{
-                i=projectiles.Remove(i);    //Projectile
+                i=projectiles.erase(i);    //Projectile
             }
         }
         if(Level<=3){
@@ -156,7 +157,7 @@ void Engine::CheckTimeOut(){
 }
 
 void Engine::spawnEnemies(Types::NPC type){
-  Enemy&& temp = Enemy(this, type, SpawnNumber, 0, 0);
+  Enemy&& temp = Enemy(type, SpawnNumber, 0, 0);
     temp.InitializeSprite(0.f, 160.f);
     enemies.push_back(temp);
     SpawnNumber++;
@@ -164,7 +165,7 @@ void Engine::spawnEnemies(Types::NPC type){
 
 
 void Engine:spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
-  Enemy&& temp = Enemy(this, type, SpawnNumber, flag, distance);
+  Enemy&& temp = Enemy(type, SpawnNumber, flag, distance);
     temp.InitializeSprite(x, y);
     enemies.push_back(temp);
     SpawnNumber++;
