@@ -78,3 +78,5 @@ private:
     void LevelUp();
     void CheckTimeOut();
 }
+
+#endif 
