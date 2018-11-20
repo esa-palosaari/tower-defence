@@ -1,26 +1,26 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(Engine* game, Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled) : type(Type), IdNum(IDNUM), Muuttuja(muuttuja), LengthTravelled(lengthtravelled), Forward(200.f, 0.f), UpDown(0.f, 200.f), Hold(0.f,0.f) {
+Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled) : type(Type), IdNum(IDNUM), Muuttuja(muuttuja), LengthTravelled(lengthtravelled), Forward(200.f, 0.f), UpDown(0.f, 200.f), Hold(0.f,0.f) {
     switch(type){
         case(Types::NPC::Slow):
             Bounty = 50;
             Hp=1500;
             Speed=0.75;
-	    enemy = game.graph.spriteEnemy1
+	        //enemy = game.graph.spriteEnemy1
             break;
     
         case(Types::NPC::Medium):
             Bounty = 50;
             Hp=1000;
             Speed=1.0;
-	    enemy = game.graph.spriteEnemy2	    
+	        //enemy = game.graph.spriteEnemy2	    
             break;
             
         case(Types::NPC::Fast):
             Bounty=50;
             Hp=500;
             Speed=1.25;
-	    enemy = game.graph.spriteEnemy3	    
+	        //enemy = game.graph.spriteEnemy3	    
             break;
     }
 }
@@ -32,7 +32,7 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
         enemy.move(Speed*Forward*elapsedTime.asSeconds());
         
     }
-    else if(vector.x >= 352 && vector.xx < 800 && vector.y < 864){
+    else if(vector.x >= 352 && vector.x < 800 && vector.y < 864){
         if(Muuttuja <= 0){
             Muuttuja=1;
             enemy.setRotation(90);
@@ -88,7 +88,7 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
 }
 void Enemy::InitializeSprite(float PointX, float PointY){
     enemy.setPosition(PointX, PointY);
-    HealthBar.setSize(sf::vector2f(64,3));
+    HealthBar.setSize(sf::Vector2f(64,3));
     base.setSize(sf::Vector2f(64,3));
     HealthBar.setOrigin(32.f, 3/2.f);
     base.setOrigin(sf::Vector2f(32.f, 3/2.f));
@@ -126,8 +126,8 @@ int Enemy::getHit(int DMG){
     if(Hp<0){
         Hp=0;
     }
-    if(type==Types::NPC::Slow || type==Types::NPC::Medium || type==Type::NPC::Fast){
-        HealthBar.setSize(sf::Vector2f(HP * 8 / 125, 3));
+    if(type == Types::NPC::Slow || type == Types::NPC::Medium || type == Types::NPC::Fast){
+        HealthBar.setSize(sf::Vector2f(Hp * 8 / 125, 3));
     }
     if(Hp<=0){
         enemy.setColor(sf::Color::Black);

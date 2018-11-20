@@ -1,5 +1,5 @@
 #ifndef UserGraphics_hpp
-#define UserGraphics_hppOB
+#define UserGraphics_hpp
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"

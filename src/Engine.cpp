@@ -9,7 +9,7 @@
 
 // Starts the engine, loads the game map from file, starts the clock and calls UserGraphics
 void Engine::StartEngine(){
-    loadMap(64);
+    loadMap(4);
     clock.restart();
     UserGraphics graph(this);
     graph.StartUserGraphics();
@@ -129,7 +129,7 @@ void Engine::EndGame(){
 
 // Saves the game into a .txt - file
 void Engine::saveGame(std::string targetPath){
-    std::ofstream out;
+   /* std::ofstream out;
     out.open(targetPath, std::ios::app);
     out << money << ';' << Level << ';' << HP << ';';
     std::ostringstream AstreamT;
@@ -137,7 +137,7 @@ void Engine::saveGame(std::string targetPath){
     ArchiveT << towers;
     std::string OdataT = AstreamT.str();
     out << OdataT;
-    out.close();
+    out.close();*/
 }
 
 

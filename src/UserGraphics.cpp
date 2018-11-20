@@ -1,12 +1,12 @@
 #include "UserGraphics.hpp"
 #include <iostream>
 
-UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
+UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     engine->window.create(sf::VideoMode(1920, 1080), "Tower Defense Group 3", sf::Style::None);
     engine->window.setMouseCursorVisible(false);
     
-    if (!Font.loadFromFile("photos/FontFile.ttf")) {
+    if (!Font.loadFromFile("../src/photos/FontFile.ttf")) {
         std::cout << "Can't load font" << std::endl;
     }
     
@@ -76,9 +76,9 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
     CircleMissile.setRadius(500.f);
     CircleMissile.setFillColor(sf::Color(0, 102, 102, 100));
     
-    TextureTowerMachinegun.loadFromFile("photos/TowerBasicPhoto.png"); 
-    TextureTowerFlameThrower.loadFromFile("photos/TowerFlamePhoto.png");
-    TextureTowerRocketlauncher.loadFromFile("photos/TowerRocketPhoto.png");
+    TextureTowerMachinegun.loadFromFile("../src/photos/TowerBasicPhoto.png"); 
+    TextureTowerFlameThrower.loadFromFile("../src/photos/TowerFlamePhoto.png");
+    TextureTowerRocketlauncher.loadFromFile("../src/photos/TowerRocketPhoto.png");
     
     TowerMachine.setTexture(TextureTowerMachinegun);
     TowerMachine.setPosition(1740, 220);
@@ -92,18 +92,18 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
     TowerRocket.setPosition(1740, 420);
     TowerRocket.setOrigin(32.f, 32.f);
     
-    TextureMouseCursor.loadFromFile("photos/MouseCursorPhoto.png");
+    TextureMouseCursor.loadFromFile("../src/photos/MouseCursorPhoto.png");
     MouseCursor.setTexture(TextureMouseCursor);
     
-    TextureProjectileMachine.loadFromFile("photos/TextureProjectileMachinePhoto.png");
-    TextureProjectileFlame.loadFromFile("photos/TextureProjectileFlamePhoto.png");
-    TextureProjectileRocket.loadFromFile("photos/TextureProjectileRocketPhoto.png");
-    TextureAoE.loadFromFile("photos/AoePhoto.png");
-    TextureEnemySlow.loadFromFile("photos/TextureEnemySlow.png");
-    TextureEnemyMedium.loadFromFile("photos/TextureEnemyMedium.png");
-    TextureEnemyFast.loadFromFile("photos/TextureEnemyFast.png");
+    TextureProjectileMachine.loadFromFile("../src/photos/TextureProjectileMachinePhoto.png");
+    TextureProjectileFlame.loadFromFile("../src/photos/TextureProjectileFlamePhoto.png");
+    TextureProjectileRocket.loadFromFile("../src/photos/TextureProjectileRocketPhoto.png");
+    TextureAoE.loadFromFile("../src/photos/AoePhoto.png");
+    TextureEnemySlow.loadFromFile("../src/photos/TextureEnemySlow.png");
+    TextureEnemyMedium.loadFromFile("../src/photos/TextureEnemyMedium.png");
+    TextureEnemyFast.loadFromFile("../src/photos/TextureEnemyFast.png");
     
-    RedMarker.loadFromFile("photos/RedMarker.png");
+    RedMarker.loadFromFile("../src/photos/RedMarker.png");
     CrossMarker.setTexture(RedMarker);
     CrossMarker.setScale(0.25f, 0.25f);
     
@@ -137,8 +137,8 @@ UserGraphics::UserGraphics(UserGraphics* engine) : engine(engine){
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
-    text.setPosition(x, y);
-    text.setCharacterSize(Size);
+    textinput.setPosition(PositionX, PositionY);
+    textinput.setCharacterSize(Size);
 }
 
 template <class t>
@@ -160,7 +160,7 @@ bool UserGraphics::OverRoad(sf::Vector2f position){
 
 void UserGraphics::spawnTower(Types::NPC type, int MoneyLost){
     engine->spawnTower(type, sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
-    engine->MoneyLost(MoneyLost);
+    engine->loseMoney(MoneyLost);
 }
 
 void UserGraphics::manageEnd()
@@ -233,7 +233,7 @@ void UserGraphics::managePause()
                     }
                     for (auto& ENMY : engine->enemies)
                     {
-                        ENMY.setPauseTime(TimePassedInPause.getElapsedTime().asMilliseconds());
+                        ENMY.setTimePause(TimePassedInPause.getElapsedTime().asMilliseconds());
                     }
                     GameIsPaused = !GameIsPaused;
                 }
@@ -589,6 +589,7 @@ void UserGraphics::render()
             else if (projectile->getProjectileType() == Types::NPC::Flamethrower)
             {
                 projectile->ProjectileSprite.setTexture(TextureProjectileFlame);
+            }
             else
             {
                 projectile->ProjectileSprite.setTexture(TextureProjectileRocket);
@@ -602,7 +603,7 @@ void UserGraphics::render()
         if (projectile->GraphArea)
         {
             projectile->AoE.setTexture(TextureAoE);
-            engine->window.draw(projectile->Aoe);
+            engine->window.draw(projectile->AoE);
         }
         
     }

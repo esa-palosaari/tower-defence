@@ -37,8 +37,8 @@ void Tower::InitializeSprite()      //Initializes tower's sprite
     tower.setOrigin(32.f,32.f);
 
     circle.setPosition(x,y);
-    circle.setOrigin(range,range);
-    circle.setRadius(range);
+    circle.setOrigin(Range,Range);
+    circle.setRadius(Range);
     circle.setFillColor(sf::Color(125, 125, 125, 255));
 }
 
@@ -58,7 +58,7 @@ int Tower::getPrice()
     return Price;
 }
 
-Types::NPC type Tower::getType()
+Types::NPC Tower::getType () const
 {
     return type;
 }
@@ -88,20 +88,20 @@ void Tower::Shoot(Enemy& enemy)     //Called from Engine.cpp
     {
         AimAngle(enemy);    //If so, turret aims at the enemy.
     }
-    if (TargetID == enemy.getIdNum() && inRange(enemy) && clock.getElapsetTime().asMilliseconds() - TimePause > Firerate){  //Lastly, turret checks whether enough time has passed since last shot. Time hast to be more than firerate.
+    if (TargetID == enemy.getIdNum() && inRange(enemy) && clock.getElapsedTime().asMilliseconds() - TimePause > Firerate){  //Lastly, turret checks whether enough time has passed since last shot. Time hast to be more than firerate.
         clock.restart();    //clock is restarted, which means that shots are fired.
         TimePause = 0;      //TimePause is resetted.
         if(type==Types::NPC::Machinegun){       //Depending on each turrets type, different kind of projectile is fired.
-            std::shared_ptr<MachinegunProjectile> projectile = std::make_shared<MachinegunProjectile>(DMG, x, y, type, enemy.getIdNum());   //Projectiles are tracked using shared pointers.
-            engine->projectiles.pusch_back(projectile); //Projectiles vector is updated.
+            //std::shared_ptr<MachinegunProjectile> projectile = std::make_shared<MachinegunProjectile>(DMG, x, y, type, enemy.getIdNum());   //Projectiles are tracked using shared pointers.
+            engine->projectiles.push_back(std::make_shared<MachinegunProjectile>(MachinegunProjectile(DMG, x, y, type, enemy.getIdNum()))); //Projectiles vector is updated.
         }
         else if(type == Types::NPC::Flamethrower){
-            std::shared_ptr<FlameProjectile> p = std::make_shared<FlameProjectile>(DMG, x, y, type, enemy.getIdNum());
-            engine->projectiles.push_back(p);
+            //std::shared_ptr<FlameProjectile> projectile = std::make_shared<FlameProjectile>(DMG, x, y, type, enemy.getIdNum());
+            engine->projectiles.push_back(std::make_shared<FlameProjectile>(FlameProjectile(DMG, x, y, type, enemy.getIdNum())));
         }
         else if(type == Types::NPC::Rocketlauncher){
-            std::shared_ptr<RocketProjectile> p = std::make_shared<RocketProjectile>(DMG, x, y, type, enemy.getIdNum());
-            engine->projectiles.push_back(p);
+            //std::shared_ptr<RocketProjectile> projectile = std::make_shared<RocketProjectile>(DMG, x, y, type, enemy.getIdNum());
+            engine->projectiles.push_back(std::make_shared<RocketProjectile>(RocketProjectile(DMG, x, y, type, enemy.getIdNum())));
         }
     }
 }

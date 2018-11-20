@@ -15,7 +15,7 @@ class Enemy {
         float getLengthTravelled() const; //Getter
         int getIdNum() const; //Getter
         int getHp(); //Getter
-        int getBounty(); const //Getter
+        int getBounty() const; //Getter
         void setDead(); //Changes enemy's status to Dead=true;
         bool CheckDead(); //Checks if enemy is dead or not
         void setTimePause(float Time);

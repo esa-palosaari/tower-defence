@@ -30,6 +30,8 @@ public:
             
 
 private:
+    sf::Clock clock;
+    sf::Font font;
     void AimAngle(Enemy const enemy);
     bool inRange(Enemy const enemy);
     Types::NPC type;

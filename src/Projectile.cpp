@@ -1,4 +1,4 @@
-#include "Projectiles.hpp"
+#include "Projectile.hpp"
 
 Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId) : DMG(dmg), x(x), y(y), type(Type), TargetID(targetId) {}
 
@@ -27,21 +27,21 @@ void Projectile::Move(sf::Time elapsedTime, std::vector<Enemy>& enemies){
             ProjectileSprite.setRotation(AimAngle+180); //Rotates projectile correctly.
             float AimPower = sqrt(pow(AimAtTarget.x,2)+pow(AimAtTarget.y,2));   //Calculates distance to target.
             sf::Vector2f UnitVector(AimAtTarget.x / AimPower, AimAtTarget.y / AimPower);    //Creates unit vector to target.
-            ProjectileSprite.move(Speed*UnitVector*elapsedTine.asSeconds());    //Calls sprite's move-function (need to implement this!) to move projectile. move() is SFML-based function.
+            ProjectileSprite.move(Speed*UnitVector*elapsedTime.asSeconds());    //Calls sprite's move-function (need to implement this!) to move projectile. move() is SFML-based function.
             break;
         }
     }
 }
 
 MachinegunProjectile::MachinegunProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
-    ProjectileSprite.setPosition(x,y):
+    ProjectileSprite.setPosition(x,y);
     ProjectileSprite.setOrigin(32.f, 32.f);
 }
 
 int MachinegunProjectile::HitTarget(std::vector<Enemy>& enemies){
     int number = 0;
     for(auto& enemy : enemies){
-        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){ //Checks if enemy is close enough to projectile and projectile still exists.
+        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){ //Checks if enemy is close enough to projectile and projectile still exists.
             if(!enemy.CheckDead()){
                 number = enemy.getHit(DMG);     //if enemy is not dead, it gets hit. It drops bounty if it dies, otherwise returns zero.
             }
@@ -60,15 +60,15 @@ FlameProjectile::FlameProjectile(int dmg, float x, float y, Types::NPC type, int
 int FlameProjectile::HitTarget(std::vector<Enemy>& enemies){
     int number=0;
     for(auto& enemy : enemies){
-        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
             if(!enemy.CheckDead()){
-                value = enemy.getHit(DMG);      //Same as machinegun's projectile. Additional features will be added here once the basic mechanism works.
+                number = enemy.getHit(DMG);      //Same as machinegun's projectile. Additional features will be added here once the basic mechanism works.
             }
             BlownUp = true;
             break;
         }
     }
-    return value;
+    return number;
 }
 
 RocketProjectile::RocketProjectile(int dmg, float x, float y, Types::NPC, int targetId) : Projectile(dmg, x, y, type, targetId){
@@ -79,12 +79,12 @@ RocketProjectile::RocketProjectile(int dmg, float x, float y, Types::NPC, int ta
 int RocketProjectile::HitTarget(std::vector<Enemy>& enemies){
     int number = 0;
     for(auto& enemy : enemies){
-        if(enemy.getIdNum() == TargetID && abs(getProjectileSprite().getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(getProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
             if(!enemy.CheckDead()){
                 number = enemy.getHit(DMG);    //Target itself gets hit as normally.
             }
             AoE.setOrigin(46.f, 45.f);      //Area of effect damage is implicated.
-            Aoe.setScale(2,2);
+            AoE.setScale(2,2);
             AoE.setPosition(enemy.enemy.getPosition().x, enemy.enemy.getPosition().y);  //Are of effect sprite is placed above enemy hit.
             AoD.setOrigin(100.f, 100.f);                                                //This is just a sprite, it doesn't "hurt" enemies.
             AoD.setRadius(100); //Damage area's radius is set.

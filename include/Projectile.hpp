@@ -58,9 +58,9 @@ private:
     float Speed = 750;
 };
 
-class RocketProjectile : Projectile{
+class RocketProjectile : public Projectile{
 public:
-    RocketProjectile(int dmg, float x, float y, Types::NPC);
+    RocketProjectile(int dmg, float x, float y, Types::NPC type, int targetId);
     int HitTarget(std::vector<Enemy>& enemies);
 private:
     float Speed = 600;
