@@ -9,7 +9,7 @@
 
 // Starts the engine, loads the game map from file, starts the clock and calls UserGraphics
 void Engine::StartEngine(){
-    loadMap(4);
+    loadMap(10);
     clock.restart();
     UserGraphics graph(this);
     graph.StartUserGraphics();
@@ -181,7 +181,7 @@ void Engine::spawnTower(Types::NPC type, float x, float y){
 // Loads the map from .txt - file into array
 void Engine::loadMap(int id){
 
-  std::vector<int> level;
+  /*std::vector<int> level;
   std::string number_as_string;
   std::string fname = "../src/maps/Map" + std::to_string(id) + ".txt";
   std::ifstream istr(fname.c_str());
@@ -195,8 +195,22 @@ void Engine::loadMap(int id){
 
   // create the tilemap from the level definition
   TileMap map;
-  if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(32, 32), &level[0], 16, 8))
-      std::cout << "Cannot load the map" << std::endl;
+  if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(64, 64), level, 30, 17))
+      std::cout << "Cannot load the map" << std::endl; */
+
+	std::string mapPath = "../src/maps/Map"+std::to_string(id)+".txt";
+	std::ifstream mapFile(mapPath);
+	std::string value;
+	int level[510];
+	int y = 0;
+	while(std::getline(mapFile,value,',')){
+		level[y]=std::stoi(value);
+		y++;
+	}
+	if(!map.load("../src/photos/tilesheet3.png", sf::Vector2u(64,64), level, 30, 17))
+		std::cout<<"MAP NOT LOADED!"<<std::endl;
+		return;
+
 }
 
 // Updates the player to a next level
