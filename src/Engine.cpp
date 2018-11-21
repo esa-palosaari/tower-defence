@@ -65,7 +65,7 @@ void Engine::Update(sf::Time elapsedTime){
                 i=projectiles.erase(i);    //Projectile
             }
         }
-        if(Level<=3){
+        if(Level < 3){
             if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
                 spawnEnemies(Types::NPC::Slow);
                 SpawnedSlows++;
@@ -82,6 +82,7 @@ void Engine::Update(sf::Time elapsedTime){
                 clock.restart();
             }
         }
+
         else{
             if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies){
                 int DetermineType = rand() % 3 + 1;
@@ -164,8 +165,8 @@ void Engine::spawnEnemies(Types::NPC type){
 }
 
 
-void Engine::spawnEnemies(Types::NPC type, float x, float y, int flag, float distance){
-  Enemy&& temp = Enemy(type, SpawnNumber, flag, distance);
+void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
+  Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance);
     temp.InitializeSprite(x, y);
     enemies.push_back(temp);
     SpawnNumber++;
@@ -180,23 +181,6 @@ void Engine::spawnTower(Types::NPC type, float x, float y){
 
 // Loads the map from .txt - file into array
 void Engine::loadMap(int id){
-
-  /*std::vector<int> level;
-  std::string number_as_string;
-  std::string fname = "../src/maps/Map" + std::to_string(id) + ".txt";
-  std::ifstream istr(fname.c_str());
-  if(istr.rdstate() & (istr.failbit | istr.badbit)) {
-    std::cerr << "Failed to read file" << std::endl;
-  } else {
-    while (std::getline(istr, number_as_string, ',')) {
-    level.push_back(atoi(number_as_string.c_str()));
-  }
-  }
-
-  // create the tilemap from the level definition
-  TileMap map;
-  if (!map.load("../src/photos/tilesheet.png", sf::Vector2u(64, 64), level, 30, 17))
-      std::cout << "Cannot load the map" << std::endl; */
 
 	std::string mapPath = "../src/maps/Map"+std::to_string(id)+".txt";
 	std::ifstream mapFile(mapPath);
@@ -216,9 +200,13 @@ void Engine::loadMap(int id){
 // Updates the player to a next level
 void Engine::LevelUp(){
     SpawnNumber = 0;
-    if(Level < 3){
-        MaxEnemies = BaseLevels[Level][0];
-    } else {
+	SpawnedSlows=0;
+	SpawnedMediums=0;
+	SpawnedFasts=0;
+    	if(Level < 3){
+        MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2];
+    } 
+	else {
         MaxEnemies = Level * 2;
     }
 

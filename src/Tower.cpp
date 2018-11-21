@@ -7,22 +7,22 @@ Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine)
     switch (type)
     {
         case(Types::NPC::Machinegun):
-        Range =  100;
-        Firerate = 100;
+        Range =  1000;
+        Firerate = 1500;
         DMG = 100;
         Price = 100;
         break;
     
         case(Types::NPC::Flamethrower):
-        Range =  100;
-        Firerate = 100;
+        Range =  1000;
+        Firerate = 1500;
         DMG = 100;
         Price = 100;
         break;
 
         case(Types::NPC::Rocketlauncher):
-        Range =  100;
-        Firerate = 100;
+        Range =  1000;
+        Firerate = 2500;
         DMG = 100;
         Price = 100;
         break;

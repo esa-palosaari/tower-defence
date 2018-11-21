@@ -44,7 +44,7 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
             Muuttuja==2;
             enemy.setRotation(0);
         }
-        enemy.move(Speed*-UpDown*elapsedTime.asSeconds());
+        enemy.move(Speed*Forward*elapsedTime.asSeconds());
     }
     else if(vector.x >= 800 && vector.x < 1248 && vector.y >= 160){
         if(Muuttuja==2){
