@@ -1,28 +1,27 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled) : type(Type), IdNum(IDNUM), Muuttuja(muuttuja), LengthTravelled(lengthtravelled), Forward(200.f, 0.f), UpDown(0.f, 200.f), Hold(0.f,0.f) {
+Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled, float hpmodifier) : type(Type), IdNum(IDNUM), Muuttuja(muuttuja), LengthTravelled(lengthtravelled), LevelModifier(hpmodifier), Forward(200.f, 0.f), UpDown(0.f, 200.f), Hold(0.f,0.f) {
     switch(type){
         case(Types::NPC::Slow):
-            Bounty = 50;
-            Hp=1500;
-            Speed=0.75;
-	        //enemy = game.graph.spriteEnemy1
+            Bounty = 20;
+            Hp=1000;
+            Speed=0.60;
             break;
     
         case(Types::NPC::Medium):
-            Bounty = 50;
-            Hp=1000;
+            Bounty = 20;
+            Hp=750;
             Speed=1.0;
-	        //enemy = game.graph.spriteEnemy2	    
             break;
             
         case(Types::NPC::Fast):
-            Bounty=50;
+            Bounty=20;
             Hp=500;
-            Speed=1.25;
-	        //enemy = game.graph.spriteEnemy3	    
+            Speed=1.40;
             break;
     }
+	int HpModified = (int)(LevelModifier*Hp);
+	Hp = HpModified;
 }
 void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     if(Dead){
@@ -49,14 +48,14 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     else if(vector.x >= 800 && vector.x < 1248 && vector.y >= 160){
         if(Muuttuja==2){
             Muuttuja=3;
-            enemy.setRotation(-90);
+            enemy.setRotation(90);
         }
         enemy.move(Speed*-UpDown*elapsedTime.asSeconds());
     }
     else if(vector.x>=700 && vector.x<1248 && vector.y < 160){
         if(Muuttuja==3){
             Muuttuja=4;
-            enemy.setRotation(0);
+            enemy.setRotation(90);
         }
         enemy.move(Speed*Forward*elapsedTime.asSeconds());
     }
@@ -70,7 +69,7 @@ void Enemy::Move(sf::Vector2f vector, sf::Time elapsedTime){
     else if(vector.x >= 1000 && vector.y >=864){
         if(Muuttuja==5){
             Muuttuja=6;
-            enemy.setRotation(0);
+            enemy.setRotation(90);
         }
         enemy.move(Speed*Forward*elapsedTime.asSeconds());
     }

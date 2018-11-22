@@ -29,6 +29,9 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     CurrentMoney.setFont(Font);
     SetToText(CurrentMoney, 1700.f, 50.f, Font, 24);
+
+	CurrentScore.setFont(Font);
+    SetToText(CurrentScore, 1700.f, 70.f, Font, 24);
     
     TimeToNextWave.setFont(Font);
     SetToText(TimeToNextWave, 1700.f, 90.f, Font, 24);
@@ -54,26 +57,26 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     MachinegunTowerPrice.setFont(Font);
     SetToText(MachinegunTowerPrice, 1780.f, 210.f, Font, 20);
-    MachinegunTowerPrice.setString("100");
+    MachinegunTowerPrice.setString("1000");
     
     FlamethrowerTowerPrice.setFont(Font);
     SetToText(FlamethrowerTowerPrice, 1780.f, 310.f, Font, 20);
-    FlamethrowerTowerPrice.setString("100");
+    FlamethrowerTowerPrice.setString("1000");
     
     RocketlauncherTowerPrice.setFont(Font);
     SetToText(RocketlauncherTowerPrice, 1780.f, 410.f, Font, 20);
-    RocketlauncherTowerPrice.setString("100");
+    RocketlauncherTowerPrice.setString("1000");
     
-    CircleMachinegun.setOrigin(250.f, 250.f);
-    CircleMachinegun.setRadius(250.f);
+    CircleMachinegun.setOrigin(350.f, 350.f);
+    CircleMachinegun.setRadius(350.f);
     CircleMachinegun.setFillColor(sf::Color(0, 102, 102, 100));
     
-    CircleFlamethrower.setOrigin(150.f, 150.f);
-    CircleFlamethrower.setRadius(150.f);
+    CircleFlamethrower.setOrigin(275.f, 275.f);
+    CircleFlamethrower.setRadius(275.f);
     CircleFlamethrower.setFillColor(sf::Color(0, 102, 102, 100));
     
-    CircleMissile.setOrigin(500.f, 500.f);
-    CircleMissile.setRadius(500.f);
+    CircleMissile.setOrigin(300.f, 300.f);
+    CircleMissile.setRadius(300.f);
     CircleMissile.setFillColor(sf::Color(0, 102, 102, 100));
     
     TextureTowerMachinegun.loadFromFile("../src/photos/TowerBasicPhoto.png"); 
@@ -129,8 +132,8 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     Road7.setSize(sf::Vector2f(576, 192));
     Road7.setPosition(1344, 768);
     
-    MenuButton.setSize(sf::Vector2f(256, 704));
-    MenuButton.setPosition(1664, 0);
+    MenuButton.setSize(sf::Vector2f(256, 704));		//256, 704
+    MenuButton.setPosition(1664, 0);	//1664,0
     
     ScreenWhenPaused.setSize(sf::Vector2f(1920, 1080));
     ScreenWhenPaused.setFillColor(sf::Color(0, 0, 0, 150));
@@ -457,7 +460,7 @@ void UserGraphics::manageEvents()
                     }
                     else if (copyTowerMachinegun && ClickedTower && !InvalidPlacementMenu)
                     {
-                        spawnTower(Types::NPC::Machinegun, 500);
+                        spawnTower(Types::NPC::Machinegun, 1000);
                         TowerMachine.setPosition(1740, 220);
                     }
                     else if (copyTowerFlamethrower && ClickedTower && !InvalidPlacementMenu)
@@ -467,24 +470,24 @@ void UserGraphics::manageEvents()
                     }
                     else if (copyTowerRocketlauncher && ClickedTower && !InvalidPlacementMenu)
                     {
-                        spawnTower(Types::NPC::Rocketlauncher, 2500);
+                        spawnTower(Types::NPC::Rocketlauncher, 1000);
                         TowerRocket.setPosition(1740, 420);
                     }
                     
-                    if (insideBounds(TowerMachine, mouse) && engine->getMoney() >= 100)
+                    if (insideBounds(TowerMachine, mouse) && engine->getMoney() >= 1000)
                     {
                         ClickedTower = true;
                         copyTowerMachinegun = true;
                         InvalidPlacementMenu = true;
                     }
-                    else if (insideBounds(TowerFlame, mouse) && engine->getMoney() >= 100)
+                    else if (insideBounds(TowerFlame, mouse) && engine->getMoney() >= 1000)
                     {
                        
                         ClickedTower = true;
                         copyTowerFlamethrower = true;
                         InvalidPlacementMenu = true;
                     }
-                    else if (insideBounds(TowerRocket, mouse) && engine->getMoney() >= 100)
+                    else if (insideBounds(TowerRocket, mouse) && engine->getMoney() >= 1000)
                     {
                         ClickedTower = true;
                         copyTowerRocketlauncher = true;
@@ -610,10 +613,12 @@ void UserGraphics::render()
     CurrentHP.setString("HP: " + std::to_string(engine->getHP()));
     CurrentWave.setString("Wave: " + std::to_string(engine->getLevel()));
     CurrentMoney.setString("Money: " + std::to_string(engine->getMoney()));
+	CurrentScore.setString("Score: "+std::to_string(engine->getScore()));
     
     engine->window.draw(CurrentHP);
     engine->window.draw(CurrentWave);
     engine->window.draw(CurrentMoney);
+	engine->window.draw(CurrentScore);
     engine->window.draw(PauseButton);
     if (engine->isTimeOut())
     {
@@ -690,7 +695,7 @@ void UserGraphics::render()
     
     if (engine->getHP() <= 0)
     {
-        GameOverText.setString("GET REKT NOOB!\nWAVES SURVIVED: " + std::to_string(engine->getLevel() - 1) + "\nTOTAL SCORE: " + std::to_string(engine->getMoney()) + "\nPLAYER NAME: ");
+        GameOverText.setString("GET REKT NOOB!\nWAVES SURVIVED: " + std::to_string(engine->getLevel()) + "\nTOTAL SCORE: " + std::to_string(engine->getScore()) + "\nPLAYER NAME: ");
         engine->window.draw(InputToName);
         engine->window.draw(GameOverText);
     }

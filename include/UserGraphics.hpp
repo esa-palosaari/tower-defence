@@ -90,6 +90,7 @@ private:
     sf::Text CurrentHP;
     sf::Text CurrentWave;
     sf::Text CurrentMoney;
+	sf::Text CurrentScore;
     sf::Text TimeToNextWave;
     sf::Text MachinegunTowerPrice;
     sf::Text FlamethrowerTowerPrice;

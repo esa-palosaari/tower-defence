@@ -27,7 +27,8 @@ public:
     int TimeToNextRound() {return TimeOutTime - TimeOutClock.getElapsedTime().asSeconds();}
 
     int getMoney() const {return money;};
-    void loseMoney(int money) {money -= money;}
+	int getScore() const {return score;}
+    void loseMoney(int cash) {money -= cash;}
     int getLevel() const {return Level;}
     int getHP() const {return HP;}
 
@@ -54,14 +55,17 @@ public:
     std::vector<Enemy> enemies;
     std::vector<Tower> towers;
     std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
+	
 
 
 private:
     // Player's statistics
     std::string GameTag;
     int Level = 0;
-    int HP = 100;
-    int money = 1000;
+    int HP = 10;
+	int money=0;
+	int score=0;
+
 
     // Enemy information
     float spawnPointX = 0;

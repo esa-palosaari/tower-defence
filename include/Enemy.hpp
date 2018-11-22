@@ -7,7 +7,7 @@
 
 class Enemy {
     public:
-  	Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled); // Constructor
+  	Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled, float hpmodifier); // Constructor
         void Move(sf::Vector2f position, sf::Time time); //Pathfinding
         int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
         void InitializeSprite(float PointX, float PointY); //Initializes enemy's sprite to spawnpoint.
@@ -38,6 +38,7 @@ class Enemy {
         float Speed; //Enemy moves this fast.
         float LengthTravelled = 0; //Distance from spawn
         float PauseTime = 0;
+	float LevelModifier;
         bool Dead=false; //If object is dead or not
         sf::Vector2f Forward; //Move-function: Moves object 'forward'
         sf::Vector2f UpDown; //Move-function: Moves object down or up depending on position.

@@ -58,7 +58,14 @@ void Engine::Update(sf::Time elapsedTime){
         for(std::vector<std::shared_ptr<Projectile>>::iterator i=projectiles.begin(); i != projectiles.end();){
             if(!i->get()->isBlownUp()){       // Projectile
                 i->get()->Move(elapsedTime, enemies);   // Projectile
-                money += i->get()->HitTarget(enemies);
+                int Income = i->get()->HitTarget(enemies);
+		if(Income>0){
+			float LevelModifier = pow(1.05, Level);
+			int ModifiedScore = (int)(LevelModifier*1);
+			int ModifiedIncome = (int)(LevelModifier*Income);
+			score=score+ModifiedScore;
+			money=money+ModifiedIncome;
+		}
                 i++;
             }
             else{
@@ -158,7 +165,8 @@ void Engine::CheckTimeOut(){
 }
 
 void Engine::spawnEnemies(Types::NPC type){
-  Enemy&& temp = Enemy(type, SpawnNumber, 0, 0);
+	float LevelModifier = pow(1.05, Level);
+  Enemy&& temp = Enemy(type, SpawnNumber, 0, 0, LevelModifier);
     temp.InitializeSprite(0.f, 160.f);
     enemies.push_back(temp);
     SpawnNumber++;
@@ -166,7 +174,8 @@ void Engine::spawnEnemies(Types::NPC type){
 
 
 void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
-  Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance);
+	float LevelModifier = pow(1.05, Level);
+  Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance, LevelModifier);
     temp.InitializeSprite(x, y);
     enemies.push_back(temp);
     SpawnNumber++;
@@ -209,9 +218,11 @@ void Engine::LevelUp(){
 	else {
         MaxEnemies = Level * 2;
     }
-
-    money += 500;
-    Level++;
+	if(Level==0){
+		money=money+2000;
+	}
+   	Level++;
+	score=score+10;
     enemies.reserve(MaxEnemies);
     std::cout << "New level starting!" << std::endl;
 }
