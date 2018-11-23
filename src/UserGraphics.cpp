@@ -105,6 +105,8 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     TextureEnemySlow.loadFromFile("../src/photos/TextureEnemySlow.png");
     TextureEnemyMedium.loadFromFile("../src/photos/TextureEnemyMedium.png");
     TextureEnemyFast.loadFromFile("../src/photos/TextureEnemyFast.png");
+	TextureEnemyCommander.loadFromFile("../src/photos/TowerFlamePhoto.png");
+	TextureEnemyKiller.loadFromFile("../src/photos/TowerRocketPhoto.png");
     
     RedMarker.loadFromFile("../src/photos/RedMarker.png");
     CrossMarker.setTexture(RedMarker);
@@ -545,10 +547,16 @@ void UserGraphics::render()
             {
                 enemy.enemy.setTexture(TextureEnemySlow);
             }
-            else
+            else if(enemy.getType()==Types::NPC::Fast)
             {
                 enemy.enemy.setTexture(TextureEnemyFast);
             }
+		else if(enemy.getType()==Types::NPC::Commander){
+			enemy.enemy.setTexture(TextureEnemyCommander);
+		}
+		else{
+			enemy.enemy.setTexture(TextureEnemyKiller);
+		}
         }
         
         if (!enemy.CheckDead() || enemy.clock.getElapsedTime().asMilliseconds() < 1000)

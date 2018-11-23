@@ -75,7 +75,9 @@ private:
     int SpawnedSlows = 0;
     int SpawnedMediums = 0;
     int SpawnedFasts = 0;
-    int BaseLevels[3][3] = {{5,0,0},{0,5,0},{0,0,5}};
+	int SpawnedCommanders=0;
+	int SpawnedKillers=0;
+    int BaseLevels[4][4] = {{5,0,0,0},{0,5,0,0},{0,0,5,0},{0,0,0,1}};
 
     // Game's state information
     int Interval = 1000;

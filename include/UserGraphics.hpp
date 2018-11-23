@@ -53,6 +53,8 @@ private:
     sf::Texture TextureEnemySlow;
     sf::Texture TextureEnemyMedium;
     sf::Texture TextureEnemyFast;
+	sf::Texture TextureEnemyCommander;
+	sf::Texture TextureEnemyKiller;
     sf::Texture TextureTowerMachinegun;
     sf::Texture TextureTowerFlameThrower;
     sf::Texture TextureTowerRocketlauncher;

@@ -32,6 +32,7 @@ class Enemy {
     private:
         Types::NPC type; //Type of enemy
         int Hp; //Healthpoints
+	int HpBase;
         int IdNum;  //Identification number, check engine cpp.
         int Muuttuja=0; //Needed for pathfinding and setting rotation
         int Bounty; //Amount of money enemy drops when it dies.

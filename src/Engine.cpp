@@ -11,6 +11,9 @@
 void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
+	if(Level==0){
+		money=money+2000;
+	}
     UserGraphics graph(this);
     graph.StartUserGraphics();
 }
@@ -35,6 +38,12 @@ void Engine::Update(sf::Time elapsedTime){
                         case(Types::NPC::Fast):
                             HP--;
                             break;
+			case(Types::NPC::Commander):
+				HP=HP-3;
+				break;
+			case(Types::NPC::Killer):
+				HP=HP-5;
+				break;
                     }
                 }
                 enemy.setDead();
@@ -72,40 +81,65 @@ void Engine::Update(sf::Time elapsedTime){
                 i=projectiles.erase(i);    //Projectile
             }
         }
-        if(Level < 3){
-            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
-                spawnEnemies(Types::NPC::Slow);
-                SpawnedSlows++;
-                clock.restart();
-            }
-            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
-                spawnEnemies(Types::NPC::Medium);
-                SpawnedMediums++;
-                clock.restart();
-            }
-            if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
-                spawnEnemies(Types::NPC::Fast);
-                SpawnedFasts++;
-                clock.restart();
-            }
+        if(Level < 5){
+            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
+                	spawnEnemies(Types::NPC::Slow);
+                	SpawnedSlows++;
+                	clock.restart();
+            	}
+            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
+                	spawnEnemies(Types::NPC::Medium);
+                	SpawnedMediums++;
+                	clock.restart();
+            	}
+            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
+                	spawnEnemies(Types::NPC::Fast);
+                	SpawnedFasts++;
+                	clock.restart();
+            	}
+		if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedCommanders < BaseLevels[Level-1][3]){
+			spawnEnemies(Types::NPC::Commander);
+			SpawnedCommanders++;
+			clock.restart();
+		}
         }
-
         else{
-            if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies){
+		if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies-1){
                 int DetermineType = rand() % 3 + 1;
                 switch(DetermineType){
-                    case 1:
-                        spawnEnemies(Types::NPC::Slow);
-                        break;
-                    case 2:
-                        spawnEnemies(Types::NPC::Medium);
-                        break;
-                    case 3:
-                        spawnEnemies(Types::NPC::Fast);
-                        break;
+                	case 1:
+                		spawnEnemies(Types::NPC::Slow);
+                        	break;
+                   	 case 2:
+                        	spawnEnemies(Types::NPC::Medium);
+                        	break;
+                    	case 3:
+                        	spawnEnemies(Types::NPC::Fast);
+                       	 	break;	
+			
                 }
                 clock.restart();
             }
+		if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() == MaxEnemies-1){
+			int DetermineType = rand() % 5 +1;
+			switch(DetermineType){
+				case 1:
+					spawnEnemies(Types::NPC::Commander);
+					break;
+				case 2:
+					spawnEnemies(Types::NPC::Commander);
+					break;
+				case 3:
+					spawnEnemies(Types::NPC::Commander);
+					break;
+				case 4:
+					spawnEnemies(Types::NPC::Commander);
+					break;
+				case 5:
+					spawnEnemies(Types::NPC::Killer);
+					break;
+			}
+		}
         }
         if(enemies.size() == MaxEnemies && HP > 0){
             CheckTimeOut();
@@ -212,17 +246,15 @@ void Engine::LevelUp(){
 	SpawnedSlows=0;
 	SpawnedMediums=0;
 	SpawnedFasts=0;
-    	if(Level < 3){
-        MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2];
-    } 
-	else {
-        MaxEnemies = Level * 2;
-    }
-	if(Level==0){
-		money=money+2000;
+	SpawnedCommanders=0;
+	SpawnedKillers=0;
+	if(Level < 4){
+		MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2]+BaseLevels[Level][3];
+	}
+       	else{
+		MaxEnemies=Level*2;
 	}
    	Level++;
 	score=score+10;
     enemies.reserve(MaxEnemies);
-    std::cout << "New level starting!" << std::endl;
 }

@@ -8,22 +8,22 @@ Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine)
     {
         case(Types::NPC::Machinegun):
         Range =  350;
-        Firerate = 500;
-        DMG = 120;
+        Firerate = 450;
+        DMG = 150;
         Price = 1000;
         break;
     
         case(Types::NPC::Flamethrower):
         Range =  275;
-        Firerate = 50;
-        DMG = 14;
+        Firerate = 45;
+        DMG = 15;
         Price = 1000;
         break;
 
         case(Types::NPC::Rocketlauncher):
         Range =  300;
-        Firerate = 3000;
-        DMG = 400;
+        Firerate = 2750;
+        DMG = 425;
         Price = 1000;
         break;
     }
