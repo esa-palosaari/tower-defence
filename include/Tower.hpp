@@ -21,12 +21,16 @@ public:
     int getRange();
     int getFirerate();
     int getPrice();
+	int getTowerLevel() { return TowerLevel;}
+	void setTowerLevel();
     sf::Sprite getTower();
     Types::NPC getType() const;
         //Values declared in public.
     sf::Sprite tower;
     sf::CircleShape circle;
     bool textureInitialize = false;
+	bool UpgradeClick=false;
+	bool UpgradeLevel=true;
             
 
 private:
@@ -36,6 +40,7 @@ private:
     bool inRange(Enemy const enemy);
     Types::NPC type;
     Engine* engine;
+	int TowerLevel=1;
     float Range;
     int Firerate;
     int DMG;

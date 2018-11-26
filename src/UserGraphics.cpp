@@ -139,6 +139,26 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     ScreenWhenPaused.setSize(sf::Vector2f(1920, 1080));
     ScreenWhenPaused.setFillColor(sf::Color(0, 0, 0, 150));
+	
+	UpgradeButton.setSize(sf::Vector2f(210,45));
+	UpgradeButton.setPosition(1690,495);
+	UpgradeButton.setFillColor(sf::Color(102,204,0));
+	
+	infoText1.setFont(Font);
+	infoText1.setPosition(1480,25);
+	infoText1.setCharacterSize(24);
+
+	infoText2.setFont(Font);
+	infoText2.setPosition(1480,70);
+	infoText2.setCharacterSize(20);
+
+	infoText3.setFont(Font);
+	infoText3.setPosition(1480,125);
+	infoText3.setCharacterSize(16);
+
+	LevelUpgrade.setFont(Font);
+	LevelUpgrade.setPosition(1700.f,505.f);
+	LevelUpgrade.setCharacterSize(20);
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
@@ -162,6 +182,78 @@ bool UserGraphics::OverRoad(sf::Vector2f position){
             insideBounds(Road5, position) || insideBounds(Road6, position) ||
             insideBounds(Road7, position) || insideBounds(MenuButton, position));
 }
+
+
+void UserGraphics::setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower){
+	if(tower.UpgradeClick){
+		if(UpgradeButton.getGlobalBounds().contains(PositionX, PositionY) || !tower.UpgradeLevel){
+			UpgradeButton.setFillColor(sf::Color(160,160,160));
+		}
+		else{
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+		}
+	}
+}
+
+
+void UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower){
+	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
+		UpgradeClick=true;
+		if(UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
+			tower.setTowerLevel();	
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+		}
+	}
+	else{
+		UpgradeClick=false;
+	}
+}
+
+void UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
+	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(position.x, position.y)){
+		if(engine->getMoney() < (tower.getTowerLevel() *800)){
+			UpgradeButton.setFillColor(sf::Color(160,160,160));
+			tower.UpgradeLevel = false;
+			CannotUpgrade=true;
+		}
+		else{
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			tower.UpgradeLevel=true;
+			CannotUpgrade=false;
+		}
+		if(!CannotUpgrade){
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			tower.UpgradeLevel=true;
+			CannotUpgrade=false;
+		}
+	}
+	else if(insideBounds(tower.tower, position)){
+		tower.UpgradeClick=true;
+		UpgradeClick=true;
+		if(engine->getMoney() < (tower.getTowerLevel() *800)){
+			UpgradeButton.setFillColor(sf::Color(160,160,160));
+			tower.UpgradeLevel=false;
+			CannotUpgrade=true;	
+		}
+		else{
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			tower.UpgradeLevel=true;
+			CannotUpgrade=false;
+		}
+		if(!CannotUpgrade){
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			tower.UpgradeLevel=true;
+			CannotUpgrade=false;
+		}
+	}
+	else{
+		tower.UpgradeClick=false;
+		UpgradeClick=false;
+	}
+}
+
+
+
 
 void UserGraphics::spawnTower(Types::NPC type, int MoneyLost){
     engine->spawnTower(type, sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
@@ -378,7 +470,9 @@ void UserGraphics::manageEvents()
             {
                 TowerMachine.setColor(sf::Color(255, 255, 255));
             }
-            
+            	for(auto& tower : engine->towers){
+			setUpgradeButtonColor(posx, posy, tower);
+		}
            
             if (copyTowerMachinegun)
             {
@@ -501,6 +595,12 @@ void UserGraphics::manageEvents()
                         copyTowerFlamethrower = false;
                         copyTowerRocketlauncher = false;
                     }
+			for(auto& tower : engine->towers){
+				upgradePressed(mouse, tower);
+			}
+			for(auto& tower : engine->towers){
+				canUpgrade(mouse, tower);
+			}
                 }
             }
         }
@@ -585,6 +685,43 @@ void UserGraphics::render()
                 TWR.tower.setTexture(TextureTowerRocketlauncher);
             }
         }
+	if(TWR.UpgradeClick || UpgradeClick){
+		infoText2.setString("Upgrade Tower to next level");	
+		infoText3.setString(std::to_string(TWR.getTowerLevel())+" / 2");	
+		if(TWR.getType() == Types::NPC::Machinegun){
+			infoText1.setString("Machinegun");	
+			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
+			if(UpgradePrice=="3200"){
+				UpgradePrice="";
+			}
+			LevelUpgrade.setString(UpgradePrice+" LEVEL");	
+		}
+		else if(TWR.getType() == Types::NPC::Flamethrower){
+			infoText1.setString("Flamethrower");	
+			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
+			if(UpgradePrice=="3200"){
+				UpgradePrice="";
+			}
+			LevelUpgrade.setString(UpgradePrice+" LEVEL");
+		}
+		else{
+			infoText1.setString("Rocketlauncher");	
+			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
+			if(UpgradePrice=="3200"){
+				UpgradePrice="";
+			}
+			LevelUpgrade.setString(UpgradePrice+" LEVEL");	
+		}
+		engine->window.draw(UpgradeButton);
+		engine->window.draw(LevelUpgrade);
+		engine->window.draw(infoText1);
+		engine->window.draw(infoText2);
+		engine->window.draw(infoText3);
+
+
+
+
+	}
         engine->window.draw(TWR.getTower());
     }
     

@@ -6,33 +6,33 @@ Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled, fl
             Bounty = 21;
             Hp=1000;
 		HpBase=1000;
-            Speed=0.60;
+            Speed=0.55;
             break;
     
         case(Types::NPC::Medium):
             Bounty = 21;
             Hp=750;
 		HpBase=750;
-            Speed=1.0;
+            Speed=0.80;
             break;
             
         case(Types::NPC::Fast):
             Bounty=21;
             Hp=500;
 		HpBase=500;
-            Speed=1.40;
+            Speed=1.25;
             break;
 	case(Types::NPC::Commander):
 		Bounty=21;
 		HpBase=2000;
 		Hp=1500;
-		Speed=0.80;
+		Speed=0.60;
 		break;
 	case(Types::NPC::Killer):
 		Bounty=21;
-		HpBase=4000;
+		HpBase=3000;
 		Hp=4000;
-		Speed=0.80;
+		Speed=0.60;
 		break;
     }
 	int HpModified = (int)(LevelModifier*Hp);

@@ -16,14 +16,14 @@ Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine)
         case(Types::NPC::Flamethrower):
         Range =  275;
         Firerate = 45;
-        DMG = 15;
+        DMG = 19;
         Price = 1000;
         break;
 
         case(Types::NPC::Rocketlauncher):
         Range =  300;
-        Firerate = 2750;
-        DMG = 425;
+        Firerate = 2000;
+        DMG = 400;
         Price = 1000;
         break;
     }
@@ -121,4 +121,22 @@ void Tower::AimAngle(Enemy enemy)   //This alters tower's sprite to face enemy's
     double Angle = 2 * 3.14159265 - atan2(SightAngle.x, SightAngle.y);
     Angle = Angle * 360 / (2*3.14159265);
     tower.setRotation(Angle + 180);
+}
+
+void Tower::setTowerLevel(){
+	DMG=DMG*2;
+	Range= Range+10;
+
+	switch(this->TowerLevel){
+		case(1):
+			engine->loseMoney(800);
+			break;
+		case(2):
+			engine->loseMoney(1600);
+			break;
+		case(3):
+			engine->loseMoney(3200);
+			break;
+	}
+	TowerLevel++;
 }

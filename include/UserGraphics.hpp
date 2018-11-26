@@ -27,6 +27,9 @@ public:
     bool OverRoad(sf::Vector2f pos);
     void spawnTower(Types::NPC type, int losePoints);
     void DrawMovingTower(float posx, float posy, sf::Vector2f pos);
+	void setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower);
+	void upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower);
+	void canUpgrade(sf::Vector2i position, Tower& tower);
     
     void Update(sf::Time elapsedTime);
     
@@ -43,8 +46,12 @@ private:
     bool InvalidPlacement = true;
     bool InvalidPlacementMenu = true;
     bool GameIsPaused = false;
+	bool UpgradeClick=false;
+	bool CannotUpgrade=false;
     
     const sf::Time FrameTime = sf::seconds(1.f / 60.f);
+
+	std::string UpgradePrice;
     
     sf::Clock TimePassedInPause;
     sf::Texture TextureProjectileMachine;
@@ -79,6 +86,7 @@ private:
     sf::RectangleShape Road7;
     sf::RectangleShape MenuButton;
     sf::RectangleShape ScreenWhenPaused;
+	sf::RectangleShape UpgradeButton;
     sf::Font Font;
     sf::String GameTag;
     sf::Text SkipWaitingButton;
@@ -97,6 +105,11 @@ private:
     sf::Text MachinegunTowerPrice;
     sf::Text FlamethrowerTowerPrice;
     sf::Text RocketlauncherTowerPrice;
+	sf::Text infoText1;
+	sf::Text infoText2;
+	sf::Text infoText3;
+	sf::Text LevelUpgrade;
+
 };
 
 #endif
