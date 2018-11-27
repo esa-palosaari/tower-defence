@@ -28,8 +28,8 @@ public:
     void spawnTower(Types::NPC type, int losePoints);
     void DrawMovingTower(float posx, float posy, sf::Vector2f pos);
 	void setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower);
-	void upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower);
-	void canUpgrade(sf::Vector2i position, Tower& tower);
+	bool upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower);
+	bool canUpgrade(sf::Vector2i position, Tower& tower);
     
     void Update(sf::Time elapsedTime);
     

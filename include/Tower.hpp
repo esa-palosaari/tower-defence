@@ -31,6 +31,7 @@ public:
     bool textureInitialize = false;
 	bool UpgradeClick=false;
 	bool UpgradeLevel=true;
+	int TowerLevel=1;
             
 
 private:
@@ -40,7 +41,6 @@ private:
     bool inRange(Enemy const enemy);
     Types::NPC type;
     Engine* engine;
-	int TowerLevel=1;
     float Range;
     int Firerate;
     int DMG;
