@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/include 
+CXX_INCLUDES = -I/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/include 
 

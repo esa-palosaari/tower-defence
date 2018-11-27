@@ -107,6 +107,7 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     TextureEnemyFast.loadFromFile("../src/photos/TextureEnemyFast.png");
 	TextureEnemyCommander.loadFromFile("../src/photos/TowerFlamePhoto.png");
 	TextureEnemyKiller.loadFromFile("../src/photos/TowerRocketPhoto.png");
+	TextureEnemyAircraft.loadFromFile("../src/photos/TextureEnemyFast.png");
     
     RedMarker.loadFromFile("../src/photos/RedMarker.png");
     CrossMarker.setTexture(RedMarker);
@@ -685,6 +686,9 @@ void UserGraphics::render()
             }
 		else if(enemy.getType()==Types::NPC::Commander){
 			enemy.enemy.setTexture(TextureEnemyCommander);
+		}
+		else if(enemy.getType()==Types::NPC::Aircraft){
+			enemy.enemy.setTexture(TextureEnemyAircraft);
 		}
 		else{
 			enemy.enemy.setTexture(TextureEnemyKiller);

@@ -77,10 +77,11 @@ private:
     int SpawnedFasts = 0;
 	int SpawnedCommanders=0;
 	int SpawnedKillers=0;
+	int SpawnedAircrafts=0;
     int BaseLevels[4][4] = {{5,0,0,0},{0,5,0,0},{0,0,5,0},{0,0,0,1}};
 
     // Game's state information
-    int Interval = 1000;
+    int Interval = 750;
     int TimeOutTime = 10;
     bool GameEnd = false;
     bool TimeOut = true;

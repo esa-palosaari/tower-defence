@@ -25,7 +25,7 @@ void Engine::Update(sf::Time elapsedTime){
     else {
         for(auto& enemy:enemies){
             auto EnemyPlacement = enemy.enemy.getPosition();
-            enemy.Move(EnemyPlacement, elapsedTime);
+            enemy.Move(enemy.getType(), EnemyPlacement, elapsedTime);
             if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
                 if(HP>0){
                     switch(enemy.getType()){
@@ -38,6 +38,9 @@ void Engine::Update(sf::Time elapsedTime){
                         case(Types::NPC::Fast):
                             HP--;
                             break;
+			case(Types::NPC::Aircraft):
+				HP--;
+				break;
 			case(Types::NPC::Commander):
 				HP=HP-3;
 				break;
@@ -105,7 +108,7 @@ void Engine::Update(sf::Time elapsedTime){
         }
         else{
 		if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies-1){
-                int DetermineType = rand() % 3 + 1;
+                int DetermineType = rand() % 4 + 1;
                 switch(DetermineType){
                 	case 1:
                 		spawnEnemies(Types::NPC::Slow);
@@ -116,6 +119,9 @@ void Engine::Update(sf::Time elapsedTime){
                     	case 3:
                         	spawnEnemies(Types::NPC::Fast);
                        	 	break;	
+			case 4:
+				spawnEnemies(Types::NPC::Aircraft);
+				break;
 			
                 }
                 clock.restart();
@@ -199,18 +205,29 @@ void Engine::CheckTimeOut(){
 }
 
 void Engine::spawnEnemies(Types::NPC type){
-	float LevelModifier = pow(1.05, Level);
+	float LevelModifier = pow(1.08, Level);
   Enemy&& temp = Enemy(type, SpawnNumber, 0, 0, LevelModifier);
-    temp.InitializeSprite(0.f, 160.f);
+	if(type==Types::NPC::Aircraft){
+		temp.InitializeSprite(0.f, 900.f);
+	}
+	else{
+		temp.InitializeSprite(0.f, 160.f);
+	}
+    
     enemies.push_back(temp);
     SpawnNumber++;
 }
 
 
 void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
-	float LevelModifier = pow(1.05, Level);
+	float LevelModifier = pow(1.08, Level);
   Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance, LevelModifier);
-    temp.InitializeSprite(x, y);
+	if(type==Types::NPC::Aircraft){
+		temp.InitializeSprite(0.f, 900.f);
+	}
+	else{
+		temp.InitializeSprite(0.f, 160.f);
+	}
     enemies.push_back(temp);
     SpawnNumber++;
 }
@@ -248,6 +265,7 @@ void Engine::LevelUp(){
 	SpawnedFasts=0;
 	SpawnedCommanders=0;
 	SpawnedKillers=0;
+	SpawnedAircrafts=0;
 	if(Level < 4){
 		MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2]+BaseLevels[Level][3];
 	}

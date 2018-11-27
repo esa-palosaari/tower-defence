@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3
+CMAKE_SOURCE_DIR = /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build
+CMAKE_BINARY_DIR = /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Peli.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/Peli.dir/flags.make
 
 CMakeFiles/Peli.dir/src/GameTitle.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/GameTitle.o: ../src/GameTitle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Peli.dir/src/GameTitle.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/GameTitle.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameTitle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Peli.dir/src/GameTitle.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/GameTitle.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameTitle.cpp
 
 CMakeFiles/Peli.dir/src/GameTitle.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/GameTitle.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameTitle.cpp > CMakeFiles/Peli.dir/src/GameTitle.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameTitle.cpp > CMakeFiles/Peli.dir/src/GameTitle.i
 
 CMakeFiles/Peli.dir/src/GameTitle.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/GameTitle.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameTitle.cpp -o CMakeFiles/Peli.dir/src/GameTitle.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameTitle.cpp -o CMakeFiles/Peli.dir/src/GameTitle.s
 
 CMakeFiles/Peli.dir/src/GameTitle.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/Peli.dir/src/GameTitle.o.provides.build: CMakeFiles/Peli.dir/src/Game
 
 CMakeFiles/Peli.dir/src/GameMenu.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/GameMenu.o: ../src/GameMenu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Peli.dir/src/GameMenu.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/GameMenu.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Peli.dir/src/GameMenu.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/GameMenu.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameMenu.cpp
 
 CMakeFiles/Peli.dir/src/GameMenu.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/GameMenu.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.cpp > CMakeFiles/Peli.dir/src/GameMenu.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameMenu.cpp > CMakeFiles/Peli.dir/src/GameMenu.i
 
 CMakeFiles/Peli.dir/src/GameMenu.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/GameMenu.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.cpp -o CMakeFiles/Peli.dir/src/GameMenu.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameMenu.cpp -o CMakeFiles/Peli.dir/src/GameMenu.s
 
 CMakeFiles/Peli.dir/src/GameMenu.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/Peli.dir/src/GameMenu.o.provides.build: CMakeFiles/Peli.dir/src/GameM
 
 CMakeFiles/Peli.dir/src/main.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/main.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Peli.dir/src/main.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/main.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Peli.dir/src/main.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/main.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/main.cpp
 
 CMakeFiles/Peli.dir/src/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/main.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/main.cpp > CMakeFiles/Peli.dir/src/main.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/main.cpp > CMakeFiles/Peli.dir/src/main.i
 
 CMakeFiles/Peli.dir/src/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/main.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/main.cpp -o CMakeFiles/Peli.dir/src/main.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/main.cpp -o CMakeFiles/Peli.dir/src/main.s
 
 CMakeFiles/Peli.dir/src/main.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/Peli.dir/src/main.o.provides.build: CMakeFiles/Peli.dir/src/main.o
 
 CMakeFiles/Peli.dir/src/Engine.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/Engine.o: ../src/Engine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Peli.dir/src/Engine.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Engine.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Peli.dir/src/Engine.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Engine.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Engine.cpp
 
 CMakeFiles/Peli.dir/src/Engine.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/Engine.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Engine.cpp > CMakeFiles/Peli.dir/src/Engine.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Engine.cpp > CMakeFiles/Peli.dir/src/Engine.i
 
 CMakeFiles/Peli.dir/src/Engine.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/Engine.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Engine.cpp -o CMakeFiles/Peli.dir/src/Engine.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Engine.cpp -o CMakeFiles/Peli.dir/src/Engine.s
 
 CMakeFiles/Peli.dir/src/Engine.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/Peli.dir/src/Engine.o.provides.build: CMakeFiles/Peli.dir/src/Engine.
 
 CMakeFiles/Peli.dir/src/Enemy.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/Enemy.o: ../src/Enemy.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Peli.dir/src/Enemy.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Enemy.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Enemy.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Peli.dir/src/Enemy.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Enemy.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Enemy.cpp
 
 CMakeFiles/Peli.dir/src/Enemy.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/Enemy.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Enemy.cpp > CMakeFiles/Peli.dir/src/Enemy.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Enemy.cpp > CMakeFiles/Peli.dir/src/Enemy.i
 
 CMakeFiles/Peli.dir/src/Enemy.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/Enemy.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Enemy.cpp -o CMakeFiles/Peli.dir/src/Enemy.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Enemy.cpp -o CMakeFiles/Peli.dir/src/Enemy.s
 
 CMakeFiles/Peli.dir/src/Enemy.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/Peli.dir/src/Enemy.o.provides.build: CMakeFiles/Peli.dir/src/Enemy.o
 
 CMakeFiles/Peli.dir/src/Tower.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/Tower.o: ../src/Tower.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Peli.dir/src/Tower.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Tower.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Tower.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Peli.dir/src/Tower.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Tower.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Tower.cpp
 
 CMakeFiles/Peli.dir/src/Tower.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/Tower.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Tower.cpp > CMakeFiles/Peli.dir/src/Tower.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Tower.cpp > CMakeFiles/Peli.dir/src/Tower.i
 
 CMakeFiles/Peli.dir/src/Tower.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/Tower.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Tower.cpp -o CMakeFiles/Peli.dir/src/Tower.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Tower.cpp -o CMakeFiles/Peli.dir/src/Tower.s
 
 CMakeFiles/Peli.dir/src/Tower.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/Peli.dir/src/Tower.o.provides.build: CMakeFiles/Peli.dir/src/Tower.o
 
 CMakeFiles/Peli.dir/src/Projectile.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/Projectile.o: ../src/Projectile.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Peli.dir/src/Projectile.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Projectile.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Projectile.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Peli.dir/src/Projectile.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/Projectile.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Projectile.cpp
 
 CMakeFiles/Peli.dir/src/Projectile.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/Projectile.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Projectile.cpp > CMakeFiles/Peli.dir/src/Projectile.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Projectile.cpp > CMakeFiles/Peli.dir/src/Projectile.i
 
 CMakeFiles/Peli.dir/src/Projectile.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/Projectile.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Projectile.cpp -o CMakeFiles/Peli.dir/src/Projectile.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Projectile.cpp -o CMakeFiles/Peli.dir/src/Projectile.s
 
 CMakeFiles/Peli.dir/src/Projectile.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/Peli.dir/src/Projectile.o.provides.build: CMakeFiles/Peli.dir/src/Pro
 
 CMakeFiles/Peli.dir/src/UserGraphics.o: CMakeFiles/Peli.dir/flags.make
 CMakeFiles/Peli.dir/src/UserGraphics.o: ../src/UserGraphics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Peli.dir/src/UserGraphics.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/UserGraphics.o -c /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/UserGraphics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Peli.dir/src/UserGraphics.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Peli.dir/src/UserGraphics.o -c /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/UserGraphics.cpp
 
 CMakeFiles/Peli.dir/src/UserGraphics.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Peli.dir/src/UserGraphics.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/UserGraphics.cpp > CMakeFiles/Peli.dir/src/UserGraphics.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/UserGraphics.cpp > CMakeFiles/Peli.dir/src/UserGraphics.i
 
 CMakeFiles/Peli.dir/src/UserGraphics.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Peli.dir/src/UserGraphics.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/UserGraphics.cpp -o CMakeFiles/Peli.dir/src/UserGraphics.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/UserGraphics.cpp -o CMakeFiles/Peli.dir/src/UserGraphics.s
 
 CMakeFiles/Peli.dir/src/UserGraphics.o.requires:
 
@@ -277,7 +277,7 @@ Peli: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
 Peli: /usr/lib/x86_64-linux-gnu/libsfml-window.so
 Peli: /usr/lib/x86_64-linux-gnu/libsfml-system.so
 Peli: CMakeFiles/Peli.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Peli"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Peli"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Peli.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -301,6 +301,6 @@ CMakeFiles/Peli.dir/clean:
 .PHONY : CMakeFiles/Peli.dir/clean
 
 CMakeFiles/Peli.dir/depend:
-	cd /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3 /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3 /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/DependInfo.cmake --color=$(COLOR)
+	cd /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3 /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3 /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Peli.dir/depend
 

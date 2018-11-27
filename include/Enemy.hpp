@@ -8,7 +8,7 @@
 class Enemy {
     public:
   	Enemy(Types::NPC type, int IDNUM, int muuttuja, float lengthtravelled, float hpmodifier); // Constructor
-        void Move(sf::Vector2f position, sf::Time time); //Pathfinding
+        void Move(Types::NPC type, sf::Vector2f position, sf::Time time); //Pathfinding
         int getHit(int DMG); //Enemy gets hit by projectile and loses health. Returns bounty if dies.
         void InitializeSprite(float PointX, float PointY); //Initializes enemy's sprite to spawnpoint.
         Types::NPC getType() const; //Getter
