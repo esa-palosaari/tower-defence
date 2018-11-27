@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Peli.dir/src/GameTitle.o"
+  "CMakeFiles/Peli.dir/src/GameMenu.o"
   "CMakeFiles/Peli.dir/src/main.o"
   "CMakeFiles/Peli.dir/src/Engine.o"
   "CMakeFiles/Peli.dir/src/Enemy.o"

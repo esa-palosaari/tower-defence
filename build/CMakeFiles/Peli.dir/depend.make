@@ -14,6 +14,9 @@ CMakeFiles/Peli.dir/src/Engine.o: ../include/Types.hpp
 CMakeFiles/Peli.dir/src/Engine.o: ../include/UserGraphics.hpp
 CMakeFiles/Peli.dir/src/Engine.o: ../src/Engine.cpp
 
+CMakeFiles/Peli.dir/src/GameMenu.o: ../include/GameMenu.hpp
+CMakeFiles/Peli.dir/src/GameMenu.o: ../src/GameMenu.cpp
+
 CMakeFiles/Peli.dir/src/GameTitle.o: ../include/GameTitle.hpp
 CMakeFiles/Peli.dir/src/GameTitle.o: ../src/GameTitle.cpp
 
@@ -44,6 +47,7 @@ CMakeFiles/Peli.dir/src/UserGraphics.o: ../src/UserGraphics.cpp
 
 CMakeFiles/Peli.dir/src/main.o: ../include/Enemy.hpp
 CMakeFiles/Peli.dir/src/main.o: ../include/Engine.hpp
+CMakeFiles/Peli.dir/src/main.o: ../include/GameMenu.hpp
 CMakeFiles/Peli.dir/src/main.o: ../include/GameTitle.hpp
 CMakeFiles/Peli.dir/src/main.o: ../include/Projectile.hpp
 CMakeFiles/Peli.dir/src/main.o: ../include/TileMap.hpp

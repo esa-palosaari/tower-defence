@@ -10,7 +10,8 @@ include_directories(include)
 set(EXECUTABLE_NAME "Peli")
 
 # define source files
-add_executable(${EXECUTABLE_NAME} "${CMAKE_SOURCE_DIR}/src/GameTitle.cpp" "${CMAKE_SOURCE_DIR}/src/main.cpp" "${CMAKE_SOURCE_DIR}/src/Engine.cpp" "${CMAKE_SOURCE_DIR}/src/Enemy.cpp" "${CMAKE_SOURCE_DIR}/src/Tower.cpp" "${CMAKE_SOURCE_DIR}/src/Projectile.cpp" "${CMAKE_SOURCE_DIR}/src/UserGraphics.cpp")
+add_executable(${EXECUTABLE_NAME} "${CMAKE_SOURCE_DIR}/src/GameTitle.cpp" "${CMAKE_SOURCE_DIR}/src/GameMenu.cpp"
+"${CMAKE_SOURCE_DIR}/src/main.cpp" "${CMAKE_SOURCE_DIR}/src/Engine.cpp" "${CMAKE_SOURCE_DIR}/src/Enemy.cpp" "${CMAKE_SOURCE_DIR}/src/Tower.cpp" "${CMAKE_SOURCE_DIR}/src/Projectile.cpp" "${CMAKE_SOURCE_DIR}/src/UserGraphics.cpp")
 # When running the whole thing:
 # file(GLOB SOURCES "src/*.cpp")
 # add_executable(${EXECUTABLE} ${SOURCES})
