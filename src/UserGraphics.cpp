@@ -196,60 +196,95 @@ void UserGraphics::setUpgradeButtonColor(float PositionX, float PositionY, std::
 }
 
 
-void UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower){
+bool UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower){
 	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
 		UpgradeClick=true;
 		if(UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
 			tower.setTowerLevel();	
 			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			return true;
 		}
 	}
 	else{
 		UpgradeClick=false;
+		return false;
 	}
+	return false;
 }
 
-void UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
-	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(position.x, position.y)){
-		if(engine->getMoney() < (tower.getTowerLevel() *800)){
+bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
+	if(tower.getTowerLevel() != 4){
+		if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(position.x, position.y)){
+			if(engine->getMoney() < (tower.getTowerLevel() *800)){
+				UpgradeButton.setFillColor(sf::Color(160,160,160));
+				tower.UpgradeLevel = false;
+				CannotUpgrade=true;
+				return false;
+			}
+			else{
+				UpgradeButton.setFillColor(sf::Color(102,204,0));
+				tower.UpgradeLevel=true;
+				CannotUpgrade=false;
+				return true;
+			}
+			if(!CannotUpgrade){
+				UpgradeButton.setFillColor(sf::Color(102,204,0));
+				tower.UpgradeLevel=true;
+				CannotUpgrade=false;
+				return true;
+			}
+		}
+		else if(insideBounds(tower.tower, position)){
+			tower.UpgradeClick=true;
+			UpgradeClick=true;
+			if(engine->getMoney() < (tower.getTowerLevel() *800)){
+				UpgradeButton.setFillColor(sf::Color(160,160,160));
+				tower.UpgradeLevel=false;
+				CannotUpgrade=true;
+				return	false;
+			}
+			else{
+				UpgradeButton.setFillColor(sf::Color(102,204,0));
+				tower.UpgradeLevel=true;
+				CannotUpgrade=false;
+				return true;
+			}
+			if(!CannotUpgrade){
+				UpgradeButton.setFillColor(sf::Color(102,204,0));
+				tower.UpgradeLevel=true;
+				CannotUpgrade=false;
+				return true;
+			}
+		}
+		else{
+			tower.UpgradeClick=false;
+			UpgradeClick=false;
+			return false;
+		}
+	}
+	else{
+		if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(position.x, position.y)){
 			UpgradeButton.setFillColor(sf::Color(160,160,160));
 			tower.UpgradeLevel = false;
 			CannotUpgrade=true;
-		}
-		else{
-			UpgradeButton.setFillColor(sf::Color(102,204,0));
-			tower.UpgradeLevel=true;
-			CannotUpgrade=false;
-		}
-		if(!CannotUpgrade){
-			UpgradeButton.setFillColor(sf::Color(102,204,0));
-			tower.UpgradeLevel=true;
-			CannotUpgrade=false;
-		}
-	}
-	else if(insideBounds(tower.tower, position)){
-		tower.UpgradeClick=true;
-		UpgradeClick=true;
-		if(engine->getMoney() < (tower.getTowerLevel() *800)){
+			return false;
+		}	
+		else if(insideBounds(tower.tower, position)){
+			tower.UpgradeClick=true;
+			UpgradeClick=true;
 			UpgradeButton.setFillColor(sf::Color(160,160,160));
 			tower.UpgradeLevel=false;
-			CannotUpgrade=true;	
+			CannotUpgrade=true;
+			return	false;
 		}
 		else{
-			UpgradeButton.setFillColor(sf::Color(102,204,0));
-			tower.UpgradeLevel=true;
-			CannotUpgrade=false;
+			tower.UpgradeClick=false;
+			UpgradeClick=false;
+			return false;
 		}
-		if(!CannotUpgrade){
-			UpgradeButton.setFillColor(sf::Color(102,204,0));
-			tower.UpgradeLevel=true;
-			CannotUpgrade=false;
-		}
+
 	}
-	else{
-		tower.UpgradeClick=false;
-		UpgradeClick=false;
-	}
+	return false;
 }
 
 
@@ -277,10 +312,6 @@ void UserGraphics::manageEnd()
                         GameTag.erase(GameTag.getSize() - 1, 1);
                         InputToName.setString(GameTag);
                     }
-                }
-                else if (event.text.unicode == '\ ')
-                {
-                    break;
                 }
                 else if (event.text.unicode == '\r')
                 {
@@ -596,10 +627,11 @@ void UserGraphics::manageEvents()
                         copyTowerRocketlauncher = false;
                     }
 			for(auto& tower : engine->towers){
-				upgradePressed(mouse, tower);
-			}
-			for(auto& tower : engine->towers){
-				canUpgrade(mouse, tower);
+				if(canUpgrade(mouse, tower)){
+					if(upgradePressed(mouse, tower)){
+						break;
+					}
+				}
 			}
                 }
             }
@@ -686,31 +718,31 @@ void UserGraphics::render()
             }
         }
 	if(TWR.UpgradeClick || UpgradeClick){
-		infoText2.setString("Upgrade Tower to next level");	
-		infoText3.setString(std::to_string(TWR.getTowerLevel())+" / 2");	
+		infoText2.setString("Upgrade Tower");	
+		infoText3.setString(std::to_string(TWR.getTowerLevel()-1)+" / 3 ");	
 		if(TWR.getType() == Types::NPC::Machinegun){
 			infoText1.setString("Machinegun");	
-			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
-			if(UpgradePrice=="3200"){
-				UpgradePrice="";
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
+			if(UpgradePrice=="6400"){
+				UpgradePrice="MAX LEVEL";
 			}
-			LevelUpgrade.setString(UpgradePrice+" LEVEL");	
+			LevelUpgrade.setString(UpgradePrice+"$");	
 		}
 		else if(TWR.getType() == Types::NPC::Flamethrower){
 			infoText1.setString("Flamethrower");	
-			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
-			if(UpgradePrice=="3200"){
-				UpgradePrice="";
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
+			if(UpgradePrice=="6400"){
+				UpgradePrice="MAX LEVEL";
 			}
-			LevelUpgrade.setString(UpgradePrice+" LEVEL");
+			LevelUpgrade.setString(UpgradePrice+"$");
 		}
 		else{
 			infoText1.setString("Rocketlauncher");	
-			UpgradePrice=std::to_string(TWR.getTowerLevel()*800);	
-			if(UpgradePrice=="3200"){
-				UpgradePrice="";
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
+			if(UpgradePrice=="6400"){
+				UpgradePrice="MAX LEVEL";
 			}
-			LevelUpgrade.setString(UpgradePrice+" LEVEL");	
+			LevelUpgrade.setString(UpgradePrice+"$");	
 		}
 		engine->window.draw(UpgradeButton);
 		engine->window.draw(LevelUpgrade);
