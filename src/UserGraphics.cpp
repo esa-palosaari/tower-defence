@@ -158,6 +158,25 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	infoText3.setFont(Font);
 	infoText3.setPosition(1480,125);
 	infoText3.setCharacterSize(16);
+	
+	// infopanel.setPosition(1690,550); for measurement
+	// infopanel.setScale(0.5f,0.21f); for measurement
+
+	infotextHL.setFont(Font);
+	infotextHL.setPosition(1710,560);
+	infotextHL.setCharacterSize(14);
+
+	infotextDMG.setFont(Font);
+	infotextDMG.setPosition(1710,580);
+	infotextDMG.setCharacterSize(14);
+
+	infotextFirerate.setFont(Font);
+	infotextFirerate.setPosition(1710,600);
+	infotextFirerate.setCharacterSize(14);
+
+	infotextRange.setFont(Font);
+	infotextRange.setPosition(1710,620);
+	infotextRange.setCharacterSize(14);
 
 	LevelUpgrade.setFont(Font);
 	LevelUpgrade.setPosition(1700.f,505.f);
@@ -724,10 +743,16 @@ void UserGraphics::render()
             }
         }
 	if(TWR.UpgradeClick || UpgradeClick){
+		// infopanel.setPosition(1690,550); for measurement
+		// infopanel.setScale(0.5f,0.21f); for measurement
 		TWR.infopanel.setTexture(TextureInfoPanel);
 		engine->window.draw(TWR.infopanel);
 		infoText2.setString("Upgrade Tower");	
-		infoText3.setString(std::to_string(TWR.getTowerLevel()-1)+" / 3 ");	
+		infoText3.setString(std::to_string(TWR.getTowerLevel()-1)+" / 3 ");
+		infotextDMG.setString("Damage: "+std::to_string(TWR.getDMG()));
+		infotextFirerate.setString("Firerate: "+std::to_string(TWR.getFirerate()));
+		infotextRange.setString("Range: "+std::to_string(TWR.getRange()));	
+		infotextHL.setString("Statistics:");
 		if(TWR.getType() == Types::NPC::Machinegun){
 			infoText1.setString("Machinegun");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
@@ -757,6 +782,11 @@ void UserGraphics::render()
 		engine->window.draw(infoText1);
 		engine->window.draw(infoText2);
 		engine->window.draw(infoText3);
+		engine->window.draw(infotextDMG);
+		engine->window.draw(infotextFirerate);
+		engine->window.draw(infotextRange);
+		engine->window.draw(infotextHL);
+
 
 
 

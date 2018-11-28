@@ -110,6 +110,10 @@ private:
 	sf::Text infoText1;
 	sf::Text infoText2;
 	sf::Text infoText3;
+	sf::Text infotextDMG;
+	sf::Text infotextFirerate;
+	sf::Text infotextRange;
+	sf::Text infotextHL;
 	sf::Text LevelUpgrade;
 
 };

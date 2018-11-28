@@ -21,6 +21,7 @@ public:
     int getRange();
     int getFirerate();
     int getPrice();
+	int getDMG();
 	int getTowerLevel() { return TowerLevel;}
 	void setTowerLevel();
     sf::Sprite getTower();

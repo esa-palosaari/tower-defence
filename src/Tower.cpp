@@ -36,8 +36,8 @@ void Tower::InitializeSprite()      //Initializes tower's sprite
     tower.setPosition(x,y);
     tower.setOrigin(32.f,32.f);
 	
-	infopanel.setPosition(1440,10);
-	infopanel.setScale(0.65f,0.6f);
+	infopanel.setPosition(1690,550);
+	infopanel.setScale(0.5f,0.21f);
 
     circle.setPosition(x,y);
     circle.setOrigin(Range,Range);
@@ -69,6 +69,10 @@ Types::NPC Tower::getType () const
 int Tower::getFirerate()
 {
     return Firerate;
+}
+
+int Tower::getDMG(){
+	return DMG;
 }
 
 sf::Sprite Tower::getTower()    //Sprite is named 'tower'
