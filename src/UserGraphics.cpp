@@ -105,13 +105,15 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     TextureEnemySlow.loadFromFile("../src/photos/TextureEnemySlow.png");
     TextureEnemyMedium.loadFromFile("../src/photos/TextureEnemyMedium.png");
     TextureEnemyFast.loadFromFile("../src/photos/TextureEnemyFast.png");
-	TextureEnemyCommander.loadFromFile("../src/photos/TowerFlamePhoto.png");
-	TextureEnemyKiller.loadFromFile("../src/photos/TowerRocketPhoto.png");
-	TextureEnemyAircraft.loadFromFile("../src/photos/TextureEnemyFast.png");
+	TextureEnemyCommander.loadFromFile("../src/photos/TextureEnemyCommander.png");
+	TextureEnemyKiller.loadFromFile("../src/photos/TextureEnemyKiller.png");
+	TextureEnemyAircraft.loadFromFile("../src/photos/TextureEnemyAircraft.png");
     
     RedMarker.loadFromFile("../src/photos/RedMarker.png");
     CrossMarker.setTexture(RedMarker);
     CrossMarker.setScale(0.25f, 0.25f);
+
+	TextureInfoPanel.loadFromFile("../src/photos/InfoPanel.png");
     
     
     Road1.setSize(sf::Vector2f(448, 192));
@@ -722,6 +724,8 @@ void UserGraphics::render()
             }
         }
 	if(TWR.UpgradeClick || UpgradeClick){
+		TWR.infopanel.setTexture(TextureInfoPanel);
+		engine->window.draw(TWR.infopanel);
 		infoText2.setString("Upgrade Tower");	
 		infoText3.setString(std::to_string(TWR.getTowerLevel()-1)+" / 3 ");	
 		if(TWR.getType() == Types::NPC::Machinegun){

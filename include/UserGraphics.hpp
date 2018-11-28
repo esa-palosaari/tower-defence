@@ -70,6 +70,7 @@ private:
     sf::Texture TextureMouseCursor;
     sf::Texture RedMarker;
     sf::Texture TextureTowerPlatform;
+	sf::Texture TextureInfoPanel;
     sf::Sprite MouseCursor;
     sf::Sprite TowerMachine;
     sf::Sprite TowerFlame;

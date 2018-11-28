@@ -28,6 +28,7 @@ public:
         //Values declared in public.
     sf::Sprite tower;
     sf::CircleShape circle;
+	sf::Sprite infopanel;
     bool textureInitialize = false;
 	bool UpgradeClick=false;
 	bool UpgradeLevel=true;
