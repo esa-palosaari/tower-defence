@@ -7,6 +7,7 @@
 class GameMenu{
 public:
     GameMenu();
+	~GameMenu();
     int StartMenu();
     int manageEvents();
     void render();
