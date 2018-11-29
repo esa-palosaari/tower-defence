@@ -41,6 +41,8 @@ boost/serialization/vector.hpp
 -
 
 ../include/GameMenu.hpp
+SFML/Audio.hpp
+-
 SFML/Graphics.hpp
 -
 SFML/Window.hpp
@@ -117,6 +119,8 @@ SFML/Graphics.hpp
 /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.cpp
 GameMenu.hpp
 /m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.hpp
+SFML/Audio.hpp
+-
 SFML/Graphics.hpp
 -
 iostream

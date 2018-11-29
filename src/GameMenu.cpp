@@ -1,8 +1,9 @@
 #include "GameMenu.hpp"
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style::None), title(), titleTexture()
+GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style::None), title(), titleTexture(), music()
 {
     if (!Font.loadFromFile("../src/photos/FontFile.ttf")) {
         std::cout << "Can't load font" << std::endl;
@@ -14,6 +15,8 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
     else{
         title.setTexture(titleTexture);
     }
+
+	
 	    
 	MenuGameButton.setFont(Font); // -> just a title
     MenuGameButton.setString("GAME MENU");
@@ -40,10 +43,17 @@ void GameMenu::SetToText(sf::Text& textinput, float PositionX, float PositionY, 
 }
 
 int GameMenu::StartMenu(){
-	int exit_ret;    
+	int exit_ret; 
+	sf::Music music;
+	music.setLoop(true);
+	if (!music.openFromFile("../src/sounds/wagner.ogg")){
+		std::cout << "Opening wagner.ogg failed!" << std::endl;
+    	return -1; // error
+	}
+	music.play();   
 	while(nWindow.isOpen()){
         exit_ret = manageEvents();
-        render();
+		render();
     }
 	return exit_ret;
 }

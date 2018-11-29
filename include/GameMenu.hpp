@@ -1,5 +1,6 @@
 #ifndef GameMenu_hpp
 #define GameMenu_hpp
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
@@ -7,7 +8,7 @@
 class GameMenu{
 public:
     GameMenu();
-	~GameMenu();
+	//~GameMenu();
     int StartMenu();
     int manageEvents();
     void render();
@@ -22,5 +23,6 @@ private:
 	int exitStatus;
 	sf::Sprite title;
 	sf::Texture titleTexture;
+	sf::Music music;
 };
 #endif
