@@ -1,5 +1,6 @@
 #ifndef GameMenu_hpp
 #define GameMenu_hpp
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
@@ -7,6 +8,7 @@
 class GameMenu{
 public:
     GameMenu();
+	//~GameMenu();
     int StartMenu();
     int manageEvents();
     void render();
@@ -14,11 +16,13 @@ public:
 private:
 	sf::RenderWindow nWindow;
 	sf::Font Font;
+	sf::Text MenuGameButton;
   	sf::Text StartGameButton;
-    sf::Text LoadGameButton;
-    sf::Text ExitGameButton;
+	sf::Text LoadGameButton;
+	sf::Text ExitGameButton;
 	int exitStatus;
-	//sf::Sprite title;
-	//sf::Texture titleTexture;
+	sf::Sprite title;
+	sf::Texture titleTexture;
+	sf::Music music;
 };
 #endif
