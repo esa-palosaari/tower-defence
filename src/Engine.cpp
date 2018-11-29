@@ -12,7 +12,7 @@ void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
 	if(Level==0){
-		money=money+2000;
+		money=money+20000;
 	}
     UserGraphics graph(this);
     graph.StartUserGraphics();

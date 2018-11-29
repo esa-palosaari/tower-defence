@@ -8,7 +8,7 @@ Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled, fl
 		HpBase=1000;
             Speed=0.55;
             break;
-    
+
         case(Types::NPC::Medium):
             Bounty = 16;
             Hp=750;
@@ -22,18 +22,21 @@ Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled, fl
 		HpBase=500;
             Speed=1.25;
             break;
+
 	case(Types::NPC::Commander):
 		Bounty=22;
 		HpBase=2000;
 		Hp=2000;
 		Speed=0.60;
 		break;
+
 	case(Types::NPC::Killer):
 		Bounty=30;
 		HpBase=4000;
 		Hp=4000;
 		Speed=0.60;
 		break;
+
 	case(Types::NPC::Aircraft):
 		Bounty=16;
 		HpBase=500;

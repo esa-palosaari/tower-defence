@@ -71,6 +71,12 @@ private:
     sf::Texture RedMarker;
     sf::Texture TextureTowerPlatform;
 	sf::Texture TextureInfoPanel;
+	sf::Texture TextureInfoPanelMG;
+	sf::Texture TextureInfoPanelFT;
+	sf::Texture TextureInfoPanelRL;
+	sf::Sprite IPMG;
+	sf::Sprite IPFT;
+	sf::Sprite IPRL;
     sf::Sprite MouseCursor;
     sf::Sprite TowerMachine;
     sf::Sprite TowerFlame;
@@ -115,6 +121,7 @@ private:
 	sf::Text infotextRange;
 	sf::Text infotextHL;
 	sf::Text LevelUpgrade;
+	sf::Text TowerArsenal;
 
 };
 
