@@ -12,29 +12,33 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     SkipWaitingButton.setFont(Font);
     SkipWaitingButton.setString("SEND WAVE");
-    SetToText(SkipWaitingButton, 1700.f, 130.f, Font, 24);
+    SetToText(SkipWaitingButton, 1680.f, 125.f, Font, 24);
     
     PauseButton.setFont(Font);
     PauseButton.setString("OPTIONS");
-    SetToText(PauseButton, 1700.f, 460.f, Font, 24);
+    SetToText(PauseButton, 1680.f, 460.f, Font, 24);
+
+	TowerArsenal.setFont(Font);
+	TowerArsenal.setString("TOWERS:");
+	SetToText(TowerArsenal, 1680.f, 155.f, Font, 24);
     
     InputToName.setFont(Font);
     SetToText(InputToName, 590.f, 500.f, Font, 50);
     
     CurrentHP.setFont(Font);
-    SetToText(CurrentHP, 1700.f, 650.f, Font, 24);
+    SetToText(CurrentHP, 1680.f, 667.f, Font, 24);
     
     CurrentWave.setFont(Font);
-    SetToText(CurrentWave, 1700.f, 10.f, Font, 24);
+    SetToText(CurrentWave, 1680.f, 10.f, Font, 24);
     
     CurrentMoney.setFont(Font);
-    SetToText(CurrentMoney, 1700.f, 50.f, Font, 24);
+    SetToText(CurrentMoney, 1680.f, 40.f, Font, 24);
 
 	CurrentScore.setFont(Font);
-    SetToText(CurrentScore, 1700.f, 70.f, Font, 24);
+    SetToText(CurrentScore, 1680.f, 65.f, Font, 24);
     
     TimeToNextWave.setFont(Font);
-    SetToText(TimeToNextWave, 1700.f, 90.f, Font, 24);
+    SetToText(TimeToNextWave, 1680.f, 90.f, Font, 24);
     
     GameOverText.setFont(Font);
     SetToText(GameOverText, 590.f, 300.f, Font, 50);
@@ -56,15 +60,15 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     SetToText(ExitGameButton, 895.f, 640.f, Font, 32);
     
     MachinegunTowerPrice.setFont(Font);
-    SetToText(MachinegunTowerPrice, 1780.f, 210.f, Font, 20);
+    SetToText(MachinegunTowerPrice, 1740.f, 210.f, Font, 20);
     MachinegunTowerPrice.setString("1000");
     
     FlamethrowerTowerPrice.setFont(Font);
-    SetToText(FlamethrowerTowerPrice, 1780.f, 310.f, Font, 20);
+    SetToText(FlamethrowerTowerPrice, 1740.f, 310.f, Font, 20);
     FlamethrowerTowerPrice.setString("1000");
     
     RocketlauncherTowerPrice.setFont(Font);
-    SetToText(RocketlauncherTowerPrice, 1780.f, 410.f, Font, 20);
+    SetToText(RocketlauncherTowerPrice, 1740.f, 410.f, Font, 20);
     RocketlauncherTowerPrice.setString("1000");
     
     CircleMachinegun.setOrigin(350.f, 350.f);
@@ -84,15 +88,15 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     TextureTowerRocketlauncher.loadFromFile("../src/photos/TowerRocketPhoto.png");
     
     TowerMachine.setTexture(TextureTowerMachinegun);
-    TowerMachine.setPosition(1740, 220);
+    TowerMachine.setPosition(1700, 220);
     TowerMachine.setOrigin(32.f, 32.f);
     
     TowerFlame.setTexture(TextureTowerFlameThrower);
-    TowerFlame.setPosition(1740, 320);
+    TowerFlame.setPosition(1700, 320);
     TowerFlame.setOrigin(32.f, 32.f);
     
     TowerRocket.setTexture(TextureTowerRocketlauncher);
-    TowerRocket.setPosition(1740, 420);
+    TowerRocket.setPosition(1700, 420);
     TowerRocket.setOrigin(32.f, 32.f);
     
     TextureMouseCursor.loadFromFile("../src/photos/MouseCursorPhoto.png");
@@ -114,6 +118,23 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     CrossMarker.setScale(0.25f, 0.25f);
 
 	TextureInfoPanel.loadFromFile("../src/photos/InfoPanel.png");
+	
+	TextureInfoPanelMG.loadFromFile("../src/photos/InfoPanel.png");
+	TextureInfoPanelFT.loadFromFile("../src/photos/InfoPanel.png");
+	TextureInfoPanelRL.loadFromFile("../src/photos/InfoPanel.png");
+	
+	IPMG.setTexture(TextureInfoPanelMG);
+	IPMG.setPosition(1670, 185);
+	IPMG.setScale(0.4f, 0.15f);
+
+	IPFT.setTexture(TextureInfoPanelMG);
+	IPFT.setPosition(1670, 285);
+	IPFT.setScale(0.4f, 0.15f);
+	
+
+	IPRL.setTexture(TextureInfoPanelMG);
+	IPRL.setPosition(1670, 385);
+	IPRL.setScale(0.4f, 0.15f);
     
     
     Road1.setSize(sf::Vector2f(448, 192));
@@ -148,34 +169,34 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	UpgradeButton.setFillColor(sf::Color(102,204,0));
 	
 	infoText1.setFont(Font);
-	infoText1.setPosition(1480,25);
-	infoText1.setCharacterSize(24);
+	infoText1.setPosition(1710,550);
+	infoText1.setCharacterSize(18);
 
 	infoText2.setFont(Font);
-	infoText2.setPosition(1480,70);
+	infoText2.setPosition(1710,540);
 	infoText2.setCharacterSize(20);
 
 	infoText3.setFont(Font);
-	infoText3.setPosition(1480,125);
-	infoText3.setCharacterSize(16);
+	infoText3.setPosition(1720,650);
+	infoText3.setCharacterSize(13);
 	
 	// infopanel.setPosition(1690,550); for measurement
 	// infopanel.setScale(0.5f,0.21f); for measurement
 
 	infotextHL.setFont(Font);
-	infotextHL.setPosition(1710,560);
+	infotextHL.setPosition(1715,570);
 	infotextHL.setCharacterSize(14);
 
 	infotextDMG.setFont(Font);
-	infotextDMG.setPosition(1710,580);
+	infotextDMG.setPosition(1720,590);
 	infotextDMG.setCharacterSize(14);
 
 	infotextFirerate.setFont(Font);
-	infotextFirerate.setPosition(1710,600);
+	infotextFirerate.setPosition(1720,610);
 	infotextFirerate.setCharacterSize(14);
 
 	infotextRange.setFont(Font);
-	infotextRange.setPosition(1710,620);
+	infotextRange.setPosition(1720,630);
 	infotextRange.setCharacterSize(14);
 
 	LevelUpgrade.setFont(Font);
@@ -564,7 +585,7 @@ void UserGraphics::manageEvents()
             
             else if (InvalidPlacementMenu && copyTowerMachinegun && ClickedTower)
             {
-                TowerMachine.setPosition(1740, 220);
+                TowerMachine.setPosition(1700, 220);
                 copyTowerMachinegun = false;
                 DroppedTower = true;
                 ClickedTower = false;
@@ -572,7 +593,7 @@ void UserGraphics::manageEvents()
             
             else if (InvalidPlacementMenu && copyTowerFlamethrower && ClickedTower)
             {
-                TowerFlame.setPosition(1740, 320);
+                TowerFlame.setPosition(1700, 320);
                 copyTowerFlamethrower = false;
                 DroppedTower = true;
                 ClickedTower = false;
@@ -580,7 +601,7 @@ void UserGraphics::manageEvents()
             
             else if (InvalidPlacementMenu && copyTowerRocketlauncher && ClickedTower)
             {
-                TowerRocket.setPosition(1740, 420);
+                TowerRocket.setPosition(1700, 420);
                 copyTowerRocketlauncher = false;
                 DroppedTower = true;
                 ClickedTower = false;
@@ -610,17 +631,17 @@ void UserGraphics::manageEvents()
                     else if (copyTowerMachinegun && ClickedTower && !InvalidPlacementMenu)
                     {
                         spawnTower(Types::NPC::Machinegun, 1000);
-                        TowerMachine.setPosition(1740, 220);
+                        TowerMachine.setPosition(1700, 220);
                     }
                     else if (copyTowerFlamethrower && ClickedTower && !InvalidPlacementMenu)
                     {
                         spawnTower(Types::NPC::Flamethrower, 1000);
-                        TowerFlame.setPosition(1740, 320);
+                        TowerFlame.setPosition(1700, 320);
                     }
                     else if (copyTowerRocketlauncher && ClickedTower && !InvalidPlacementMenu)
                     {
                         spawnTower(Types::NPC::Rocketlauncher, 1000);
-                        TowerRocket.setPosition(1740, 420);
+                        TowerRocket.setPosition(1700, 420);
                     }
                     
                     if (insideBounds(TowerMachine, mouse) && engine->getMoney() >= 1000)
@@ -664,17 +685,17 @@ void UserGraphics::manageEvents()
             {
                 if (InvalidPlacementMenu && copyTowerMachinegun && ClickedTower)
                 {
-                    TowerMachine.setPosition(1740, 220);
+                    TowerMachine.setPosition(1700, 220);
                     copyTowerMachinegun = false;
                 }
                 else if (InvalidPlacementMenu && copyTowerFlamethrower && ClickedTower)
                 {
-                    TowerFlame.setPosition(1740, 320);
+                    TowerFlame.setPosition(1700, 320);
                     copyTowerFlamethrower = false;
                 }
                 else if (InvalidPlacementMenu && copyTowerRocketlauncher && ClickedTower)
                 {
-                    TowerRocket.setPosition(1740, 420);
+                    TowerRocket.setPosition(1700, 420);
                     copyTowerRocketlauncher = false;
                 }
             }
@@ -748,7 +769,7 @@ void UserGraphics::render()
 		TWR.infopanel.setTexture(TextureInfoPanel);
 		engine->window.draw(TWR.infopanel);
 		infoText2.setString("Upgrade Tower");	
-		infoText3.setString(std::to_string(TWR.getTowerLevel()-1)+" / 3 ");
+		infoText3.setString("LEVEL - "+std::to_string(TWR.getTowerLevel()));
 		infotextDMG.setString("Damage: "+std::to_string(TWR.getDMG()));
 		infotextFirerate.setString("Firerate: "+std::to_string(TWR.getFirerate()));
 		infotextRange.setString("Range: "+std::to_string(TWR.getRange()));	
@@ -758,29 +779,38 @@ void UserGraphics::render()
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
 			if(UpgradePrice=="6400"){
 				UpgradePrice="MAX LEVEL";
+				LevelUpgrade.setString(UpgradePrice);
 			}
-			LevelUpgrade.setString(UpgradePrice+"$");	
+			else{
+				LevelUpgrade.setString(UpgradePrice+"$ UPGRADE");	
+			}
 		}
 		else if(TWR.getType() == Types::NPC::Flamethrower){
 			infoText1.setString("Flamethrower");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
 			if(UpgradePrice=="6400"){
 				UpgradePrice="MAX LEVEL";
+				LevelUpgrade.setString(UpgradePrice);
 			}
-			LevelUpgrade.setString(UpgradePrice+"$");
+			else{
+				LevelUpgrade.setString(UpgradePrice+"$ UPGRADE");	
+			}
 		}
 		else{
 			infoText1.setString("Rocketlauncher");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
 			if(UpgradePrice=="6400"){
 				UpgradePrice="MAX LEVEL";
+				LevelUpgrade.setString(UpgradePrice);
 			}
-			LevelUpgrade.setString(UpgradePrice+"$");	
+			else{
+				LevelUpgrade.setString(UpgradePrice+"$ UPGRADE");	
+			}
 		}
 		engine->window.draw(UpgradeButton);
 		engine->window.draw(LevelUpgrade);
 		engine->window.draw(infoText1);
-		engine->window.draw(infoText2);
+		// engine->window.draw(infoText2);
 		engine->window.draw(infoText3);
 		engine->window.draw(infotextDMG);
 		engine->window.draw(infotextFirerate);
@@ -829,12 +859,14 @@ void UserGraphics::render()
     CurrentWave.setString("Wave: " + std::to_string(engine->getLevel()));
     CurrentMoney.setString("Money: " + std::to_string(engine->getMoney()));
 	CurrentScore.setString("Score: "+std::to_string(engine->getScore()));
+
     
     engine->window.draw(CurrentHP);
     engine->window.draw(CurrentWave);
     engine->window.draw(CurrentMoney);
 	engine->window.draw(CurrentScore);
     engine->window.draw(PauseButton);
+	engine->window.draw(TowerArsenal);
     if (engine->isTimeOut())
     {
         engine->window.draw(SkipWaitingButton);
@@ -884,6 +916,11 @@ void UserGraphics::render()
     {
         engine->window.draw(CircleMissile);
     }
+
+	engine->window.draw(IPMG);
+	engine->window.draw(IPFT);
+	engine->window.draw(IPRL);
+
     engine->window.draw(TowerMachine);
     engine->window.draw(TowerFlame);
     engine->window.draw(TowerRocket);

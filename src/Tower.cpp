@@ -37,7 +37,7 @@ void Tower::InitializeSprite()      //Initializes tower's sprite
     tower.setOrigin(32.f,32.f);
 	
 	infopanel.setPosition(1690,550);
-	infopanel.setScale(0.5f,0.21f);
+	infopanel.setScale(0.5f,0.26f);
 
     circle.setPosition(x,y);
     circle.setOrigin(Range,Range);
