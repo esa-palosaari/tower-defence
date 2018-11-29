@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Enemy.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/Enemy.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Engine.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/Engine.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameMenu.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/GameMenu.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameTitle.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/GameTitle.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Projectile.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/Projectile.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Tower.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/Tower.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/UserGraphics.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/UserGraphics.o"
-  "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/main.cpp" "/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir/src/main.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Enemy.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/Enemy.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Engine.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/Engine.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameMenu.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/GameMenu.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/GameTitle.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/GameTitle.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Projectile.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/Projectile.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/Tower.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/Tower.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/UserGraphics.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/UserGraphics.o"
+  "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/src/main.cpp" "/m/home/home2/26/ikaheia1/unix/Documents/C++/project/towerdefence-3/build/CMakeFiles/Peli.dir/src/main.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

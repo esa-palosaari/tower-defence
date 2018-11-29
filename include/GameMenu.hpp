@@ -14,11 +14,12 @@ public:
 private:
 	sf::RenderWindow nWindow;
 	sf::Font Font;
+	sf::Text MenuGameButton;
   	sf::Text StartGameButton;
-    sf::Text LoadGameButton;
-    sf::Text ExitGameButton;
+	sf::Text LoadGameButton;
+	sf::Text ExitGameButton;
 	int exitStatus;
-	//sf::Sprite title;
-	//sf::Texture titleTexture;
+	sf::Sprite title;
+	sf::Texture titleTexture;
 };
 #endif
