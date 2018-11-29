@@ -1,0 +1,3 @@
+/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/edit_cache.dir
+/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/rebuild_cache.dir
+/u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/build/CMakeFiles/Peli.dir

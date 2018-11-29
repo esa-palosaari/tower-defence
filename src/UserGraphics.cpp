@@ -872,7 +872,7 @@ void UserGraphics::render()
         engine->window.draw(SkipWaitingButton);
     }
     
-    if (engine->getMoney() < 100)
+    if (engine->getMoney() < 1000)
     {
         TowerMachine.setColor(sf::Color(128, 128, 128));
     }
@@ -882,7 +882,7 @@ void UserGraphics::render()
         TowerMachine.setColor(sf::Color(255, 255, 255));
     }
     
-    if (engine->getMoney() < 100)
+    if (engine->getMoney() < 1000)
     {
         TowerFlame.setColor(sf::Color(128, 128, 128));
     }
@@ -892,7 +892,7 @@ void UserGraphics::render()
         TowerFlame.setColor(sf::Color(255, 255, 255));
     }
     
-    if (engine->getMoney() < 100)
+    if (engine->getMoney() < 1000)
     {
         TowerRocket.setColor(sf::Color(128, 128, 128));
     }
