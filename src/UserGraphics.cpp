@@ -13,6 +13,10 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     SkipWaitingButton.setFont(Font);
     SkipWaitingButton.setString("SEND WAVE");
     SetToText(SkipWaitingButton, 1680.f, 125.f, Font, 24);
+
+	TopScoreHL.setFont(Font);
+	TopScoreHL.setString("TOP 10 PLAYERS:");
+	SetToText(TopScoreHL,10.f,10.f,Font,40);
     
     PauseButton.setFont(Font);
     PauseButton.setString("OPTIONS");
@@ -330,7 +334,31 @@ bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 	return false;
 }
 
-
+void UserGraphics::showHiscores(){
+	if(engine->showTopScore()){
+		if(!topScoresInit){
+			topScoresInit=true;
+			float y = 70.f;
+			int i = 1;
+			for(auto& score : engine->topScoresVec){
+				sf::Text temp;
+				temp.setFont(Font);
+				temp.setCharacterSize(20);
+				temp.setPosition(20.f, y);
+				temp.setString(std::to_string(i)+". "+score.name+" - Score: "+std::to_string(score.score));
+				topScores.push_back(temp);
+				y+=50.f;
+				i++;
+				if(i==11){
+					break;
+				}
+			}
+		}
+		for(auto& text : topScores){
+			text.setPosition(text.getPosition().x, text.getPosition().y);
+		}
+	}
+}
 
 
 void UserGraphics::spawnTower(Types::NPC type, int MoneyLost){
@@ -460,6 +488,9 @@ void UserGraphics::StartUserGraphics()
                 {
                     engine->Update(FrameTime);
                     manageEnd();
+			if(engine->isEnd()){
+				showHiscores();
+			}
                 }
             }
             render();
@@ -950,7 +981,12 @@ void UserGraphics::render()
         GameOverText.setString("GET REKT NOOB!\nWAVES SURVIVED: " + std::to_string(engine->getLevel()) + "\nTOTAL SCORE: " + std::to_string(engine->getScore()) + "\nPLAYER NAME: ");
         engine->window.draw(InputToName);
         engine->window.draw(GameOverText);
+	
     }
+	for(auto& text : topScores){
+		engine->window.draw(TopScoreHL);
+		engine->window.draw(text);
+	}
     
     if (GameIsPaused)
     {

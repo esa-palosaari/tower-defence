@@ -32,10 +32,12 @@ public:
 	bool canUpgrade(sf::Vector2i position, Tower& tower);
     
     void Update(sf::Time elapsedTime);
+	void showHiscores();
     
 private:
     Engine* engine;
     std::vector<sf::Sprite> towers;
+	std::vector<sf::Text> topScores;
     bool FinishedName = false;
     bool copyTowerMachinegun = false;
     bool copyTowerFlamethrower = false;
@@ -48,6 +50,7 @@ private:
     bool GameIsPaused = false;
 	bool UpgradeClick=false;
 	bool CannotUpgrade=false;
+	
     
     const sf::Time FrameTime = sf::seconds(1.f / 60.f);
 
@@ -122,6 +125,7 @@ private:
 	sf::Text infotextHL;
 	sf::Text LevelUpgrade;
 	sf::Text TowerArsenal;
+	sf::Text TopScoreHL;
 
 };
 

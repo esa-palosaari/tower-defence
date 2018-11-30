@@ -12,13 +12,22 @@
 #include <fstream>
 #include <ctime>
 
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/serialization/vector.hpp>
 
     class Tower;
     class Projectile;    // forward declaration?
+
+class Scores{
+
+public:
+	std::string name;
+	int score;
+	bool operator <(const Scores& d){
+		if(score > d.score){
+			return true;
+		}
+		return false;
+	}
+};
     
 class Engine{
 public:
@@ -50,10 +59,18 @@ public:
     void setLevel(int startLevel) {Level = startLevel;}
     void setGameTag(std::string UserTag) {GameTag = UserTag;}
 
+	bool showTopScore(){
+		if(GameEnd && showTopScoreClk.getElapsedTime().asSeconds()>1){
+			return true;
+		}
+		return false;
+	}
+
     TileMap map;
     sf::RenderWindow window;
     std::vector<Enemy> enemies;
     std::vector<Tower> towers;
+	std::vector<Scores> topScoresVec;
     std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
 	
 
@@ -89,6 +106,7 @@ private:
 
     // SFML properties
     sf::Clock TimeOutClock;
+	sf::Clock showTopScoreClk;
     sf::Clock clock;
 
     // Required functions

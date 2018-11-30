@@ -2,6 +2,11 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <ctime>
+
 
 GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style::None), title(), titleTexture(), music()
 {
@@ -35,13 +40,83 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
     ExitGameButton.setFont(Font); // -> exitStatus = 0
     ExitGameButton.setString("EXIT GAME");
     SetToText(ExitGameButton, 810.f, 660.f, Font, 64);
+	
+	TopScoreHL.setFont(Font);
+	TopScoreHL.setString("TOP 10 PLAYERS:");
+	SetToText(TopScoreHL,10.f,10.f,Font,40);
 
-    	
+    MenuOn=true;
+}
+
+
+void GameMenu::showHighScores(){
+	if(!topScoresInit){
+			topScoresInit=true;
+			float y = 70.f;
+			int i=1;
+			for(auto& score : topScoresVec){
+				sf::Text temp;
+				temp.setFont(Font);
+				temp.setCharacterSize(20);
+				temp.setPosition(20.f,y);
+				temp.setString(std::to_string(i)+". "+score.name+"- Score: "+std::to_string(score.score));
+				topScores.push_back(temp);
+				y+=50.f;
+				i++;
+				if(i==11){
+					break;
+				}
+			}
+	}
+	for(auto& text : topScores){
+		text.setPosition(text.getPosition().x, text.getPosition().y);
+	}
 }
 
 void GameMenu::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
     textinput.setPosition(PositionX, PositionY);
     textinput.setCharacterSize(Size);
+}
+
+void GameMenu::StartScores(){
+	if(MenuOn){
+	showTopScoreClk.restart();
+	std::string line;
+	std::ifstream myfile("../src/maps/scores.txt");
+	if(myfile.is_open()){
+		int i = 1;
+		Sores temp;
+		while(getline(myfile, line, ';')){
+			std::cout<<line<<'\n';
+			switch(i){
+				case 1:
+					temp.name=line;
+					break;
+				case 2:
+					temp.score=stoi(line);
+					break;
+			}
+			i++;
+			if(i>2){
+				i=1;
+				topScoresVec.push_back(temp);
+				Sores temp;
+			}
+		}
+		myfile.close();
+		std::sort(topScoresVec.begin(), topScoresVec.end());
+	}
+	else{
+		std::cout<<"Unable to open file";
+	}
+    }
+}
+
+bool GameMenu::showTopScore(){
+	if(MenuOn && showTopScoreClk.getElapsedTime().asSeconds()>1){
+		return true;
+	}
+	return false;
 }
 
 int GameMenu::StartMenu(){
@@ -56,7 +131,9 @@ int GameMenu::StartMenu(){
 	music.play(); // play music   
 	while(nWindow.isOpen()){
         exit_ret = manageEvents(); // start manage events
-		render(); // start rendering
+	StartScores();
+	showHighScores();
+	render(); // start rendering
     }
 	return exit_ret;
 }
@@ -74,18 +151,21 @@ int GameMenu::manageEvents(){
                 if (StartGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
                 {
           			exitStatus = 1; // -> start a new game
+					MenuOn=false;
 					nWindow.close();
                 }
                 
                 else if (LoadGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
                 {
                    	exitStatus = 2; // -> load game
+					MenuOn=false;
 					nWindow.close();
                 }
                 
                 else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
                 {
                 	exitStatus = 0; // -> exit game
+					MenuOn=false;
 					nWindow.close();
                 }
             }
@@ -103,6 +183,10 @@ void GameMenu::render(){
 	nWindow.draw(StartGameButton);
 	nWindow.draw(LoadGameButton);
 	nWindow.draw(ExitGameButton);
+	for(auto& text : topScores){
+		nWindow.draw(TopScoreHL);
+		nWindow.draw(text);
+	}
 	nWindow.display();
 }
 

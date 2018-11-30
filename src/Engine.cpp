@@ -12,7 +12,7 @@ void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
 	if(Level==0){
-		money=money+20000;
+		money=money+2000;
 	}
     UserGraphics graph(this);
     graph.StartUserGraphics();
@@ -170,7 +170,41 @@ bool Engine::isAllDead(){
 // Ends the game
 void Engine::EndGame(){
     if(!GameEnd){
+	showTopScoreClk.restart();
+	std::ofstream out;
+	out.open("../src/maps/scores.txt",std::ios::app);
+	time_t now = time(0);
+	out<<GameTag<<";"<<score<<';';
         GameEnd = true;
+	out.close();
+	std::string line;
+	std::ifstream myfile("../src/maps/scores.txt");
+	if(myfile.is_open()){
+		int i = 1;
+		Scores temp;
+		while(getline(myfile, line, ';')){
+			std::cout<<line<<'\n';
+			switch(i){
+				case 1:
+					temp.name=line;
+					break;
+				case 2:
+					temp.score=stoi(line);
+					break;
+			}
+			i++;
+			if(i>2){
+				i=1;
+				topScoresVec.push_back(temp);
+				Scores temp;
+			}
+		}
+		myfile.close();
+		std::sort(topScoresVec.begin(), topScoresVec.end());
+	}
+	else{
+		std::cout<<"Unable to open file";
+	}
     }
 }
 

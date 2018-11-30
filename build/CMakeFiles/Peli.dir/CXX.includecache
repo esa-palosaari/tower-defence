@@ -31,14 +31,6 @@ fstream
 -
 ctime
 -
-boost/archive/text_iarchive.hpp
--
-boost/archive/text_oarchive.hpp
--
-boost/lexical_cast.hpp
--
-boost/serialization/vector.hpp
--
 
 ../include/GameMenu.hpp
 SFML/Audio.hpp
@@ -48,6 +40,8 @@ SFML/Graphics.hpp
 SFML/Window.hpp
 -
 iostream
+-
+fstream
 -
 
 ../include/GameTitle.hpp
@@ -124,6 +118,14 @@ SFML/Audio.hpp
 SFML/Graphics.hpp
 -
 iostream
+-
+vector
+-
+string
+-
+algorithm
+-
+ctime
 -
 
 /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/GameTitle.cpp
