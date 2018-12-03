@@ -14,6 +14,8 @@ void Engine::StartEngine(){
 	if(Level==0){
 		money=money+2000;
 	}
+	// would be better to give UserGraphics a pointer to Engine,
+	// rather than copy it whole
     UserGraphics graph(this);
     graph.StartUserGraphics();
 }
@@ -310,3 +312,5 @@ void Engine::LevelUp(){
 	score=score+10;
     enemies.reserve(MaxEnemies);
 }
+
+Engine::~Engine(){}

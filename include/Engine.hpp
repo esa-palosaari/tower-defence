@@ -72,7 +72,7 @@ public:
     std::vector<Tower> towers;
 	std::vector<Scores> topScoresVec;
     std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
-	
+  ~Engine();
 
 
 private:
