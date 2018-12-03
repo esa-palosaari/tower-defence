@@ -21,7 +21,7 @@ It contains the following:
   * `README.md` -- This file.
 
 ## Requirements
-The game requires the SFML library to run. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
+The game requires the SFML library to compile. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
 
 ## Updating Makefile
 1. If you've written new .cpp files, edit file `CMakeLists.txt` and add the new .cpp files there as parameters to add_executable()
