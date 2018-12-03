@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/Peli.dir/src/GameTitle.o CMakeFiles/Peli.dir/src/GameMenu.o CMakeFiles/Peli.dir/src/main.o CMakeFiles/Peli.dir/src/Engine.o CMakeFiles/Peli.dir/src/Enemy.o CMakeFiles/Peli.dir/src/Tower.o CMakeFiles/Peli.dir/src/Projectile.o CMakeFiles/Peli.dir/src/UserGraphics.o  -o Peli -rdynamic -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system 

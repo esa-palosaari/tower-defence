@@ -9,6 +9,7 @@ public:
     void StartTitle();
     void manageEvents();
     void render();
+  ~GameTitle();
 private:
 	sf::RenderWindow nWindow;
 	sf::Sprite title;
