@@ -27,23 +27,23 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
 	// Creating menu text items    
 	MenuGameButton.setFont(Font); // -> just a title
     MenuGameButton.setString("GAME MENU");
-    SetToText(MenuGameButton, 790.f, 380.f, Font, 128);
+    SetToText(MenuGameButton, 660.f, 380.f, Font, 128);
 
     StartGameButton.setFont(Font); // -> exitStatus = 1
     StartGameButton.setString("START GAME");
-    SetToText(StartGameButton,810.f, 530.f, Font, 64);
+    SetToText(StartGameButton,690.f, 530.f, Font, 64);
     
     LoadGameButton.setFont(Font); // -> exitStatus = 2
     LoadGameButton.setString("LOAD GAME");
-    SetToText(LoadGameButton, 810.f, 595.f, Font, 64);
+    SetToText(LoadGameButton, 690.f, 595.f, Font, 64);
     
     ExitGameButton.setFont(Font); // -> exitStatus = 0
     ExitGameButton.setString("EXIT GAME");
-    SetToText(ExitGameButton, 810.f, 660.f, Font, 64);
+    SetToText(ExitGameButton, 690.f, 660.f, Font, 64);
 	
 	TopScoreHL.setFont(Font);
 	TopScoreHL.setString("TOP 10 PLAYERS:");
-	SetToText(TopScoreHL,10.f,10.f,Font,40);
+	SetToText(TopScoreHL,30.f,410.f,Font,64);
 
     MenuOn = true;
 }
@@ -52,13 +52,13 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
 void GameMenu::showHighScores(){
 	if(!topScoresInit){
 			topScoresInit = true;
-			float y = 70.f;
+			float y = 500.f;
 			int i = 1;
 			for(auto& score : topScoresVec){
 				sf::Text temp;
 				temp.setFont(Font);
-				temp.setCharacterSize(20);
-				temp.setPosition(20.f, y);
+				temp.setCharacterSize(30);
+				temp.setPosition(50.f, y);
 				temp.setString(std::to_string(i) + ". " + score.name + "- Score: " + std::to_string(score.score));
 				topScores.push_back(temp);
 				y += 50.f;
@@ -86,7 +86,7 @@ void GameMenu::StartScores(){
 	std::ifstream myfile("../src/maps/scores.txt");
 	if(myfile.is_open()){
 		int i = 1;
-		Scores temp;
+		Sores temp;
 		while(getline(myfile, line, ';')){
 			//std::cout<<line<<'\n';
 			switch(i){
@@ -101,7 +101,7 @@ void GameMenu::StartScores(){
 			if(i > 2){
 				i = 1;
 				topScoresVec.push_back(temp);
-				Scores temp;
+				Sores temp;
 			}
 		}
 		myfile.close();
@@ -131,14 +131,12 @@ int GameMenu::StartMenu(){
 	}
 	music.play(); // play music
 
-    StartScores();
-    showHighScores();
 
 	while(nWindow.isOpen()){
-        exit_ret = manageEvents(); // start manage events
-	//StartScores();
-	//showHighScores();
-	render(); // start rendering
+        	exit_ret = manageEvents(); // start manage events
+		StartScores();
+		showHighScores();
+		render(); // start rendering
     }
 	return exit_ret;
 }
