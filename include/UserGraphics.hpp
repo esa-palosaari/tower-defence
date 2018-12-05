@@ -127,6 +127,10 @@ private:
 	sf::Text TowerArsenal;
 	sf::Text TopScoreHL;
 
+	sf::SoundBuffer MachinegunSound;
+
+	
+
 };
 
 #endif

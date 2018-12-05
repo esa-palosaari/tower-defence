@@ -206,6 +206,8 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	LevelUpgrade.setFont(Font);
 	LevelUpgrade.setPosition(1700.f,505.f);
 	LevelUpgrade.setCharacterSize(20);
+
+	MachinegunSound.loadFromFile("../src/sounds/MG.ogg");
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
@@ -784,14 +786,17 @@ void UserGraphics::render()
             if (TWR.getType() == Types::NPC::Machinegun)
             {
                 TWR.tower.setTexture(TextureTowerMachinegun);
+				TWR.shootSound.setBuffer(MachinegunSound);
             }
             else if (TWR.getType() == Types::NPC::Flamethrower)
             {
                 TWR.tower.setTexture(TextureTowerFlameThrower);
+				TWR.shootSound.setBuffer(MachinegunSound); // replace!!!
             }
             else
             {
                 TWR.tower.setTexture(TextureTowerRocketlauncher);
+				TWR.shootSound.setBuffer(MachinegunSound); // replace!!!
             }
         }
 	if(TWR.UpgradeClick || UpgradeClick){

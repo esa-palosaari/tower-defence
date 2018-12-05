@@ -1,5 +1,6 @@
 #include "Tower.hpp"
 #include "Engine.hpp"
+#include <SFML/Audio.hpp>
 #include <memory> //Jotta voidaan hallinnoida uusien tornien spawnaaminen ja mahdollinen tallentaminen save game-funktiossa.
 
 Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine), type(type), x(x), y(y)
@@ -101,14 +102,17 @@ void Tower::Shoot(Enemy& enemy)     //Called from Engine.cpp
         if(type==Types::NPC::Machinegun){       //Depending on each turrets type, different kind of projectile is fired.
             //std::shared_ptr<MachinegunProjectile> projectile = std::make_shared<MachinegunProjectile>(DMG, x, y, type, enemy.getIdNum());   //Projectiles are tracked using shared pointers.
             engine->projectiles.push_back(std::make_shared<MachinegunProjectile>(MachinegunProjectile(DMG, x, y, type, enemy.getIdNum()))); //Projectiles vector is updated.
+			shootSound.play();	
         }
         else if(type == Types::NPC::Flamethrower){
             //std::shared_ptr<FlameProjectile> projectile = std::make_shared<FlameProjectile>(DMG, x, y, type, enemy.getIdNum());
             engine->projectiles.push_back(std::make_shared<FlameProjectile>(FlameProjectile(DMG, x, y, type, enemy.getIdNum())));
+			shootSound.play();
         }
         else if(type == Types::NPC::Rocketlauncher){
             //std::shared_ptr<RocketProjectile> projectile = std::make_shared<RocketProjectile>(DMG, x, y, type, enemy.getIdNum());
             engine->projectiles.push_back(std::make_shared<RocketProjectile>(RocketProjectile(DMG, x, y, type, enemy.getIdNum())));
+			shootSound.play();
         }
     }
 }
