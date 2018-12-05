@@ -11,8 +11,8 @@
 void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
-	if(Level==0){
-		money=money+2000;
+	if(Level == 0){
+		money += 2000;
 	}
 	// would be better to give UserGraphics a pointer to Engine,
 	// rather than copy it whole
@@ -176,7 +176,7 @@ void Engine::EndGame(){
 	std::ofstream out;
 	out.open("../src/maps/scores.txt",std::ios::app);
 	time_t now = time(0);
-	out<<GameTag<<";"<<score<<';';
+	out << GameTag << ";" << score << ';';
         GameEnd = true;
 	out.close();
 	std::string line;
@@ -185,7 +185,7 @@ void Engine::EndGame(){
 		int i = 1;
 		Scores temp;
 		while(getline(myfile, line, ';')){
-			std::cout<<line<<'\n';
+			//std::cout<<line<<'\n';
 			switch(i){
 				case 1:
 					temp.name=line;

@@ -45,29 +45,30 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
 	TopScoreHL.setString("TOP 10 PLAYERS:");
 	SetToText(TopScoreHL,10.f,10.f,Font,40);
 
-    MenuOn=true;
+    MenuOn = true;
 }
 
-
+// Gets the 10 best players and stores them in a new vector? 
 void GameMenu::showHighScores(){
 	if(!topScoresInit){
-			topScoresInit=true;
+			topScoresInit = true;
 			float y = 70.f;
-			int i=1;
+			int i = 1;
 			for(auto& score : topScoresVec){
 				sf::Text temp;
 				temp.setFont(Font);
 				temp.setCharacterSize(20);
-				temp.setPosition(20.f,y);
-				temp.setString(std::to_string(i)+". "+score.name+"- Score: "+std::to_string(score.score));
+				temp.setPosition(20.f, y);
+				temp.setString(std::to_string(i) + ". " + score.name + "- Score: " + std::to_string(score.score));
 				topScores.push_back(temp);
-				y+=50.f;
+				y += 50.f;
 				i++;
-				if(i==11){
+				if(i == 11){
 					break;
 				}
 			}
 	}
+
 	for(auto& text : topScores){
 		text.setPosition(text.getPosition().x, text.getPosition().y);
 	}
@@ -85,22 +86,22 @@ void GameMenu::StartScores(){
 	std::ifstream myfile("../src/maps/scores.txt");
 	if(myfile.is_open()){
 		int i = 1;
-		Sores temp;
+		Scores temp;
 		while(getline(myfile, line, ';')){
-			std::cout<<line<<'\n';
+			//std::cout<<line<<'\n';
 			switch(i){
 				case 1:
-					temp.name=line;
+					temp.name = line;
 					break;
 				case 2:
-					temp.score=stoi(line);
+					temp.score = stoi(line);
 					break;
 			}
 			i++;
-			if(i>2){
-				i=1;
+			if(i > 2){
+				i = 1;
 				topScoresVec.push_back(temp);
-				Sores temp;
+				Scores temp;
 			}
 		}
 		myfile.close();
@@ -113,7 +114,7 @@ void GameMenu::StartScores(){
 }
 
 bool GameMenu::showTopScore(){
-	if(MenuOn && showTopScoreClk.getElapsedTime().asSeconds()>1){
+	if(MenuOn && showTopScoreClk.getElapsedTime().asSeconds() > 1){
 		return true;
 	}
 	return false;
@@ -123,16 +124,20 @@ int GameMenu::StartMenu(){
 	int exit_ret; // exit status 
 	sf::Music music; // music object
 	music.setLoop(true); 
-	// loading musid
+	// loading music
 	if (!music.openFromFile("../src/sounds/radio.ogg")){
-		std::cout << "Opening wagner.ogg failed!" << std::endl;
+		std::cout << "Opening radio.ogg failed!" << std::endl;
     	return -1; // error
 	}
-	music.play(); // play music   
+	music.play(); // play music
+
+    StartScores();
+    showHighScores();
+
 	while(nWindow.isOpen()){
         exit_ret = manageEvents(); // start manage events
-	StartScores();
-	showHighScores();
+	//StartScores();
+	//showHighScores();
 	render(); // start rendering
     }
 	return exit_ret;

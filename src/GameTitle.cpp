@@ -37,5 +37,3 @@ GameTitle::~GameTitle() {
 
 }
 
-
-// /Users/oskartainio/Documents/Ohjelmointi/C++ -ohjelmointi/Projekti/GameTitle/GameTitle/ExternalLibraries/SFML/include/SFML
