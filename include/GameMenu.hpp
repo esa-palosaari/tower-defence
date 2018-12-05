@@ -48,8 +48,8 @@ private:
 	sf::Sprite title;
 	sf::Texture titleTexture;
 	sf::Music music;
-	bool MenuOn=true;
-	bool topScoresInit=false;
+	bool MenuOn = true;
+	bool topScoresInit = false;
 	sf::Clock showTopScoreClk;
 };
 #endif
