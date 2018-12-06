@@ -1,5 +1,6 @@
 #include "UserGraphics.hpp"
 #include <iostream>
+#include <math.h>
 
 UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     

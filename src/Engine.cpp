@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 // Starts the engine, loads the game map from file, starts the clock and calls UserGraphics
 void Engine::StartEngine(){
