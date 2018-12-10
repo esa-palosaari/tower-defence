@@ -128,6 +128,9 @@ private:
 	sf::Text TopScoreHL;
 
 
+	sf::SoundBuffer MachinegunSound;
+
+	
 
 };
 

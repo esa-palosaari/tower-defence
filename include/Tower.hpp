@@ -30,6 +30,7 @@ public:
     sf::Sprite tower;
     sf::CircleShape circle;
 	sf::Sprite infopanel;
+	sf::Sound shootSound;
     bool textureInitialize = false;
 	bool UpgradeClick=false;
 	bool UpgradeLevel=true;
@@ -51,6 +52,7 @@ private:
     float x;
     float y;
     float TimePause = 0;
+	
 };
 
 #endif
