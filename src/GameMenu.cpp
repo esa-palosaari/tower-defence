@@ -89,7 +89,9 @@ void GameMenu::StartScores(){
 		Sores temp;
 		while(getline(myfile, line, ';')){
 			//std::cout<<line<<'\n';
+
 			line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());			
+
 			switch(i){
 				case 1:
 					temp.name = line;

@@ -1,4 +1,5 @@
 #include "Projectile.hpp"
+#include <math.h>
 
 Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId) : DMG(dmg), x(x), y(y), type(Type), TargetID(targetId) {}
 

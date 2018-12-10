@@ -1,6 +1,7 @@
 #include "Tower.hpp"
 #include "Engine.hpp"
 #include <SFML/Audio.hpp>
+#include <math.h>
 #include <memory> //Jotta voidaan hallinnoida uusien tornien spawnaaminen ja mahdollinen tallentaminen save game-funktiossa.
 
 Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine), type(type), x(x), y(y)
