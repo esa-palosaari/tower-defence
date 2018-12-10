@@ -75,9 +75,10 @@ void Engine::Update(sf::Time elapsedTime){
                 i->get()->Move(elapsedTime, enemies);   // Projectile
                 int Income = i->get()->HitTarget(enemies);
 		if(Income>0){
-			float LevelModifier = pow(1.05, Level);
-			int ModifiedScore = (int)(LevelModifier*1);
-			int ModifiedIncome = (int)(LevelModifier*Income);
+			float LevelModifierScore = pow(1.05, Level);
+			float LevelModifierMoney = pow(1.03, Level);
+			int ModifiedScore = (int)(LevelModifierScore*1);
+			int ModifiedIncome = (int)(LevelModifierMoney*Income);
 			score=score+ModifiedScore;
 			money=money+ModifiedIncome;
 		}
