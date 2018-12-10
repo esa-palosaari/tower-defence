@@ -1,7 +1,12 @@
 #include "Projectile.hpp"
+#include <SFML/Audio.hpp>
 #include <math.h>
 
-Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId) : DMG(dmg), x(x), y(y), type(Type), TargetID(targetId) {}
+Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId) : DMG(dmg), x(x), y(y), type(Type), TargetID(targetId) {
+	Explosion.loadFromFile("../src/sounds/explosion.ogg");
+	ExplosionSound.setBuffer(Explosion);
+
+}
 
 void Projectile::InitializeTexture(){
     textureInitialize = true;
@@ -101,6 +106,7 @@ int RocketProjectile::HitTarget(std::vector<Enemy>& enemies){
             GraphArea = true;       //Changes GraphArea to true.
             clock.restart();        //Restarts the clock.
             BlownUp=true;           //Destroys projetile.
+			ExplosionSound.play(); 	//Plays explosion sound.
             break;
         }
     }

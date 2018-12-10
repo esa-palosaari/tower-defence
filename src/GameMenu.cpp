@@ -45,6 +45,9 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
 	TopScoreHL.setString("TOP 10 PLAYERS:");
 	SetToText(TopScoreHL,30.f,410.f,Font,64);
 
+	Click.loadFromFile("../src/sounds/click.ogg");
+	ClickSound.setBuffer(Click);
+
     MenuOn = true;
 }
 
@@ -152,6 +155,8 @@ int GameMenu::manageEvents(){
         sf::Vector2i mouse(sf::Mouse::getPosition(nWindow).x, sf::Mouse::getPosition(nWindow).y);
         if (event.type == sf::Event::MouseButtonPressed)
         {
+			
+			ClickSound.play();	
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 if (StartGameButton.getGlobalBounds().contains(mouse.x, mouse.y))

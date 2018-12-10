@@ -1,5 +1,6 @@
 #ifndef Projectiles_hpp
 #define Projectiles_hpp
+#include <SFML/Audio.hpp>
 #include "Types.hpp"
 #include "Tower.hpp"
 
@@ -31,6 +32,8 @@ public:
     Projectile(Projectile&&) = default;          //Move constructor
     Projectile& operator=(const Projectile&) & = default;  //Copy assignment
     Projectile& operator=(Projectile&&) & = default;     //move assignment*/
+	sf::Sound ExplosionSound;
+	sf::SoundBuffer Explosion;
 
 protected:
     Types::NPC type;    //type of projectile, specific to each turret

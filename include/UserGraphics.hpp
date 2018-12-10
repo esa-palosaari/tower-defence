@@ -128,7 +128,12 @@ private:
 	sf::Text TopScoreHL;
 
 	sf::SoundBuffer MachinegunSound;
-
+	sf::SoundBuffer FlamerSound; 
+	sf::SoundBuffer RocketSound;
+	sf::SoundBuffer ExplosionSound; 
+	sf::SoundBuffer UpgradeSound;
+	sf::SoundBuffer Click;
+	sf::Sound ClickSound;
 	
 
 };

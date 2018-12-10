@@ -209,6 +209,12 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	LevelUpgrade.setCharacterSize(20);
 
 	MachinegunSound.loadFromFile("../src/sounds/MG.ogg");
+	FlamerSound.loadFromFile("../src/sounds/FT.wav");
+	RocketSound.loadFromFile("../src/sounds/RL.ogg");
+	ExplosionSound.loadFromFile("../src/sounds/explosion.ogg");
+	UpgradeSound.loadFromFile("../src/sounds/upgrade.ogg");
+	Click.loadFromFile("../src/sounds/click.ogg");
+	ClickSound.setBuffer(Click);
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
@@ -424,6 +430,7 @@ void UserGraphics::managePause()
         sf::Vector2i mouse(sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
         if (event.type == sf::Event::MouseButtonPressed)
         {
+			ClickSound.play(); 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 if (ContinueButton.getGlobalBounds().contains(mouse.x, mouse.y))
@@ -651,6 +658,7 @@ void UserGraphics::manageEvents()
         {
             if (event.type == sf::Event::MouseButtonPressed)
             {
+				ClickSound.play(); 
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 {
                     if (SkipWaitingButton.getGlobalBounds().contains(mouse.x, mouse.y) && engine->isTimeOut())
@@ -717,7 +725,8 @@ void UserGraphics::manageEvents()
         {
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                if (InvalidPlacementMenu && copyTowerMachinegun && ClickedTower)
+				ClickSound.play();                
+				if (InvalidPlacementMenu && copyTowerMachinegun && ClickedTower)
                 {
                     TowerMachine.setPosition(1700, 220);
                     copyTowerMachinegun = false;
@@ -792,12 +801,12 @@ void UserGraphics::render()
             else if (TWR.getType() == Types::NPC::Flamethrower)
             {
                 TWR.tower.setTexture(TextureTowerFlameThrower);
-				TWR.shootSound.setBuffer(MachinegunSound); // replace!!!
+				TWR.shootSound.setBuffer(FlamerSound); // replace!!!
             }
             else
             {
                 TWR.tower.setTexture(TextureTowerRocketlauncher);
-				TWR.shootSound.setBuffer(MachinegunSound); // replace!!!
+				TWR.shootSound.setBuffer(RocketSound); // replace!!!
             }
         }
 	if(TWR.UpgradeClick || UpgradeClick){

@@ -51,5 +51,7 @@ private:
 	bool MenuOn = true;
 	bool topScoresInit = false;
 	sf::Clock showTopScoreClk;
+	sf::SoundBuffer Click;
+	sf::Sound ClickSound;
 };
 #endif

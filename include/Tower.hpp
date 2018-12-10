@@ -31,6 +31,7 @@ public:
     sf::CircleShape circle;
 	sf::Sprite infopanel;
 	sf::Sound shootSound;
+	sf::Sound upgradeSound;
     bool textureInitialize = false;
 	bool UpgradeClick=false;
 	bool UpgradeLevel=true;
