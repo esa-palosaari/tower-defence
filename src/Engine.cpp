@@ -12,25 +12,26 @@
 void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
-	if(Level == 0){
-		money += 1250;
-	}
-	// would be better to give UserGraphics a pointer to Engine,
-	// rather than copy it whole
+	  if(Level == 0){
+      money += 1250;
+	  }
+
     UserGraphics graph(this);
     graph.StartUserGraphics();
 }
 
+// Updates the engine every
 void Engine::Update(sf::Time elapsedTime){
+
     if(Level == 0 || FileLoaded){
         CheckTimeOut();
     }
     else {
-        for(auto& enemy:enemies){
+        for(auto& enemy:enemies){ // Goes through the enemies and decreases HP
             auto EnemyPlacement = enemy.enemy.getPosition();
             enemy.Move(enemy.getType(), EnemyPlacement, elapsedTime);
             if(enemy.enemy.getPosition().x >= 1984 && !enemy.CheckDead()){
-                if(HP>0){
+                if(HP > 0){
                     switch(enemy.getType()){
                         case(Types::NPC::Slow):
                             HP--;
@@ -41,116 +42,123 @@ void Engine::Update(sf::Time elapsedTime){
                         case(Types::NPC::Fast):
                             HP--;
                             break;
-			case(Types::NPC::Aircraft):
-				HP--;
-				break;
-			case(Types::NPC::Commander):
-				HP=HP-3;
-				break;
-			case(Types::NPC::Killer):
-				HP=HP-5;
-				break;
+                  			case(Types::NPC::Aircraft):
+                  				HP--;
+                  				break;
+                  			case(Types::NPC::Commander):
+                  				HP -= 3;
+                  				break;
+                  			case(Types::NPC::Killer):
+                  				HP -= 5;
+                  				break;
                     }
                 }
                 enemy.setDead();
             }
         }
 
+        // If HP > 0, towers start shooting
         std::sort(enemies.rbegin(), enemies.rend());
-
         for(auto& enemy : enemies){
             for(auto& tower : towers){
-                if(HP>0){
-                    tower.Shoot(enemy); //Tower
+                if(HP > 0){
+                    tower.Shoot(enemy);
                 }
             }
         }
 
+        // Retarget the towers
         for(auto& tower : towers){
-            tower.ReTarget();   //Tower
+            tower.ReTarget();
         }
 
-        for(std::vector<std::shared_ptr<Projectile>>::iterator i=projectiles.begin(); i != projectiles.end();){
-            if(!i->get()->isBlownUp()){       // Projectile
-                i->get()->Move(elapsedTime, enemies);   // Projectile
+        // Shared pointer for tower's projectiles
+        // Checks status and shoots if projectile exists
+        // Otherwise erases the the iterator
+        for(std::vector<std::shared_ptr<Projectile>>::iterator i = projectiles.begin(); i != projectiles.end();){
+            if(!i->get()->isBlownUp()){
+                i->get()->Move(elapsedTime, enemies);
                 int Income = i->get()->HitTarget(enemies);
-		if(Income>0){
-			float LevelModifierScore = pow(1.05, Level);
-			float LevelModifierMoney = pow(1.03, Level);
-			int ModifiedScore = (int)(LevelModifierScore*1);
-			int ModifiedIncome = (int)(LevelModifierMoney*Income);
-			score=score+ModifiedScore;
-			money=money+ModifiedIncome;
-		}
+            		if(Income > 0){
+            			float LevelModifierScore = pow(1.05, Level);
+            			float LevelModifierMoney = pow(1.03, Level);
+            			int ModifiedScore = (int)(LevelModifierScore * 1);
+            			int ModifiedIncome = (int)(LevelModifierMoney * Income);
+            			score += ModifiedScore;
+            			money += ModifiedIncome;
+            		}
                 i++;
             }
-            else{
-                i=projectiles.erase(i);    //Projectile
+            else {
+                i = projectiles.erase(i);
             }
         }
+
+        // Determine the game difficulty according to player's level
+        // Spawns new enemies
         if(Level < 5){
-            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
-                	spawnEnemies(Types::NPC::Slow);
-                	SpawnedSlows++;
-                	clock.restart();
-            	}
-            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
-                	spawnEnemies(Types::NPC::Medium);
-                	SpawnedMediums++;
-                	clock.restart();
-            	}
-            	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
-                	spawnEnemies(Types::NPC::Fast);
-                	SpawnedFasts++;
-                	clock.restart();
-            	}
-		if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedCommanders < BaseLevels[Level-1][3]){
-			spawnEnemies(Types::NPC::Commander);
-			SpawnedCommanders++;
-			clock.restart();
-		}
+        	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedSlows < BaseLevels[Level-1][0]){
+            spawnEnemies(Types::NPC::Slow);
+            SpawnedSlows++;
+            clock.restart();
+        	}
+        	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedMediums < BaseLevels[Level-1][1]){
+            spawnEnemies(Types::NPC::Medium);
+            SpawnedMediums++;
+            clock.restart();
+        	}
+        	if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedFasts < BaseLevels[Level-1][2]){
+            spawnEnemies(Types::NPC::Fast);
+            SpawnedFasts++;
+            clock.restart();
+        	}
+      		if(clock.getElapsedTime().asMilliseconds() > Interval && SpawnedCommanders < BaseLevels[Level-1][3]){
+      			spawnEnemies(Types::NPC::Commander);
+      			SpawnedCommanders++;
+      			clock.restart();
+      		}
         }
-        else{
-		if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies-1){
-                int DetermineType = rand() % 4 + 1;
-                switch(DetermineType){
-                	case 1:
-                		spawnEnemies(Types::NPC::Slow);
-                        	break;
-                   	 case 2:
-                        	spawnEnemies(Types::NPC::Medium);
-                        	break;
-                    	case 3:
-                        	spawnEnemies(Types::NPC::Fast);
-                       	 	break;	
-			case 4:
-				spawnEnemies(Types::NPC::Aircraft);
-				break;
-			
-                }
-                clock.restart();
+        else {
+          if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() < MaxEnemies-1){
+            int DetermineType = rand() % 4 + 1;
+            switch(DetermineType){
+              case 1:
+                spawnEnemies(Types::NPC::Slow);
+                break;
+              case 2:
+                spawnEnemies(Types::NPC::Medium);
+                break;
+              case 3:
+                spawnEnemies(Types::NPC::Fast);
+                break;
+            	case 4:
+            		spawnEnemies(Types::NPC::Aircraft);
+            		break;
             }
-		if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() == MaxEnemies-1){
-			int DetermineType = rand() % 5 +1;
-			switch(DetermineType){
-				case 1:
-					spawnEnemies(Types::NPC::Commander);
-					break;
-				case 2:
-					spawnEnemies(Types::NPC::Commander);
-					break;
-				case 3:
-					spawnEnemies(Types::NPC::Commander);
-					break;
-				case 4:
-					spawnEnemies(Types::NPC::Commander);
-					break;
-				case 5:
-					spawnEnemies(Types::NPC::Killer);
-					break;
-			}
-		}
+              clock.restart();
+            }
+    	  if(clock.getElapsedTime().asMilliseconds()>Interval && enemies.size() == MaxEnemies - 1){
+    			int DetermineType = rand() % 5 +1;
+    			switch(DetermineType){
+    				case 1:
+    					spawnEnemies(Types::NPC::Commander);
+    					break;
+    				case 2:
+    					spawnEnemies(Types::NPC::Commander);
+    					break;
+    				case 3:
+    					spawnEnemies(Types::NPC::Commander);
+    					break;
+    				case 4:
+    					spawnEnemies(Types::NPC::Commander);
+    					break;
+    				case 5:
+    					spawnEnemies(Types::NPC::Killer);
+    					break;
+    			}
         }
+      }
+
         if(enemies.size() == MaxEnemies && HP > 0){
             CheckTimeOut();
         }
@@ -171,62 +179,52 @@ bool Engine::isAllDead(){
 }
 
 
-// Ends the game
+// Ends the game and saves top scores to .txt
 void Engine::EndGame(){
-    if(!GameEnd){
-	showTopScoreClk.restart();
-	std::ofstream out;
-	out.open("../src/maps/scores.txt",std::ios::app);
-	time_t now = time(0);
-	out << GameTag << ";" << score << ';';
-        GameEnd = true;
-	out.close();
-	std::string line;
-	std::ifstream myfile("../src/maps/scores.txt");
-	if(myfile.is_open()){
-		int i = 1;
-		Scores temp;
-		while(getline(myfile, line, ';')){
-			//std::cout<<line<<'\n';
-			switch(i){
-				case 1:
-					temp.name=line;
-					break;
-				case 2:
-					temp.score=stoi(line);
-					break;
-			}
-			i++;
-			if(i>2){
-				i=1;
-				topScoresVec.push_back(temp);
-				Scores temp;
-			}
-		}
-		myfile.close();
-		std::sort(topScoresVec.begin(), topScoresVec.end());
-	}
-	else{
-		std::cout<<"Unable to open file";
-	}
-    }
+  if(!GameEnd){
+  	showTopScoreClk.restart();
+  	std::ofstream out;
+  	out.open("../src/maps/scores.txt",std::ios::app);
+  	time_t now = time(0);
+  	out << GameTag << ";" << score << ';';
+    GameEnd = true;
+  	out.close();
+
+  	std::string line;
+  	std::ifstream myfile("../src/maps/scores.txt");
+
+  	if(myfile.is_open()){
+  		int i = 1;
+  		Scores temp;
+  		while(getline(myfile, line, ';')){
+  			switch(i){
+  				case 1:
+  					temp.name=line;
+  					break;
+  				case 2:
+  					temp.score=stoi(line);
+  					break;
+  			}
+  			i++;
+  			if(i > 2){
+  				i = 1;
+  				topScoresVec.push_back(temp);
+  				Scores temp;
+  			}
+  		}
+
+  		myfile.close();
+  		std::sort(topScoresVec.begin(), topScoresVec.end());
+  	}
+
+  	else {
+  		std::cout << "Unable to open file";
+  	}
+  }
 }
 
-
-// Saves the game into a .txt - file
-void Engine::saveGame(std::string targetPath){
-   /* std::ofstream out;
-    out.open(targetPath, std::ios::app);
-    out << money << ';' << Level << ';' << HP << ';';
-    std::ostringstream AstreamT;
-    boost::archive::text_oarchive ArchiveT(AstreamT);
-    ArchiveT << towers;
-    std::string OdataT = AstreamT.str();
-    out << OdataT;
-    out.close();*/
-}
-
-
+// Check if level has been cleared,
+// Raises level and resets the time
 void Engine::CheckTimeOut(){
     if(isAllDead() && !TimeOut){
         TimeOut = true;
@@ -242,16 +240,17 @@ void Engine::CheckTimeOut(){
     }
 }
 
+
+// Spawns new enemies
 void Engine::spawnEnemies(Types::NPC type){
 	float LevelModifier = pow(1.08, Level);
   Enemy&& temp = Enemy(type, SpawnNumber, 0, 0, LevelModifier);
-	if(type==Types::NPC::Aircraft){
+	if(type == Types::NPC::Aircraft){
 		temp.InitializeSprite(0.f, 900.f);
 	}
-	else{
+	else {
 		temp.InitializeSprite(0.f, 160.f);
 	}
-    
     enemies.push_back(temp);
     SpawnNumber++;
 }
@@ -260,7 +259,7 @@ void Engine::spawnEnemies(Types::NPC type){
 void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
 	float LevelModifier = pow(1.08, Level);
   Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance, LevelModifier);
-	if(type==Types::NPC::Aircraft){
+	if(type == Types::NPC::Aircraft){
 		temp.InitializeSprite(0.f, 900.f);
 	}
 	else{
@@ -270,7 +269,7 @@ void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float
     SpawnNumber++;
 }
 
-
+// Spawns new towers
 void Engine::spawnTower(Types::NPC type, float x, float y){
     Tower&& temp = Tower(this, type, x, y);
     temp.InitializeSprite();
@@ -297,22 +296,22 @@ void Engine::loadMap(int id){
 
 // Updates the player to a next level
 void Engine::LevelUp(){
-    SpawnNumber = 0;
-	SpawnedSlows=0;
-	SpawnedMediums=0;
-	SpawnedFasts=0;
-	SpawnedCommanders=0;
-	SpawnedKillers=0;
-	SpawnedAircrafts=0;
+  SpawnNumber = 0;
+	SpawnedSlows = 0;
+	SpawnedMediums = 0;
+	SpawnedFasts = 0;
+	SpawnedCommanders = 0;
+	SpawnedKillers = 0;
+	SpawnedAircrafts = 0;
 	if(Level < 4){
 		MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2]+BaseLevels[Level][3];
 	}
-       	else{
-		MaxEnemies=Level*2;
+  else {
+		MaxEnemies = Level * 2;
 	}
-   	Level++;
+  Level++;
 	score=score+10;
-    enemies.reserve(MaxEnemies);
+  enemies.reserve(MaxEnemies);
 }
 
 Engine::~Engine(){}
