@@ -47,7 +47,7 @@ public:
     MachinegunProjectile(int dmg, float x, float y, Types::NPC type, int targetId);
     int HitTarget(std::vector<Enemy>& enemies);
 private:
-    float Speed = 1000;
+    float Speed = 2000;
 };
 
 class FlameProjectile : public Projectile{
@@ -55,7 +55,7 @@ public:
     FlameProjectile(int dmg, float x, float y, Types::NPC type, int targetId);
     int HitTarget(std::vector<Enemy>& enemies);
 private:
-    float Speed = 750;
+    float Speed = 1250;
 };
 
 class RocketProjectile : public Projectile{

@@ -66,15 +66,15 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     
     MachinegunTowerPrice.setFont(Font);
     SetToText(MachinegunTowerPrice, 1740.f, 210.f, Font, 20);
-    MachinegunTowerPrice.setString("1000");
+    MachinegunTowerPrice.setString("500");
     
     FlamethrowerTowerPrice.setFont(Font);
     SetToText(FlamethrowerTowerPrice, 1740.f, 310.f, Font, 20);
-    FlamethrowerTowerPrice.setString("1000");
+    FlamethrowerTowerPrice.setString("500");
     
     RocketlauncherTowerPrice.setFont(Font);
     SetToText(RocketlauncherTowerPrice, 1740.f, 410.f, Font, 20);
-    RocketlauncherTowerPrice.setString("1000");
+    RocketlauncherTowerPrice.setString("500");
     
     CircleMachinegun.setOrigin(350.f, 350.f);
     CircleMachinegun.setRadius(350.f);
@@ -207,6 +207,8 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	LevelUpgrade.setFont(Font);
 	LevelUpgrade.setPosition(1700.f,505.f);
 	LevelUpgrade.setCharacterSize(20);
+
+	
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
@@ -263,7 +265,7 @@ bool UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_
 bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 	if(tower.getTowerLevel() != 4){
 		if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(position.x, position.y)){
-			if(engine->getMoney() < (tower.getTowerLevel() *800)){
+			if(engine->getMoney() < (tower.getTowerLevel() *200)){
 				UpgradeButton.setFillColor(sf::Color(160,160,160));
 				tower.UpgradeLevel = false;
 				CannotUpgrade=true;
@@ -285,7 +287,7 @@ bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 		else if(insideBounds(tower.tower, position)){
 			tower.UpgradeClick=true;
 			UpgradeClick=true;
-			if(engine->getMoney() < (tower.getTowerLevel() *800)){
+			if(engine->getMoney() < (tower.getTowerLevel() *200)){
 				UpgradeButton.setFillColor(sf::Color(160,160,160));
 				tower.UpgradeLevel=false;
 				CannotUpgrade=true;
@@ -662,34 +664,34 @@ void UserGraphics::manageEvents()
                     }
                     else if (copyTowerMachinegun && ClickedTower && !InvalidPlacementMenu)
                     {
-                        spawnTower(Types::NPC::Machinegun, 1000);
+                        spawnTower(Types::NPC::Machinegun, 500);
                         TowerMachine.setPosition(1700, 220);
                     }
                     else if (copyTowerFlamethrower && ClickedTower && !InvalidPlacementMenu)
                     {
-                        spawnTower(Types::NPC::Flamethrower, 1000);
+                        spawnTower(Types::NPC::Flamethrower, 500);
                         TowerFlame.setPosition(1700, 320);
                     }
                     else if (copyTowerRocketlauncher && ClickedTower && !InvalidPlacementMenu)
                     {
-                        spawnTower(Types::NPC::Rocketlauncher, 1000);
+                        spawnTower(Types::NPC::Rocketlauncher, 500);
                         TowerRocket.setPosition(1700, 420);
                     }
                     
-                    if (insideBounds(TowerMachine, mouse) && engine->getMoney() >= 1000)
+                    if (insideBounds(TowerMachine, mouse) && engine->getMoney() >= 500)
                     {
                         ClickedTower = true;
                         copyTowerMachinegun = true;
                         InvalidPlacementMenu = true;
                     }
-                    else if (insideBounds(TowerFlame, mouse) && engine->getMoney() >= 1000)
+                    else if (insideBounds(TowerFlame, mouse) && engine->getMoney() >= 500)
                     {
                        
                         ClickedTower = true;
                         copyTowerFlamethrower = true;
                         InvalidPlacementMenu = true;
                     }
-                    else if (insideBounds(TowerRocket, mouse) && engine->getMoney() >= 1000)
+                    else if (insideBounds(TowerRocket, mouse) && engine->getMoney() >= 500)
                     {
                         ClickedTower = true;
                         copyTowerRocketlauncher = true;
@@ -808,8 +810,8 @@ void UserGraphics::render()
 		infotextHL.setString("Statistics:");
 		if(TWR.getType() == Types::NPC::Machinegun){
 			infoText1.setString("Machinegun");	
-			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
-			if(UpgradePrice=="6400"){
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
+			if(UpgradePrice=="800"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}
@@ -819,8 +821,8 @@ void UserGraphics::render()
 		}
 		else if(TWR.getType() == Types::NPC::Flamethrower){
 			infoText1.setString("Flamethrower");	
-			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
-			if(UpgradePrice=="6400"){
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
+			if(UpgradePrice=="800"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}
@@ -830,8 +832,8 @@ void UserGraphics::render()
 		}
 		else{
 			infoText1.setString("Rocketlauncher");	
-			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*800));	
-			if(UpgradePrice=="6400"){
+			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
+			if(UpgradePrice=="800"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}
@@ -904,7 +906,7 @@ void UserGraphics::render()
         engine->window.draw(SkipWaitingButton);
     }
     
-    if (engine->getMoney() < 1000)
+    if (engine->getMoney() < 500)
     {
         TowerMachine.setColor(sf::Color(128, 128, 128));
     }
@@ -914,7 +916,7 @@ void UserGraphics::render()
         TowerMachine.setColor(sf::Color(255, 255, 255));
     }
     
-    if (engine->getMoney() < 1000)
+    if (engine->getMoney() < 500)
     {
         TowerFlame.setColor(sf::Color(128, 128, 128));
     }
@@ -924,7 +926,7 @@ void UserGraphics::render()
         TowerFlame.setColor(sf::Color(255, 255, 255));
     }
     
-    if (engine->getMoney() < 1000)
+    if (engine->getMoney() < 500)
     {
         TowerRocket.setColor(sf::Color(128, 128, 128));
     }
@@ -979,7 +981,7 @@ void UserGraphics::render()
     
     if (engine->getHP() <= 0)
     {
-        GameOverText.setString("GET REKT NOOB!\nWAVES SURVIVED: " + std::to_string(engine->getLevel()) + "\nTOTAL SCORE: " + std::to_string(engine->getScore()) + "\nPLAYER NAME: ");
+        GameOverText.setString("GAME OVER!\nWAVES SURVIVED: " + std::to_string(engine->getLevel()) + "\nTOTAL SCORE: " + std::to_string(engine->getScore()) + "\nPLAYER NAME: ");
         engine->window.draw(InputToName);
         engine->window.draw(GameOverText);
 	

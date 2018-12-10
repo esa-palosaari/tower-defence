@@ -13,7 +13,7 @@ void Engine::StartEngine(){
     loadMap(10);
     clock.restart();
 	if(Level == 0){
-		money += 2000;
+		money += 1250;
 	}
 	// would be better to give UserGraphics a pointer to Engine,
 	// rather than copy it whole
