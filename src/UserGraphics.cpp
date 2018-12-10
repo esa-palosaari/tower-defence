@@ -815,7 +815,7 @@ void UserGraphics::render()
 		if(TWR.getType() == Types::NPC::Machinegun){
 			infoText1.setString("Machinegun");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
-			if(UpgradePrice=="800"){
+			if(UpgradePrice=="1600"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}
@@ -826,7 +826,7 @@ void UserGraphics::render()
 		else if(TWR.getType() == Types::NPC::Flamethrower){
 			infoText1.setString("Flamethrower");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
-			if(UpgradePrice=="800"){
+			if(UpgradePrice=="1600"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}
@@ -837,7 +837,7 @@ void UserGraphics::render()
 		else{
 			infoText1.setString("Rocketlauncher");	
 			UpgradePrice=std::to_string((int)(pow(2,TWR.getTowerLevel()-1)*200));	
-			if(UpgradePrice=="800"){
+			if(UpgradePrice=="1600"){
 				UpgradePrice="MAX LEVEL";
 				LevelUpgrade.setString(UpgradePrice);
 			}

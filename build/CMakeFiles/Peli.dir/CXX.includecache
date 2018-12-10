@@ -149,6 +149,8 @@ Tower.hpp
 /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Tower.hpp
 Engine.hpp
 /u/23/tainioo2/unix/Documents/Projekti/towerdefence-3/src/Engine.hpp
+SFML/Audio.hpp
+-
 math.h
 -
 memory
