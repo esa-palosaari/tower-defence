@@ -5,19 +5,17 @@
 #include "Tower.hpp"
 #include "Projectile.hpp"
 #include "TileMap.hpp"
-
-#include "Types.hpp"    //U
-#include "memory"   //U
-
+#include "Types.hpp"
+#include "memory"
 #include <fstream>
 #include <ctime>
 
 
-    class Tower;
-    class Projectile;    // forward declaration?
+class Tower;
+class Projectile;
 
+// Class for game scores
 class Scores{
-
 public:
 	std::string name;
 	int score;
@@ -28,7 +26,7 @@ public:
 		return false;
 	}
 };
-    
+
 class Engine{
 public:
     void StartEngine();
@@ -36,7 +34,7 @@ public:
     int TimeToNextRound() {return TimeOutTime - TimeOutClock.getElapsedTime().asSeconds();}
 
     int getMoney() const {return money;};
-	int getScore() const {return score;}
+	  int getScore() const {return score;}
     void loseMoney(int cash) {money -= cash;}
     int getLevel() const {return Level;}
     int getHP() const {return HP;}
@@ -59,20 +57,20 @@ public:
     void setLevel(int startLevel) {Level = startLevel;}
     void setGameTag(std::string UserTag) {GameTag = UserTag;}
 
-	bool showTopScore(){
-		if(GameEnd && showTopScoreClk.getElapsedTime().asSeconds()>1){
-			return true;
-		}
-		return false;
-	}
+  	bool showTopScore(){
+  		if(GameEnd && showTopScoreClk.getElapsedTime().asSeconds()>1){
+  			return true;
+  		}
+  		return false;
+  	}
 
     TileMap map;
     sf::RenderWindow window;
     std::vector<Enemy> enemies;
     std::vector<Tower> towers;
-	std::vector<Scores> topScoresVec;
+	  std::vector<Scores> topScoresVec;
     std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
-  ~Engine();
+   ~Engine();
 
 
 private:
@@ -80,8 +78,8 @@ private:
     std::string GameTag;
     int Level = 0;
     int HP = 10;
-	int money=0;
-	int score=0;
+	  int money = 0;
+	  int score = 0;
 
 
     // Enemy information
@@ -92,10 +90,10 @@ private:
     int SpawnedSlows = 0;
     int SpawnedMediums = 0;
     int SpawnedFasts = 0;
-	int SpawnedCommanders=0;
-	int SpawnedKillers=0;
-	int SpawnedAircrafts=0;
-    int BaseLevels[4][4] = {{5,0,0,0},{0,5,0,0},{0,0,5,0},{0,0,0,1}};
+  	int SpawnedCommanders=0;
+  	int SpawnedKillers=0;
+  	int SpawnedAircrafts=0;
+    int BaseLevels[4][4] = {{5,0,0,0}, {0,5,0,0}, {0,0,5,0}, {0,0,0,1}};
 
     // Game's state information
     int Interval = 750;
@@ -106,7 +104,7 @@ private:
 
     // SFML properties
     sf::Clock TimeOutClock;
-	sf::Clock showTopScoreClk;
+	  sf::Clock showTopScoreClk;
     sf::Clock clock;
 
     // Required functions
@@ -115,4 +113,4 @@ private:
     void CheckTimeOut();
 };
 
-#endif 
+#endif
