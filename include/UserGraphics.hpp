@@ -16,28 +16,28 @@ public:
     void manageEvents();
     void manageEnd();
     void managePause();
-    
+
     template <class t>
     bool insideBounds(t sprite, sf::Vector2f pos);
     template <class t>
     bool insideBounds(t sprite, sf::Vector2i pos);
     template <class t, class y>
     bool insideBounds(t sprite, y pos);
-    
+
     bool OverRoad(sf::Vector2f pos);
     void spawnTower(Types::NPC type, int losePoints);
     void DrawMovingTower(float posx, float posy, sf::Vector2f pos);
-	void setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower);
-	bool upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower);
-	bool canUpgrade(sf::Vector2i position, Tower& tower);
-    
+  	void setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower);
+  	bool upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower);
+  	bool canUpgrade(sf::Vector2i position, Tower& tower);
+
     void Update(sf::Time elapsedTime);
-	void showHiscores();
-    
+	  void showHiscores();
+
 private:
     Engine* engine;
     std::vector<sf::Sprite> towers;
-	std::vector<sf::Text> topScores;
+	  std::vector<sf::Text> topScores;
     bool FinishedName = false;
     bool copyTowerMachinegun = false;
     bool copyTowerFlamethrower = false;
@@ -48,14 +48,13 @@ private:
     bool InvalidPlacement = true;
     bool InvalidPlacementMenu = true;
     bool GameIsPaused = false;
-	bool UpgradeClick=false;
-	bool CannotUpgrade=false;
-	
-    
+  	bool UpgradeClick = false;
+  	bool CannotUpgrade = false;
+
     const sf::Time FrameTime = sf::seconds(1.f / 60.f);
 
-	std::string UpgradePrice;
-    
+	  std::string UpgradePrice;
+
     sf::Clock TimePassedInPause;
     sf::Texture TextureProjectileMachine;
     sf::Texture TextureProjectileFlame;
@@ -63,9 +62,9 @@ private:
     sf::Texture TextureEnemySlow;
     sf::Texture TextureEnemyMedium;
     sf::Texture TextureEnemyFast;
-	sf::Texture TextureEnemyCommander;
-	sf::Texture TextureEnemyKiller;
-	sf::Texture TextureEnemyAircraft;
+  	sf::Texture TextureEnemyCommander;
+  	sf::Texture TextureEnemyKiller;
+  	sf::Texture TextureEnemyAircraft;
     sf::Texture TextureTowerMachinegun;
     sf::Texture TextureTowerFlameThrower;
     sf::Texture TextureTowerRocketlauncher;
@@ -73,13 +72,13 @@ private:
     sf::Texture TextureMouseCursor;
     sf::Texture RedMarker;
     sf::Texture TextureTowerPlatform;
-	sf::Texture TextureInfoPanel;
-	sf::Texture TextureInfoPanelMG;
-	sf::Texture TextureInfoPanelFT;
-	sf::Texture TextureInfoPanelRL;
-	sf::Sprite IPMG;
-	sf::Sprite IPFT;
-	sf::Sprite IPRL;
+  	sf::Texture TextureInfoPanel;
+  	sf::Texture TextureInfoPanelMG;
+  	sf::Texture TextureInfoPanelFT;
+  	sf::Texture TextureInfoPanelRL;
+  	sf::Sprite IPMG;
+  	sf::Sprite IPFT;
+  	sf::Sprite IPRL;
     sf::Sprite MouseCursor;
     sf::Sprite TowerMachine;
     sf::Sprite TowerFlame;
@@ -97,9 +96,10 @@ private:
     sf::RectangleShape Road7;
     sf::RectangleShape MenuButton;
     sf::RectangleShape ScreenWhenPaused;
-	sf::RectangleShape UpgradeButton;
+	  sf::RectangleShape UpgradeButton;
     sf::Font Font;
     sf::String GameTag;
+
     sf::Text SkipWaitingButton;
     sf::Text PauseButton;
     sf::Text PausedGameTitle;
@@ -111,33 +111,31 @@ private:
     sf::Text CurrentHP;
     sf::Text CurrentWave;
     sf::Text CurrentMoney;
-	sf::Text CurrentScore;
+	  sf::Text CurrentScore;
     sf::Text TimeToNextWave;
     sf::Text MachinegunTowerPrice;
     sf::Text FlamethrowerTowerPrice;
     sf::Text RocketlauncherTowerPrice;
-	sf::Text infoText1;
-	sf::Text infoText2;
-	sf::Text infoText3;
-	sf::Text infotextDMG;
-	sf::Text infotextFirerate;
-	sf::Text infotextRange;
-	sf::Text infotextHL;
-	sf::Text LevelUpgrade;
-	sf::Text TowerArsenal;
-	sf::Text TopScoreHL;
+  	sf::Text infoText1;
+  	sf::Text infoText2;
+  	sf::Text infoText3;
+  	sf::Text infotextDMG;
+  	sf::Text infotextFirerate;
+  	sf::Text infotextRange;
+  	sf::Text infotextHL;
+  	sf::Text LevelUpgrade;
+  	sf::Text TowerArsenal;
+  	sf::Text TopScoreHL;
 
+  	sf::SoundBuffer MachinegunSound;
+  	sf::SoundBuffer FlamerSound;
+  	sf::SoundBuffer RocketSound;
+  	sf::SoundBuffer ExplosionSound;
+  	sf::SoundBuffer UpgradeSound;
+  	sf::SoundBuffer Click;
+  	sf::Sound ClickSound;
 
-	sf::SoundBuffer MachinegunSound;
-	sf::SoundBuffer FlamerSound; 
-	sf::SoundBuffer RocketSound;
-	sf::SoundBuffer ExplosionSound; 
-	sf::SoundBuffer UpgradeSound;
-	sf::SoundBuffer Click;
-	sf::Sound ClickSound;
-	
 
 };
 
 #endif
-
