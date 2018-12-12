@@ -5,19 +5,20 @@
 GameTitle::GameTitle() : nWindow(sf::VideoMode(1920, 1080), "GameTitle", sf::Style::None), title(), titleTexture() {
     if(!titleTexture.loadFromFile("../src/photos/kuva.png")){
         std::cout << "Opening title.png failed!" << std::endl;
-    }
-    else{
+    } else {
         title.setTexture(titleTexture);
     }
 }
 
-void GameTitle::StartTitle(){
+// Starts the Gametitle view
+void GameTitle::StartTitle() {
     while(nWindow.isOpen()){
         manageEvents();
         render();
     }
 }
 
+// Manages users input
 void GameTitle::manageEvents(){
     sf::Event event;
     while(nWindow.pollEvent(event)){
@@ -27,13 +28,14 @@ void GameTitle::manageEvents(){
     }
 }
 
+// Renders the window
 void GameTitle::render(){
     nWindow.clear();
     nWindow.draw(title);
     nWindow.display();
 }
 
+// Destructor
 GameTitle::~GameTitle() {
 
 }
-
