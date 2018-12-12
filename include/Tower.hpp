@@ -7,7 +7,7 @@
 #include "Engine.hpp"
 #include "Types.hpp"
 
-class Engine; 
+class Engine;
 
 class Tower {
 public:
@@ -17,26 +17,26 @@ public:
     void Shoot(Enemy& enemy);
     void setTimePause(float Time) { TimePause = Time; }
     void ReTarget();
-        //Getters
+    //Getters
     int getRange();
     int getFirerate();
     int getPrice();
-	int getDMG();
-	int getTowerLevel() { return TowerLevel;}
-	void setTowerLevel();
+  	int getDMG();
+  	int getTowerLevel() { return TowerLevel;}
+
+  	void setTowerLevel();
     sf::Sprite getTower();
     Types::NPC getType() const;
-        //Values declared in public.
     sf::Sprite tower;
     sf::CircleShape circle;
-	sf::Sprite infopanel;
-	sf::Sound shootSound;
-	sf::Sound upgradeSound;
+  	sf::Sprite infopanel;
+  	sf::Sound shootSound;
+  	sf::Sound upgradeSound;
     bool textureInitialize = false;
-	bool UpgradeClick=false;
-	bool UpgradeLevel=true;
-	int TowerLevel=1;
-            
+  	bool UpgradeClick = false;
+  	bool UpgradeLevel = true;
+  	int TowerLevel = 1;
+
 
 private:
     sf::Clock clock;
@@ -53,7 +53,7 @@ private:
     float x;
     float y;
     float TimePause = 0;
-	
+
 };
 
 #endif
