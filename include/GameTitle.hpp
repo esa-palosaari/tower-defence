@@ -9,10 +9,10 @@ public:
     void StartTitle();
     void manageEvents();
     void render();
-  ~GameTitle();
+    ~GameTitle();
 private:
-	sf::RenderWindow nWindow;
-	sf::Sprite title;
-	sf::Texture titleTexture;
+  	sf::RenderWindow nWindow;
+  	sf::Sprite title;
+  	sf::Texture titleTexture;
 };
 #endif
