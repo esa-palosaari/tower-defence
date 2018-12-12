@@ -14,44 +14,40 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
     if (!Font.loadFromFile("../src/photos/army.ttf")) {
         std::cout << "Can't load font" << std::endl;
 	}
-	
+
 	// loading background picture
     if(!titleTexture.loadFromFile("../src/photos/menu.png")){
         std::cout << "Opening menu.png failed!" << std::endl;
     }
-    else{
+    else {
         title.setTexture(titleTexture);
     }
 
-	
-	// Creating menu text items    
-	MenuGameButton.setFont(Font); // -> just a title
+
+	// Creating menu text items
+	  MenuGameButton.setFont(Font); // -> just a title
     MenuGameButton.setString("GAME MENU");
     SetToText(MenuGameButton, 660.f, 380.f, Font, 128);
 
-    StartGameButton.setFont(Font); // -> exitStatus = 1
-    StartGameButton.setString("START GAME");
-    SetToText(StartGameButton,690.f, 530.f, Font, 64);
-    
-    LoadGameButton.setFont(Font); // -> exitStatus = 2
-    LoadGameButton.setString("LOAD GAME");
+    LoadGameButton.setFont(Font); // -> exitStatus = 1
+    LoadGameButton.setString("START GAME");
     SetToText(LoadGameButton, 690.f, 595.f, Font, 64);
-    
+
     ExitGameButton.setFont(Font); // -> exitStatus = 0
     ExitGameButton.setString("EXIT GAME");
     SetToText(ExitGameButton, 690.f, 660.f, Font, 64);
-	
-	TopScoreHL.setFont(Font);
-	TopScoreHL.setString("TOP 10 PLAYERS:");
-	SetToText(TopScoreHL,30.f,410.f,Font,64);
 
-	Click.loadFromFile("../src/sounds/click.ogg");
-	ClickSound.setBuffer(Click);
+  	TopScoreHL.setFont(Font);
+  	TopScoreHL.setString("TOP 10 PLAYERS:");
+  	SetToText(TopScoreHL,30.f,410.f,Font,64);
+
+  	Click.loadFromFile("../src/sounds/click.ogg");
+  	ClickSound.setBuffer(Click);
 
     MenuOn = true;
 }
 
-// Gets the 10 best players and stores them in a new vector? 
+// Gets the 10 best players and stores them in a new vector
 void GameMenu::showHighScores(){
 	if(!topScoresInit){
 			topScoresInit = true;
@@ -82,43 +78,45 @@ void GameMenu::SetToText(sf::Text& textinput, float PositionX, float PositionY, 
     textinput.setCharacterSize(Size);
 }
 
+// Reads top scores from .txt file into vector
 void GameMenu::StartScores(){
 	if(MenuOn){
-	showTopScoreClk.restart();
-	std::string line;
-	std::ifstream myfile("../src/maps/scores.txt");
-	if(myfile.is_open()){
-		int i = 1;
-		Sores temp;
-		while(getline(myfile, line, ';')){
-			//std::cout<<line<<'\n';
+  	showTopScoreClk.restart();
+  	std::string line;
+  	std::ifstream myfile("../src/maps/scores.txt");
+  	if(myfile.is_open()){
+  		int i = 1;
+  		topScores temp;
+  		while(getline(myfile, line, ';')){
+  			line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
+        // Get the player name or scores
+  			switch(i) {
+  				case 1:
+  					temp.name = line;
+  					break;
+  				case 2:
+  					temp.score = stoi(line);
+  					break;
+  			}
+  			i++;
+  			if(i > 2){
+  				i = 1;
+  				topScoresVec.push_back(temp);
+  				topScores temp;
+  			}
+  		}
 
-			line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());			
+  		myfile.close();
+  		std::sort(topScoresVec.begin(), topScoresVec.end());
 
-			switch(i){
-				case 1:
-					temp.name = line;
-					break;
-				case 2:
-					temp.score = stoi(line);
-					break;
-			}
-			i++;
-			if(i > 2){
-				i = 1;
-				topScoresVec.push_back(temp);
-				Sores temp;
-			}
-		}
-		myfile.close();
-		std::sort(topScoresVec.begin(), topScoresVec.end());
-	}
-	else{
-		std::cout<<"Unable to open file";
-	}
-    }
+  	}
+  	else {
+  		std::cout << "Unable to open file";
+  	}
+  }
 }
 
+// is this needed?
 bool GameMenu::showTopScore(){
 	if(MenuOn && showTopScoreClk.getElapsedTime().asSeconds() > 1){
 		return true;
@@ -126,10 +124,11 @@ bool GameMenu::showTopScore(){
 	return false;
 }
 
+// Starts the menu, plays music, calls other menu functions
 int GameMenu::StartMenu(){
-	int exit_ret; // exit status 
+	int exit_ret; // exit status
 	sf::Music music; // music object
-	music.setLoop(true); 
+	music.setLoop(true);
 	// loading music
 	if (!music.openFromFile("../src/sounds/radio.ogg")){
 		std::cout << "Opening radio.ogg failed!" << std::endl;
@@ -137,62 +136,49 @@ int GameMenu::StartMenu(){
 	}
 	music.play(); // play music
 
-
 	while(nWindow.isOpen()){
-        	exit_ret = manageEvents(); // start manage events
+    exit_ret = manageEvents(); // start manage events
 		StartScores();
 		showHighScores();
 		render(); // start rendering
-    }
+  }
+
 	return exit_ret;
+
 }
 
+
+// Manages users input and return exitStatus
 int GameMenu::manageEvents(){
 
     sf::Event event; // event object
-    while(nWindow.pollEvent(event))
-    {
+    while(nWindow.pollEvent(event)) {
         sf::Vector2i mouse(sf::Mouse::getPosition(nWindow).x, sf::Mouse::getPosition(nWindow).y);
-        if (event.type == sf::Event::MouseButtonPressed)
-        {
-			
-			ClickSound.play();	
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            {
-                if (StartGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
-                {
-          			exitStatus = 1; // -> start a new game
-					MenuOn=false;
-					nWindow.close();
+        if (event.type == sf::Event::MouseButtonPressed) {
+			       ClickSound.play();
+             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+               if (StartGameButton.getGlobalBounds().contains(mouse.x, mouse.y)) {
+                    exitStatus = 1; // -> start a new game
+    			          MenuOn = false;
+    			          nWindow.close();
                 }
-                
-                else if (LoadGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
-                {
-                   	exitStatus = 2; // -> load game
-					MenuOn=false;
-					nWindow.close();
-                }
-                
-                else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y))
-                {
+                else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y)) {
                 	exitStatus = 0; // -> exit game
-					MenuOn=false;
-					nWindow.close();
-                }
+        					MenuOn = false;
+        					nWindow.close();
+               }
             }
-        }
-     }
+      }
+    }
 	return exitStatus;
 }
 
-
+// Draws all the gamemenu objects
 void GameMenu::render(){
-	// draw everything    
 	nWindow.clear(sf::Color::Black);
 	nWindow.draw(title);
 	nWindow.draw(MenuGameButton);
 	nWindow.draw(StartGameButton);
-	nWindow.draw(LoadGameButton);
 	nWindow.draw(ExitGameButton);
 	for(auto& text : topScores){
 		nWindow.draw(TopScoreHL);
@@ -200,4 +186,3 @@ void GameMenu::render(){
 	}
 	nWindow.display();
 }
-
