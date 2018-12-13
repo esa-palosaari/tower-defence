@@ -211,6 +211,7 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	RocketSound.loadFromFile("../src/sounds/ML.ogg");
 	ExplosionSound.loadFromFile("../src/sounds/explosion.ogg");
 	UpgradeSound.loadFromFile("../src/sounds/upgrade.wav");
+	UpgradeSound2.setBuffer(UpgradeSound);	
 	Click.loadFromFile("../src/sounds/click.ogg");
 	ClickSound.setBuffer(Click);
 
@@ -259,6 +260,8 @@ bool UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_
 		UpgradeClick = true;
 		if(UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
 			tower.setTowerLevel();
+			UpgradeSound2.play();
+
 			UpgradeButton.setFillColor(sf::Color(102,204,0));
 			return true;
 		}

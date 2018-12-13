@@ -153,6 +153,6 @@ void Tower::setTowerLevel(){
 	}
 
 	TowerLevel++;
-	upgradeSound.play();
+	
   
 }

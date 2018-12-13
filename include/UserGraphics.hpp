@@ -134,6 +134,7 @@ private:
   	sf::SoundBuffer UpgradeSound;
   	sf::SoundBuffer Click;
   	sf::Sound ClickSound;
+	sf::Sound UpgradeSound2; // uu
 
 
 };
