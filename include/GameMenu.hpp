@@ -6,12 +6,12 @@
 #include <iostream>
 #include <fstream>
 
-class topScores {	// Class for top scores in game
+class TopScores {	// Class for top scores in game
 
 public:
 	std::string name;
 	int score;
-	bool operator <(const Sores& d){
+	bool operator <(const TopScores& d){
 		if(score > d.score){
 			return true;
 		}
@@ -29,7 +29,7 @@ public:
 		void showHighScores();
     void render();
 		void SetToText(sf::Text& text, float x, float y, sf::Font font, int size);
-		std::vector<Sores> topScoresVec; // Existing top scores
+		std::vector<TopScores> topScoresVec; // Existing top scores
 		std::vector<sf::Text> topScores; // Renewed vector
 private:
 		sf::RenderWindow nWindow;

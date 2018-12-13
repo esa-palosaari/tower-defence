@@ -25,13 +25,13 @@ GameMenu::GameMenu() : nWindow(sf::VideoMode(1920, 1080), "GameMenu", sf::Style:
 
 
 	// Creating menu text items
-	  MenuGameButton.setFont(Font); // -> just a title
+	MenuGameButton.setFont(Font); // -> just a title
     MenuGameButton.setString("GAME MENU");
     SetToText(MenuGameButton, 660.f, 380.f, Font, 128);
 
-    LoadGameButton.setFont(Font); // -> exitStatus = 1
-    LoadGameButton.setString("START GAME");
-    SetToText(LoadGameButton, 690.f, 595.f, Font, 64);
+    StartGameButton.setFont(Font); // -> exitStatus = 1
+    StartGameButton.setString("START GAME");
+    SetToText(StartGameButton, 690.f, 595.f, Font, 64);
 
     ExitGameButton.setFont(Font); // -> exitStatus = 0
     ExitGameButton.setString("EXIT GAME");
@@ -86,7 +86,7 @@ void GameMenu::StartScores(){
   	std::ifstream myfile("../src/maps/scores.txt");
   	if(myfile.is_open()){
   		int i = 1;
-  		topScores temp;
+  		TopScores temp;
   		while(getline(myfile, line, ';')){
   			line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
         // Get the player name or scores
@@ -102,7 +102,7 @@ void GameMenu::StartScores(){
   			if(i > 2){
   				i = 1;
   				topScoresVec.push_back(temp);
-  				topScores temp;
+  				TopScores temp;
   			}
   		}
 

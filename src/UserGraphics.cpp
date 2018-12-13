@@ -39,7 +39,7 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
     CurrentMoney.setFont(Font);
     SetToText(CurrentMoney, 1680.f, 40.f, Font, 24);
 
-	   CurrentScore.setFont(Font);
+	CurrentScore.setFont(Font);
     SetToText(CurrentScore, 1680.f, 65.f, Font, 24);
 
     TimeToNextWave.setFont(Font);
@@ -62,7 +62,7 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 
     ExitGameButton.setFont(Font);
     ExitGameButton.setString("EXIT GAME");
-    SetToText(ExitGameButton, 895.f, 640.f, Font, 32);
+    SetToText(ExitGameButton, 888.f, 575.f, Font, 32);
 
     MachinegunTowerPrice.setFont(Font);
     SetToText(MachinegunTowerPrice, 1740.f, 210.f, Font, 20);
@@ -208,9 +208,9 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 
 	MachinegunSound.loadFromFile("../src/sounds/MG.ogg");
 	FlamerSound.loadFromFile("../src/sounds/FT.wav");
-	RocketSound.loadFromFile("../src/sounds/RL.ogg");
+	RocketSound.loadFromFile("../src/sounds/ML.ogg");
 	ExplosionSound.loadFromFile("../src/sounds/explosion.ogg");
-	UpgradeSound.loadFromFile("../src/sounds/upgrade.ogg");
+	UpgradeSound.loadFromFile("../src/sounds/upgrade.wav");
 	Click.loadFromFile("../src/sounds/click.ogg");
 	ClickSound.setBuffer(Click);
 
@@ -440,7 +440,7 @@ void UserGraphics::managePause() {
                     std::cout << "Type save file name:" << std::endl;
                     std::string path;
                     std::cin >> path;
-                    engine->saveGame(path);
+                    //engine->saveGame(path);
                     std::cout << "Game saved" << std::endl;
                 }
             }
@@ -855,7 +855,7 @@ void UserGraphics::render() {
         engine->window.draw(PausedGameTitle);
         engine->window.draw(ContinueButton);
         engine->window.draw(ExitGameButton);
-        engine->window.draw(SaveGameButton);
+        //engine->window.draw(SaveGameButton);
     }
 
     engine->window.draw(MouseCursor);

@@ -34,7 +34,7 @@ public:
     int TimeToNextRound() {return TimeOutTime - TimeOutClock.getElapsedTime().asSeconds();}
 
     int getMoney() const {return money;};
-	  int getScore() const {return score;}
+	int getScore() const {return score;}
     void loseMoney(int cash) {money -= cash;}
     int getLevel() const {return Level;}
     int getHP() const {return HP;}
@@ -46,7 +46,6 @@ public:
     bool isEnd() {return GameEnd;}
 
     void EndGame();
-    void saveGame(std::string filetarget);
 
     void spawnTower(Types::NPC type, float x, float y);
     void spawnEnemies(Types::NPC type);
