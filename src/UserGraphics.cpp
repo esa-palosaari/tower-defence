@@ -276,7 +276,7 @@ bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 			if(engine->getMoney() < (tower.getTowerLevel() *200)){
 				UpgradeButton.setFillColor(sf::Color(160,160,160));
 				tower.UpgradeLevel = false;
-				CannotUpgrade=true;
+				CannotUpgrade = true;
 				return false;
 			} else {
 				UpgradeButton.setFillColor(sf::Color(102,204,0));
@@ -286,36 +286,36 @@ bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 			}
 			if(!CannotUpgrade){
 				UpgradeButton.setFillColor(sf::Color(102,204,0));
-				tower.UpgradeLevel=true;
-				CannotUpgrade=false;
+				tower.UpgradeLevel = true;
+				CannotUpgrade = false;
 				return true;
 			}
 		}
 		else if(insideBounds(tower.tower, position)){
-			tower.UpgradeClick=true;
-			UpgradeClick=true;
+			tower.UpgradeClick = true;
+			UpgradeClick = true;
 			if(engine->getMoney() < (tower.getTowerLevel() *200)){
 				UpgradeButton.setFillColor(sf::Color(160,160,160));
-				tower.UpgradeLevel=false;
-				CannotUpgrade=true;
+				tower.UpgradeLevel = false;
+				CannotUpgrade = true;
 				return	false;
 			}
 			else{
 				UpgradeButton.setFillColor(sf::Color(102,204,0));
-				tower.UpgradeLevel=true;
-				CannotUpgrade=false;
+				tower.UpgradeLevel = true;
+				CannotUpgrade = false;
 				return true;
 			}
 			if(!CannotUpgrade){
 				UpgradeButton.setFillColor(sf::Color(102,204,0));
-				tower.UpgradeLevel=true;
-				CannotUpgrade=false;
+				tower.UpgradeLevel = true;
+				CannotUpgrade = false;
 				return true;
 			}
 		}
 		else{
-			tower.UpgradeClick=false;
-			UpgradeClick=false;
+			tower.UpgradeClick = false;
+			UpgradeClick = false;
 			return false;
 		}
 	}
@@ -436,14 +436,9 @@ void UserGraphics::managePause() {
                     GameIsPaused = !GameIsPaused;
                 } else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y)) {
                     engine->window.close();
-                } else if (SaveGameButton.getGlobalBounds().contains(mouse.x, mouse.y) && engine->isTimeOut()){
-                    std::cout << "Type save file name:" << std::endl;
-                    std::string path;
-                    std::cin >> path;
-                    //engine->saveGame(path);
-                    std::cout << "Game saved" << std::endl;
-                }
+                } 
             }
+
         } else if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape) {
             engine->window.close();
         }
