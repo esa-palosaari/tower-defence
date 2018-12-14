@@ -14,7 +14,11 @@ It contains the following:
   
   * `include/` -- The header files
   
-  * `build/` -- Makefile, CMakeFiles, and the executable binary
+  * `build/` -- Makefile, CMakeFiles, and the executable binary for the game
+ 
+  * `build/test/` -- Executable binary for the tests
+
+  * `test/` -- Googletest and game test source files 
 
   * `CMakeLists.txt` -- Configuration for CMake.
   
