@@ -23,7 +23,8 @@ It contains the following:
 
 ## Requirements
 The game requires CMake and the SFML library to compile. You can get download 
-and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
+and installation instructions from [https://cmake.org](https://cmake.org) and 
+[https://www.sfml-dev.org/](https://www.sfml-dev.org/).
 
 ## Updating Makefile
 1. If there is something in `build/` (from another system for example) delete 
