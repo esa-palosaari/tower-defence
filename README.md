@@ -5,10 +5,7 @@ It contains the following:
 
   * `plan/` -- Here is the project plan.
 
-  * `doc/` -- here are the documentation sources related to the project.
-    You may use different tools for documentation (e.g. latex),
-    but we hope to get the final version of the document
-    **also as pdf file**.
+  * `doc/` -- here are the documentation sources related to the project
 
   * `src/` -- here are the C++ source files. 
   
