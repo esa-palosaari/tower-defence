@@ -9,13 +9,13 @@ It contains the following:
 
   * `src/` -- Here are the C++ source files. 
   
-  * `include/` -- The header files
+  * `include/` -- The header files.
   
-  * `build/` -- Makefile, CMakeFiles, and the executable binary for the game
+  * `build/` -- Makefile, CMakeFiles, and the executable binary for the game.
  
-  * `build/test/` -- Executable binary for the tests
+  * `build/test/` -- Executable binary for the tests.
 
-  * `test/` -- Googletest and game test source files 
+  * `test/` -- Googletest and game test source files.
 
   * `CMakeLists.txt` -- Configuration for CMake.
   
@@ -27,8 +27,8 @@ and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-
 
 ## Updating Makefile
 1. If there is something in `build/` (from another system for example) delete 
-   all files there (e.g. `cd build` and `rm * -rf`)
-2. run `cmake ..` in directory `build/`
+   all files there (e.g. `cd build` and `rm * -rf`).
+2. run `cmake ..` in directory `build/`.
 
 ## Compiling the the program
 Run `make` in the directory `build/`.
