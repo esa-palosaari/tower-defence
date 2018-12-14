@@ -22,7 +22,7 @@ It contains the following:
   * `README.md` -- This file.
 
 ## Requirements
-The game requires the SFML library to compile. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
+The game requires CMake and the SFML library to compile. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
 
 ## Updating Makefile
 1. If there is something in `build/` (from another system for example) delete all files there (e.g. `cd build` and `rm * -rf`)
@@ -32,7 +32,7 @@ The game requires the SFML library to compile. You can get download and installa
 Run `make` in the directory `build/`.
 
 ## Run the program
-The executable `TD3` is in the `build/` directory
+The executable `TD3` is in the `build/` directory.
 
 ## Run the tests
-The executable is in the `build/test/` directory
+The executable `runTests` is in the `build/test/` directory.
