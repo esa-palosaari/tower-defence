@@ -5,9 +5,9 @@ It contains the following:
 
   * `plan/` -- Here is the project plan.
 
-  * `doc/` -- here are the documentation sources related to the project
+  * `doc/` -- Here are the documentation sources related to the project.
 
-  * `src/` -- here are the C++ source files. 
+  * `src/` -- Here are the C++ source files. 
   
   * `include/` -- The header files
   
@@ -22,10 +22,12 @@ It contains the following:
   * `README.md` -- This file.
 
 ## Requirements
-The game requires CMake and the SFML library to compile. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
+The game requires CMake and the SFML library to compile. You can get download 
+and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
 
 ## Updating Makefile
-1. If there is something in `build/` (from another system for example) delete all files there (e.g. `cd build` and `rm * -rf`)
+1. If there is something in `build/` (from another system for example) delete 
+   all files there (e.g. `cd build` and `rm * -rf`)
 2. run `cmake ..` in directory `build/`
 
 ## Compiling the the program
