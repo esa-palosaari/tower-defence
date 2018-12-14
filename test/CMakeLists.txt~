@@ -1,0 +1,10 @@
+find_package(Threads REQUIRED)
+
+# add Googletest
+ADD_SUBDIRECTORY(gtest-1.7.0)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+
+# make test executable
+add_executable(runTests moneyTest.cpp)
+target_link_libraries(runTests gtest gtest_main)
+add_test(runTests runTests)

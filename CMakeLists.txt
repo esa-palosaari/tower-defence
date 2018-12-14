@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.0)
 
-project(towerGameTitle)
+project(towerGame3)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -10,11 +10,9 @@ include_directories(include)
 set(EXECUTABLE_NAME "TD3")
 
 # define source files
-add_executable(${EXECUTABLE_NAME} "${CMAKE_SOURCE_DIR}/src/GameTitle.cpp" "${CMAKE_SOURCE_DIR}/src/GameMenu.cpp"
-"${CMAKE_SOURCE_DIR}/src/main.cpp" "${CMAKE_SOURCE_DIR}/src/Engine.cpp" "${CMAKE_SOURCE_DIR}/src/Enemy.cpp" "${CMAKE_SOURCE_DIR}/src/Tower.cpp" "${CMAKE_SOURCE_DIR}/src/Projectile.cpp" "${CMAKE_SOURCE_DIR}/src/UserGraphics.cpp")
-# When running the whole thing:
-# file(GLOB SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
-# add_executable(${EXECUTABLE} ${SOURCES})
+ file(GLOB SRCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+
+ add_executable(${EXECUTABLE_NAME} ${SRCES})
 
 
 # add sfml
@@ -25,5 +23,6 @@ if(SFML_FOUND)
   target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 endif()
 
-
-
+# add tests
+enable_testing()
+add_subdirectory(test)
