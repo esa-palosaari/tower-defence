@@ -32,7 +32,7 @@ The game requires the SFML library to compile. You can get download and installa
 Run `make` in the directory `build/`.
 
 ## Run the program
-The executable is in the `build/` directory
+The executable `TD3` is in the `build/` directory
 
 ## Run the tests
 The executable is in the `build/test/` directory
