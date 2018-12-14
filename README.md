@@ -28,12 +28,14 @@ It contains the following:
 The game requires the SFML library to compile. You can get download and installation instructions from [https://www.sfml-dev.org/](https://www.sfml-dev.org/).
 
 ## Updating Makefile
-1. If you've written new .cpp files, edit file `CMakeLists.txt` and add the new .cpp files there as parameters to add_executable()
-2. If there is something in `build/` (from another system for example) delete all files there (e.g. `cd build` and `rm * -rf`)
-3. run `cmake ..` in directory `build/`
+1. If there is something in `build/` (from another system for example) delete all files there (e.g. `cd build` and `rm * -rf`)
+2. run `cmake ..` in directory `build/`
 
 ## Compiling the the program
 Run `make` in the directory `build/`.
 
 ## Run the program
 The executable is in the `build/` directory
+
+## Run the tests
+The executable is in the `build/test/` directory
