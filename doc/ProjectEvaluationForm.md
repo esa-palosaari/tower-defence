@@ -3,9 +3,9 @@
 **Name of project to be reviewed: towerdefense-3**
 
 **Names of reviewers:**
-Oskar Tainio 590138
-Katariina Tuovinen 561507
-Arsi Ikäheimonen 47130M
+Oskar Tainio 590138,
+Katariina Tuovinen 561507,
+Arsi Ikäheimonen 47130M,
 Esa Palosaari 618573
 
 Provide short comments (2-4 sentences) for each item below.
