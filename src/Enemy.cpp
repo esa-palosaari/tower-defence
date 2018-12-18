@@ -53,14 +53,48 @@ Enemy::Enemy(Types::NPC Type, int IDNUM, int muuttuja, float lengthtravelled, fl
 	HpBase = HpBaseModified;
 
 }
+// Getter functions
+Types::NPC Enemy::getType() const{
+    return type;
+}
 
+float Enemy::getLengthTravelled() const{
+    return LengthTravelled;
+}
+
+int Enemy::getIdNum() const{
+    return IdNum;
+}
+
+int Enemy::getHp(){
+    return Hp;
+}
+
+int Enemy::getBounty() const{
+    return Bounty;
+}
+
+bool Enemy::CheckDead(){
+    return Dead;
+}
+// Sets enemy dead
+void Enemy::setDead(){
+    Dead = true;
+}
+// Sets time to pause
+void Enemy::setTimePause(float Time){
+	PauseTime = Time;
+}
+
+// Initializes tectures
+void Enemy::InitializeTexture(){
+	TextureInitialize = true;
+}
 // Moves the enemy according to its placement and type
 void Enemy::Move(Types::NPC type, sf::Vector2f vector, sf::Time elapsedTime){
-
     if(Dead){
         return;
     }
-
 	if(type == Types::NPC::Aircraft){
 		if(vector.x >= 0){
       enemy.move(Speed * Forward * elapsedTime.asSeconds());
@@ -109,7 +143,6 @@ void Enemy::Move(Types::NPC type, sf::Vector2f vector, sf::Time elapsedTime){
     }
     base.setPosition(HealthBar.getPosition());
 }
-
 // Initializes enemy sprites
 void Enemy::InitializeSprite(float PointX, float PointY){
     enemy.setPosition(PointX, PointY);
@@ -130,50 +163,15 @@ void Enemy::InitializeSprite(float PointX, float PointY){
     base.setPosition(0.f, 890.f);
 	}
 }
-
-
-// Getter functions
-Types::NPC Enemy::getType() const{
-    return type;
-}
-
-float Enemy::getLengthTravelled() const{
-    return LengthTravelled;
-}
-
-int Enemy::getIdNum() const{
-    return IdNum;
-}
-
-int Enemy::getHp(){
-    return Hp;
-}
-
-int Enemy::getBounty() const{
-    return Bounty;
-}
-
-bool Enemy::CheckDead(){
-    return Dead;
-}
-
-// Sets enemy dead
-void Enemy::setDead(){
-    Dead = true;
-}
-
-
 // Damages enemy
 int Enemy::getHit(int DMG){
     Hp -= DMG;
     if(Hp < 0){
         Hp = 0;
     }
-
     if(type == Types::NPC::Slow || type == Types::NPC::Medium || type == Types::NPC::Fast || Types::NPC::Commander){
         HealthBar.setSize(sf::Vector2f(75 * Hp / HpBase, 3));
     }
-
     if(Hp <= 0){
         enemy.setColor(sf::Color::Black);
         base.setFillColor(sf::Color::Transparent);
@@ -186,13 +184,3 @@ int Enemy::getHit(int DMG){
     }
 }
 
-
-// Sets time to pause
-void Enemy::setTimePause(float Time){
-	PauseTime = Time;
-}
-
-// Initializes tectures
-void Enemy::InitializeTexture(){
-	TextureInitialize = true;
-}

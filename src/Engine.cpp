@@ -19,10 +19,146 @@ void Engine::StartEngine(){
     UserGraphics graph(this);
     graph.StartUserGraphics();
 }
-
 // Updates the engine every
-void Engine::Update(sf::Time elapsedTime){
 
+// Checks if all enemies are dead
+bool Engine::isAllDead(){
+    if(enemies.size() < 1){
+        return false;
+    }
+    for(int i = 0; i < enemies.size(); i++){
+        if(!enemies[i].CheckDead()){
+            return false;
+        }
+    }
+    return true;
+}
+// Ends the game and saves top scores to .txt
+void Engine::EndGame(){
+  if(!GameEnd){
+  	showTopScoreClk.restart();
+  	std::ofstream out;
+  	out.open("../src/maps/scores.txt",std::ios::app);
+  	time_t now = time(0);
+  	out << GameTag << ";" << score << ';';
+    GameEnd = true;
+  	out.close();
+
+  	std::string line;
+  	std::ifstream myfile("../src/maps/scores.txt");
+
+  	if(myfile.is_open()){
+  		int i = 1;
+  		Scores temp;
+  		while(getline(myfile, line, ';')){
+  			switch(i){
+  				case 1:
+  					temp.name=line;
+  					break;
+  				case 2:
+  					temp.score=stoi(line);
+  					break;
+  			}
+  			i++;
+  			if(i > 2){
+  				i = 1;
+  				HighScoresVec.push_back(temp);
+  				Scores temp;
+  			}
+  		}
+
+  		myfile.close();
+  		std::sort(HighScoresVec.begin(), HighScoresVec.end());
+  	}
+
+  	else {
+  		std::cout << "Unable to open file";
+  	}
+  }
+}
+// Check if level has been cleared,
+// Raises level and resets the time
+void Engine::CheckTimeOut(){
+    if(isAllDead() && !TimeOut){
+        TimeOut = true;
+        TimeOutClock.restart();
+    }
+    if(TimeOutClock.getElapsedTime().asSeconds() > TimeOutTime && TimeOut){
+        FileLoaded = false;
+        enemies.clear();
+        LevelUp();
+        TimeOut = false;
+        TimeOutTime = 10;
+    }
+}
+// Spawns new enemies
+void Engine::spawnEnemies(Types::NPC type){
+	float LevelModifier = pow(1.08, Level);
+  Enemy&& temp = Enemy(type, SpawnNumber, 0, 0, LevelModifier);
+	if(type == Types::NPC::Aircraft){
+		temp.InitializeSprite(0.f, 900.f);
+	}
+	else {
+		temp.InitializeSprite(0.f, 160.f);
+	}
+    enemies.push_back(temp);
+    SpawnNumber++;
+}
+void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
+	float LevelModifier = pow(1.08, Level);
+  Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance, LevelModifier);
+	if(type == Types::NPC::Aircraft){
+		temp.InitializeSprite(0.f, 900.f);
+	}
+	else{
+		temp.InitializeSprite(0.f, 160.f);
+	}
+    enemies.push_back(temp);
+    SpawnNumber++;
+}
+// Spawns new towers
+void Engine::spawnTower(Types::NPC type, float x, float y){
+    Tower&& temp = Tower(this, type, x, y);
+    temp.InitializeSprite();
+    towers.push_back(temp);
+}
+// Loads the map from .txt - file into array
+void Engine::loadMap(int id){
+
+	std::string mapPath = "../src/maps/Map"+std::to_string(id)+".txt";
+	std::ifstream mapFile(mapPath);
+	std::string value;
+	int level[510];
+	int y = 0;
+	while(std::getline(mapFile,value,',')){
+		level[y]=std::stoi(value);
+		y++;
+	}
+	if(!map.load("../src/photos/tilesheet3.png", sf::Vector2u(64,64), level, 30, 17)){
+		std::cout<<"MAP NOT LOADED!"<<std::endl;
+		return;
+	}
+}
+// Updates the player to a next level
+void Engine::LevelUp(){
+  SpawnNumber = 0;
+	SpawnedSlows = 0;
+	SpawnedMediums = 0;
+	SpawnedFasts = 0;
+	SpawnedCommanders = 0;
+	SpawnedKillers = 0;
+	SpawnedAircrafts = 0;
+	if(Level < 4){
+		MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2]+BaseLevels[Level][3];
+	}
+  else {
+		MaxEnemies = Level * 2;
+	}
+  Level++;
+	score=score+10;
+  enemies.reserve(MaxEnemies);
+}
+void Engine::Update(sf::Time elapsedTime){
     if(Level == 0 || FileLoaded){
         CheckTimeOut();
     }
@@ -56,7 +192,6 @@ void Engine::Update(sf::Time elapsedTime){
                 enemy.setDead();
             }
         }
-
         // If HP > 0, towers start shooting
         std::sort(enemies.rbegin(), enemies.rend());
         for(auto& enemy : enemies){
@@ -66,12 +201,10 @@ void Engine::Update(sf::Time elapsedTime){
                 }
             }
         }
-
         // Retarget the towers
         for(auto& tower : towers){
             tower.ReTarget();
         }
-
         // Shared pointer for tower's projectiles
         // Checks status and shoots if projectile exists
         // Otherwise erases the the iterator
@@ -93,7 +226,6 @@ void Engine::Update(sf::Time elapsedTime){
                 i = projectiles.erase(i);
             }
         }
-
         // Determine the game difficulty according to player's level
         // Spawns new enemies
         if(Level < 5){
@@ -158,160 +290,9 @@ void Engine::Update(sf::Time elapsedTime){
     			}
         }
       }
-
         if(enemies.size() == MaxEnemies && HP > 0){
             CheckTimeOut();
         }
     }
 }
-
-// Checks if all enemies are dead
-bool Engine::isAllDead(){
-    if(enemies.size() < 1){
-        return false;
-    }
-    for(int i = 0; i < enemies.size(); i++){
-        if(!enemies[i].CheckDead()){
-            return false;
-        }
-    }
-    return true;
-}
-
-
-// Ends the game and saves top scores to .txt
-void Engine::EndGame(){
-  if(!GameEnd){
-  	showTopScoreClk.restart();
-  	std::ofstream out;
-  	out.open("../src/maps/scores.txt",std::ios::app);
-  	time_t now = time(0);
-  	out << GameTag << ";" << score << ';';
-    GameEnd = true;
-  	out.close();
-
-  	std::string line;
-  	std::ifstream myfile("../src/maps/scores.txt");
-
-  	if(myfile.is_open()){
-  		int i = 1;
-  		Scores temp;
-  		while(getline(myfile, line, ';')){
-  			switch(i){
-  				case 1:
-  					temp.name=line;
-  					break;
-  				case 2:
-  					temp.score=stoi(line);
-  					break;
-  			}
-  			i++;
-  			if(i > 2){
-  				i = 1;
-  				topScoresVec.push_back(temp);
-  				Scores temp;
-  			}
-  		}
-
-  		myfile.close();
-  		std::sort(topScoresVec.begin(), topScoresVec.end());
-  	}
-
-  	else {
-  		std::cout << "Unable to open file";
-  	}
-  }
-}
-
-// Check if level has been cleared,
-// Raises level and resets the time
-void Engine::CheckTimeOut(){
-    if(isAllDead() && !TimeOut){
-        TimeOut = true;
-        TimeOutClock.restart();
-    }
-
-    if(TimeOutClock.getElapsedTime().asSeconds() > TimeOutTime && TimeOut){
-        FileLoaded = false;
-        enemies.clear();
-        LevelUp();
-        TimeOut = false;
-        TimeOutTime = 10;
-    }
-}
-
-
-// Spawns new enemies
-void Engine::spawnEnemies(Types::NPC type){
-	float LevelModifier = pow(1.08, Level);
-  Enemy&& temp = Enemy(type, SpawnNumber, 0, 0, LevelModifier);
-	if(type == Types::NPC::Aircraft){
-		temp.InitializeSprite(0.f, 900.f);
-	}
-	else {
-		temp.InitializeSprite(0.f, 160.f);
-	}
-    enemies.push_back(temp);
-    SpawnNumber++;
-}
-
-
-void Engine::spawnEnemies(Types::NPC type, float x, float y, int muuttuja, float distance){
-	float LevelModifier = pow(1.08, Level);
-  Enemy&& temp = Enemy(type, SpawnNumber, muuttuja, distance, LevelModifier);
-	if(type == Types::NPC::Aircraft){
-		temp.InitializeSprite(0.f, 900.f);
-	}
-	else{
-		temp.InitializeSprite(0.f, 160.f);
-	}
-    enemies.push_back(temp);
-    SpawnNumber++;
-}
-
-// Spawns new towers
-void Engine::spawnTower(Types::NPC type, float x, float y){
-    Tower&& temp = Tower(this, type, x, y);
-    temp.InitializeSprite();
-    towers.push_back(temp);
-}
-
-// Loads the map from .txt - file into array
-void Engine::loadMap(int id){
-
-	std::string mapPath = "../src/maps/Map"+std::to_string(id)+".txt";
-	std::ifstream mapFile(mapPath);
-	std::string value;
-	int level[510];
-	int y = 0;
-	while(std::getline(mapFile,value,',')){
-		level[y]=std::stoi(value);
-		y++;
-	}
-	if(!map.load("../src/photos/tilesheet3.png", sf::Vector2u(64,64), level, 30, 17))
-		std::cout<<"MAP NOT LOADED!"<<std::endl;
-		return;
-
-}
-
-// Updates the player to a next level
-void Engine::LevelUp(){
-  SpawnNumber = 0;
-	SpawnedSlows = 0;
-	SpawnedMediums = 0;
-	SpawnedFasts = 0;
-	SpawnedCommanders = 0;
-	SpawnedKillers = 0;
-	SpawnedAircrafts = 0;
-	if(Level < 4){
-		MaxEnemies = BaseLevels[Level][0] + BaseLevels[Level][1] + BaseLevels[Level][2]+BaseLevels[Level][3];
-	}
-  else {
-		MaxEnemies = Level * 2;
-	}
-  Level++;
-	score=score+10;
-  enemies.reserve(MaxEnemies);
-}
-
 Engine::~Engine(){}

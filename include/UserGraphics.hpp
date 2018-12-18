@@ -32,19 +32,19 @@ public:
   	bool canUpgrade(sf::Vector2i position, Tower& tower);
 
     void Update(sf::Time elapsedTime);
-	  void showHiscores();
+	  void showHighscores();
 
 private:
     Engine* engine;
     std::vector<sf::Sprite> towers;
-	  std::vector<sf::Text> topScores;
+	  std::vector<sf::Text> HighScores;
     bool FinishedName = false;
     bool copyTowerMachinegun = false;
     bool copyTowerFlamethrower = false;
     bool copyTowerRocketlauncher = false;
     bool ClickedTower = false;
     bool DroppedTower = false;
-    bool topScoresInit = false;
+    bool topScoresInitialize = false;
     bool InvalidPlacement = true;
     bool InvalidPlacementMenu = true;
     bool GameIsPaused = false;

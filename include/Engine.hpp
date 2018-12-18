@@ -74,7 +74,7 @@ public:
   sf::RenderWindow window;
   std::vector<Enemy> enemies;
   std::vector<Tower> towers;
-  std::vector<Scores> topScoresVec;
+  std::vector<Scores> HighScoresVec;
   std::vector<std::shared_ptr<Projectile>> projectiles;   // projectile is an abstract class
   ~Engine();
   

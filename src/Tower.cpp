@@ -2,7 +2,7 @@
 #include "Engine.hpp"
 #include <SFML/Audio.hpp>
 #include <math.h>
-#include <memory> //Jotta voidaan hallinnoida uusien tornien spawnaaminen ja mahdollinen tallentaminen save game-funktiossa.
+#include <memory> 
 
 Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine), type(type), x(x), y(y)
 {
@@ -30,48 +30,37 @@ Tower::Tower(Engine* engine, Types::NPC type, float x, float y) : engine(engine)
         break;
     }
 }
-
 //Initializes tower's sprite
 void Tower::InitializeSprite() {
-
     tower.setPosition(x,y);
     tower.setOrigin(32.f,32.f);
-
   	infopanel.setPosition(1690,550);
   	infopanel.setScale(0.5f,0.26f);
-
     circle.setPosition(x,y);
     circle.setOrigin(Range,Range);
     circle.setRadius(Range);
     circle.setFillColor(sf::Color(125, 125, 125, 255));
 }
-
 //Initializes texture for tower.
 void Tower::InitializeTexture() {
     textureInitialize = true;
 }
-
 // Getters
 int Tower::getRange(){
     return Range;
 }
-
 int Tower::getPrice(){
     return Price;
 }
-
 Types::NPC Tower::getType () const{
     return type;
 }
-
 int Tower::getFirerate(){
     return Firerate;
 }
-
 int Tower::getDMG(){
 	return DMG;
 }
-
 //Sprite is named 'tower'
 sf::Sprite Tower::getTower(){
     return tower;
@@ -82,11 +71,24 @@ sf::Sprite Tower::getTower(){
 void Tower::ReTarget(){
     TargetID = -1;
 }
-
-
-//
+// Alters tower's level, dmg, range and money
+void Tower::setTowerLevel(){
+	DMG = DMG * 2;
+	Range += 5;
+	switch(this->TowerLevel){
+		case(1):
+			engine->loseMoney(200);
+			break;
+		case(2):
+			engine->loseMoney(400);
+			break;
+		case(3):
+			engine->loseMoney(800);
+			break;
+	}
+	TowerLevel++;
+}
 void Tower::Shoot(Enemy& enemy) {
-
     //TargetID is -1, when there is no target, but changes when there is potential enemy in range.
     if (TargetID == -1 && inRange(enemy)){
         TargetID = enemy.getIdNum();
@@ -114,45 +116,19 @@ void Tower::Shoot(Enemy& enemy) {
         }
     }
 }
-
-
 // Checks if targeted enemy is in range. Called from tower's Shoot()-function.
 bool Tower::inRange(Enemy enemy){
     if (enemy.CheckDead()){
          return false;
     }
-
     float XLength = abs(enemy.enemy.getPosition().x - tower.getPosition().x);
     float YLength = abs(enemy.enemy.getPosition().y - tower.getPosition().y);
     return sqrt(pow(XLength, 2) + pow(YLength, 2)) < Range;
 }
-
 // Alters tower's sprite to face enemy's direction. Called from tower's Shoot() -function.
 void Tower::AimAngle(Enemy enemy) {
     sf::Vector2f SightAngle = -tower.getPosition() + enemy.enemy.getPosition();
     double Angle = 2 * 3.14159265 - atan2(SightAngle.x, SightAngle.y);
     Angle = Angle * 360 / (2*3.14159265);
     tower.setRotation(Angle + 180);
-}
-
-// Alters tower's level, dmg, range and money
-void Tower::setTowerLevel(){
-	DMG = DMG * 2;
-	Range += 5;
-
-	switch(this->TowerLevel){
-		case(1):
-			engine->loseMoney(200);
-			break;
-		case(2):
-			engine->loseMoney(400);
-			break;
-		case(3):
-			engine->loseMoney(800);
-			break;
-	}
-
-	TowerLevel++;
-	
-  
 }

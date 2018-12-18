@@ -11,6 +11,15 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
         std::cout << "Can't load font" << std::endl;
     }
 
+	MachinegunSound.loadFromFile("../src/sounds/MG.ogg");
+	FlamerSound.loadFromFile("../src/sounds/FT.wav");
+	RocketSound.loadFromFile("../src/sounds/ML.ogg");
+	ExplosionSound.loadFromFile("../src/sounds/explosion.ogg");
+	UpgradeSound.loadFromFile("../src/sounds/upgrade.wav");
+	UpgradeSound2.setBuffer(UpgradeSound);	
+	Click.loadFromFile("../src/sounds/click.ogg");
+	ClickSound.setBuffer(Click);
+
     SkipWaitingButton.setFont(Font);
     SkipWaitingButton.setString("SEND WAVE");
     SetToText(SkipWaitingButton, 1680.f, 125.f, Font, 24);
@@ -205,36 +214,21 @@ UserGraphics::UserGraphics(Engine* engine) : engine(engine){
 	LevelUpgrade.setPosition(1700.f,505.f);
 	LevelUpgrade.setCharacterSize(20);
 
-
-	MachinegunSound.loadFromFile("../src/sounds/MG.ogg");
-	FlamerSound.loadFromFile("../src/sounds/FT.wav");
-	RocketSound.loadFromFile("../src/sounds/ML.ogg");
-	ExplosionSound.loadFromFile("../src/sounds/explosion.ogg");
-	UpgradeSound.loadFromFile("../src/sounds/upgrade.wav");
-	UpgradeSound2.setBuffer(UpgradeSound);	
-	Click.loadFromFile("../src/sounds/click.ogg");
-	ClickSound.setBuffer(Click);
-
 }
 
 void UserGraphics::SetToText(sf::Text& textinput, float PositionX, float PositionY, sf::Font Font, int Size){
     textinput.setPosition(PositionX, PositionY);
     textinput.setCharacterSize(Size);
 }
-
-
 // Template functions to check whether object is inside bounds
-
 template <class t>
 bool UserGraphics::insideBounds(t sprite, sf::Vector2f position){
     return sprite.getGlobalBounds().contains(position);
 }
-
 template <class t>
 bool UserGraphics::insideBounds(t sprite, sf::Vector2i position){
     return sprite.getGlobalBounds().contains(position.x, position.y);
 }
-
 // Checks if road vectors are inside bounds
 bool UserGraphics::OverRoad(sf::Vector2f position){
     return (insideBounds(Road1, position) || insideBounds(Road2, position) ||
@@ -242,7 +236,6 @@ bool UserGraphics::OverRoad(sf::Vector2f position){
             insideBounds(Road5, position) || insideBounds(Road6, position) ||
             insideBounds(Road7, position) || insideBounds(MenuButton, position));
 }
-
 // Set upgrade button color
 void UserGraphics::setUpgradeButtonColor(float PositionX, float PositionY, std::vector<Tower>::value_type& tower){
 	if(tower.UpgradeClick){
@@ -253,25 +246,6 @@ void UserGraphics::setUpgradeButtonColor(float PositionX, float PositionY, std::
 		}
 	}
 }
-
-// Checks if upgrade button is pressed
-bool UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower){
-	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
-		UpgradeClick = true;
-		if(UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
-			tower.setTowerLevel();
-			UpgradeSound2.play();
-
-			UpgradeButton.setFillColor(sf::Color(102,204,0));
-			return true;
-		}
-	} else {
-		UpgradeClick = false;
-		return false;
-	}
-	return false;
-}
-
 // Checks if tower can be upgraded
 bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 	if(tower.getTowerLevel() != 4){
@@ -346,22 +320,37 @@ bool UserGraphics::canUpgrade(sf::Vector2i position, Tower& tower){
 	}
 	return false;
 }
+// Checks if upgrade button is pressed
+bool UserGraphics::upgradePressed(sf::Vector2i mouse, std::vector<Tower>::value_type& tower){
+	if(tower.UpgradeClick && UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
+		UpgradeClick = true;
+		if(UpgradeButton.getGlobalBounds().contains(mouse.x, mouse.y)){
+			tower.setTowerLevel();
+			UpgradeSound2.play();
 
-
+			UpgradeButton.setFillColor(sf::Color(102,204,0));
+			return true;
+		}
+	} else {
+		UpgradeClick = false;
+		return false;
+	}
+	return false;
+}
 // Shows game's high scores
-void UserGraphics::showHiscores(){
+void UserGraphics::showHighscores(){
 	if(engine->showTopScore()){
-		if(!topScoresInit){
-			topScoresInit = true;
+		if(!topScoresInitialize){
+			topScoresInitialize = true;
 			float y = 70.f;
 			int i = 1;
-			for(auto& score : engine->topScoresVec){
+			for(auto& score : engine->HighScoresVec){
 				sf::Text temp;
 				temp.setFont(Font);
 				temp.setCharacterSize(20);
 				temp.setPosition(20.f, y);
 				temp.setString(std::to_string(i) + ". " + score.name + " - Score: " + std::to_string(score.score));
-				topScores.push_back(temp);
+				HighScores.push_back(temp);
 				y += 50.f;
 				i++;
 				if(i == 11){
@@ -369,116 +358,16 @@ void UserGraphics::showHiscores(){
 				}
 			}
 		}
-		for(auto& text : topScores){
+		for(auto& text : HighScores){
 			text.setPosition(text.getPosition().x, text.getPosition().y);
 		}
 	}
 }
-
 // Spawns new towers
 void UserGraphics::spawnTower(Types::NPC type, int MoneyLost){
     engine->spawnTower(type, sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
     engine->loseMoney(MoneyLost);
 }
-
-// Ends the game, manages events
-void UserGraphics::manageEnd(){
-    sf::Event event;
-    while (engine->window.pollEvent(event)){
-        switch (event.type){
-            case(sf::Event::TextEntered):
-                if (event.text.unicode == '\b' && !FinishedName){
-                    if (GameTag.isEmpty()) {
-                        break;
-                    } else {
-                        GameTag.erase(GameTag.getSize() - 1, 1);
-                        InputToName.setString(GameTag);
-                    }
-                } else if (event.text.unicode == '\r') {
-                    if (GameTag.isEmpty()) {
-                        break;
-                    } else {
-                        FinishedName = true;
-                        engine->setGameTag(GameTag);
-                        InputToName.setString(GameTag + "\nPRESS ESC TO LEAVE");
-                        engine->EndGame();
-                    }
-                } else if (event.text.unicode < 128 && !FinishedName && GameTag.getSize() < 16) {
-                    GameTag.insert(GameTag.getSize(), event.text.unicode);
-                    InputToName.setString(GameTag);
-                }
-
-                break;
-
-            case(sf::Event::KeyPressed):
-                if (event.key.code == sf::Keyboard::Escape) {
-                    engine->window.close();
-                }
-        }
-    }
-}
-
-
-// Manages pause state
-void UserGraphics::managePause() {
-    sf::Event event;
-    while (engine->window.pollEvent(event)) {
-        sf::Vector2i mouse(sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
-        if (event.type == sf::Event::MouseButtonPressed){
-			      ClickSound.play();
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-                if (ContinueButton.getGlobalBounds().contains(mouse.x, mouse.y)){
-                    engine->increaseTimeOut(TimePassedInPause.getElapsedTime().asSeconds());
-                    for (auto& TWR : engine->towers){
-                        TWR.setTimePause(TimePassedInPause.getElapsedTime().asMilliseconds());
-                    }
-                    for (auto& ENMY : engine->enemies){
-                        ENMY.setTimePause(TimePassedInPause.getElapsedTime().asMilliseconds());
-                    }
-
-                    GameIsPaused = !GameIsPaused;
-                } else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y)) {
-                    engine->window.close();
-                } 
-            }
-
-        } else if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape) {
-            engine->window.close();
-        }
-    }
-}
-
-// Starts the UserGraphics
-void UserGraphics::StartUserGraphics(){
-    while (engine->window.isOpen()){
-        sf::Clock clock;
-        sf::Time TimeSLU = sf::Time::Zero;
-        while (engine->window.isOpen()){
-            if (engine->getHP() > 0 && !GameIsPaused)
-                manageEvents();
-
-            TimeSLU += clock.restart();
-
-            while (TimeSLU > FrameTime){
-                TimeSLU -= FrameTime;
-                if (engine->getHP() > 0 && !GameIsPaused) {
-                    manageEvents();
-                    engine->Update(FrameTime);
-                } else if (GameIsPaused) {
-                    managePause();
-                } else {
-                    engine->Update(FrameTime);
-                    manageEnd();
-              			if(engine->isEnd()){
-              				showHiscores();
-              			}
-                }
-            }
-            render();
-        }
-    }
-}
-
 // Draws moving towers
 void UserGraphics::DrawMovingTower(float posx, float posy, sf::Vector2f pos) {
     bool Drawable = true;
@@ -505,38 +394,59 @@ void UserGraphics::DrawMovingTower(float posx, float posy, sf::Vector2f pos) {
 
     DroppedTower = false;
 }
+// Starts the UserGraphics
+void UserGraphics::StartUserGraphics(){
+    while (engine->window.isOpen()){
+        sf::Clock clock;
+        sf::Time TimeSLU = sf::Time::Zero;
+        while (engine->window.isOpen()){
+            if (engine->getHP() > 0 && !GameIsPaused)
+                manageEvents();
 
+            TimeSLU += clock.restart();
+
+            while (TimeSLU > FrameTime){
+                TimeSLU -= FrameTime;
+                if (engine->getHP() > 0 && !GameIsPaused) {
+                    manageEvents();
+                    engine->Update(FrameTime);
+                } else if (GameIsPaused) {
+                    managePause();
+                } else {
+                    engine->Update(FrameTime);
+                    manageEnd();
+              			if(engine->isEnd()){
+              				showHighscores();
+              			}
+                }
+            }
+            render();
+        }
+    }
+}
 // Manages events such as mouse clicks during the game
 void UserGraphics::manageEvents() {
-
     sf::Event event;
     while (engine->window.pollEvent(event)) {
-
         sf::Vector2i mouse(sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
-
         float posx = event.mouseMove.x;
         float posy = event.mouseMove.y;
-
         sf::Vector2f pos(posx, posy);
-
         if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape) {
             engine->window.close();
             break;
         } else if (event.key.code == sf::Keyboard::P && engine->isTimeOut()) {
             engine->resetTimeOut();
         }
-
         if (event.type == sf::Event::MouseMoved) {
             if (insideBounds(TowerMachine, pos)) {
                 TowerMachine.setColor(sf::Color(0, 100, 175));
             } else {
                 TowerMachine.setColor(sf::Color(255, 255, 255));
             }
-
             for(auto& tower : engine->towers){
 			          setUpgradeButtonColor(posx, posy, tower);
 		         }
-
             if (copyTowerMachinegun) {
                 TowerMachine.setPosition(posx, posy);
                 CircleMachinegun.setPosition(posx, posy);
@@ -554,7 +464,6 @@ void UserGraphics::manageEvents() {
                 InvalidPlacement = false;
             }
         }
-
         if (event.type == sf::Event::MouseButtonReleased) {
             if ((copyTowerMachinegun || copyTowerFlamethrower || copyTowerRocketlauncher) && DroppedTower && !InvalidPlacement){
                 ClickedTower = true;
@@ -577,7 +486,6 @@ void UserGraphics::manageEvents() {
                 ClickedTower = false;
             }
         }
-
         if (!InvalidPlacement) {
             if (event.type == sf::Event::MouseButtonPressed) {
 				        ClickSound.play();
@@ -626,8 +534,6 @@ void UserGraphics::manageEvents() {
                 }
             }
         }
-
-
         if (InvalidPlacement) {
             if (event.type == sf::Event::MouseButtonPressed){
 				          ClickSound.play();
@@ -645,8 +551,70 @@ void UserGraphics::manageEvents() {
         }
     }
 }
+// Manages pause state
+void UserGraphics::managePause() {
+    sf::Event event;
+    while (engine->window.pollEvent(event)) {
+        sf::Vector2i mouse(sf::Mouse::getPosition(engine->window).x, sf::Mouse::getPosition(engine->window).y);
+        if (event.type == sf::Event::MouseButtonPressed){
+			      ClickSound.play();
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                if (ContinueButton.getGlobalBounds().contains(mouse.x, mouse.y)){
+                    engine->increaseTimeOut(TimePassedInPause.getElapsedTime().asSeconds());
+                    for (auto& TWR : engine->towers){
+                        TWR.setTimePause(TimePassedInPause.getElapsedTime().asMilliseconds());
+                    }
+                    for (auto& ENMY : engine->enemies){
+                        ENMY.setTimePause(TimePassedInPause.getElapsedTime().asMilliseconds());
+                    }
 
+                    GameIsPaused = !GameIsPaused;
+                } else if (ExitGameButton.getGlobalBounds().contains(mouse.x, mouse.y)) {
+                    engine->window.close();
+                } 
+            }
 
+        } else if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape) {
+            engine->window.close();
+        }
+    }
+}
+// Ends the game, manages events
+void UserGraphics::manageEnd(){
+    sf::Event event;
+    while (engine->window.pollEvent(event)){
+        switch (event.type){
+            case(sf::Event::TextEntered):
+                if (event.text.unicode == '\b' && !FinishedName){
+                    if (GameTag.isEmpty()) {
+                        break;
+                    } else {
+                        GameTag.erase(GameTag.getSize() - 1, 1);
+                        InputToName.setString(GameTag);
+                    }
+                } else if (event.text.unicode == '\r') {
+                    if (GameTag.isEmpty()) {
+                        break;
+                    } else {
+                        FinishedName = true;
+                        engine->setGameTag(GameTag);
+                        InputToName.setString(GameTag + "\nPRESS ESC TO LEAVE");
+                        engine->EndGame();
+                    }
+                } else if (event.text.unicode < 128 && !FinishedName && GameTag.getSize() < 16) {
+                    GameTag.insert(GameTag.getSize(), event.text.unicode);
+                    InputToName.setString(GameTag);
+                }
+
+                break;
+
+            case(sf::Event::KeyPressed):
+                if (event.key.code == sf::Keyboard::Escape) {
+                    engine->window.close();
+                }
+        }
+    }
+}
 // Renders the game window
 void UserGraphics::render() {
 
@@ -679,7 +647,6 @@ void UserGraphics::render() {
             engine->window.draw(enemy.HealthBar);
         }
     }
-
     // Sets textures for towers
     for (auto& TWR : engine->towers) {
         if (!TWR.textureInitialize) {
@@ -695,7 +662,6 @@ void UserGraphics::render() {
 				        TWR.shootSound.setBuffer(RocketSound); // replace!!!
             }
         }
-
        // Infopanel for tower textures
 	     if(TWR.UpgradeClick || UpgradeClick){
         		TWR.infopanel.setTexture(TextureInfoPanel);
@@ -769,41 +735,34 @@ void UserGraphics::render() {
         }
 
     }
-
     CurrentHP.setString("HP: " + std::to_string(engine->getHP()));
     CurrentWave.setString("Wave: " + std::to_string(engine->getLevel()));
     CurrentMoney.setString("Money: " + std::to_string(engine->getMoney()));
-	  CurrentScore.setString("Score: "+std::to_string(engine->getScore()));
-
+	CurrentScore.setString("Score: "+std::to_string(engine->getScore()));
     engine->window.draw(CurrentHP);
     engine->window.draw(CurrentWave);
     engine->window.draw(CurrentMoney);
 	  engine->window.draw(CurrentScore);
     engine->window.draw(PauseButton);
 	  engine->window.draw(TowerArsenal);
-
     if (engine->isTimeOut()) {
         engine->window.draw(SkipWaitingButton);
     }
-
     if (engine->getMoney() < 500) {
         TowerMachine.setColor(sf::Color(128, 128, 128));
     } else {
         TowerMachine.setColor(sf::Color(255, 255, 255));
     }
-
     if (engine->getMoney() < 500) {
         TowerFlame.setColor(sf::Color(128, 128, 128));
     } else {
         TowerFlame.setColor(sf::Color(255, 255, 255));
     }
-
     if (engine->getMoney() < 500) {
         TowerRocket.setColor(sf::Color(128, 128, 128));
     } else {
         TowerRocket.setColor(sf::Color(255, 255, 255));
     }
-
     if (copyTowerMachinegun && !DroppedTower) {
         engine->window.draw(CircleMachinegun);
     } else if (copyTowerFlamethrower && !DroppedTower) {
@@ -811,39 +770,31 @@ void UserGraphics::render() {
     } else if (copyTowerRocketlauncher && !DroppedTower) {
         engine->window.draw(CircleMissile);
     }
-
   	engine->window.draw(IPMG);
   	engine->window.draw(IPFT);
   	engine->window.draw(IPRL);
-
     engine->window.draw(TowerMachine);
     engine->window.draw(TowerFlame);
     engine->window.draw(TowerRocket);
-
     engine->window.draw(MachinegunTowerPrice);
     engine->window.draw(FlamethrowerTowerPrice);
     engine->window.draw(RocketlauncherTowerPrice);
-
     if (InvalidPlacement && !InvalidPlacementMenu) {
         engine->window.draw(CrossMarker);
         InvalidPlacementMenu = false;
     }
-
     if (engine->isTimeOut() && !GameIsPaused) {
         TimeToNextWave.setString("Next wave in: " + std::to_string(engine->TimeToNextRound()));
     } else {
         TimeToNextWave.setString("INCOMING!");
     }
-
     engine->window.draw(TimeToNextWave);
-
     if (engine->getHP() <= 0) {
         GameOverText.setString("GAME OVER!\nWAVES SURVIVED: " + std::to_string(engine->getLevel()) + "\nTOTAL SCORE: " + std::to_string(engine->getScore()) + "\nPLAYER NAME: ");
         engine->window.draw(InputToName);
         engine->window.draw(GameOverText);
     }
-
-  	for(auto& text : topScores){
+  	for(auto& text : HighScores){
   		engine->window.draw(TopScoreHL);
   		engine->window.draw(text);
 	  }
@@ -855,8 +806,6 @@ void UserGraphics::render() {
         engine->window.draw(ExitGameButton);
         //engine->window.draw(SaveGameButton);
     }
-
     engine->window.draw(MouseCursor);
     engine->window.display();
-    
 }

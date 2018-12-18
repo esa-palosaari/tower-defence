@@ -6,27 +6,22 @@ Projectile::Projectile(int dmg, float x, float y, Types::NPC Type, int targetId)
 	Explosion.loadFromFile("../src/sounds/explosion.ogg");
 	ExplosionSound.setBuffer(Explosion);
 }
-
 // Initializes textures.
 void Projectile::InitializeTexture(){
     textureInitialize = true;
 }
-
 // Returns Projectile's type (Machinegun, Flame or Rocket
 Types::NPC Projectile::getProjectileType() const{
     return type;
 }
-
 // Return projectile's sprite, which is initialized at UserGraphics constructor.
 sf::Sprite Projectile::getProjectileSprite() const{
     return ProjectileSprite;
 }
-
 // Check's if projectile exists or not.
 bool Projectile::isBlownUp(){
     return BlownUp;
 }
-
 // Move- and hitTarget- methods for each projectile
 void Projectile::Move(sf::Time elapsedTime, std::vector<Enemy>& enemies){
     for(auto& enemy : enemies){
@@ -42,59 +37,11 @@ void Projectile::Move(sf::Time elapsedTime, std::vector<Enemy>& enemies){
         }
     }
 }
-
-
-// Machinegun projectile
-MachinegunProjectile::MachinegunProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
-    ProjectileSprite.setPosition(x,y);
-    ProjectileSprite.setOrigin(32.f, 32.f);
-}
-
-int MachinegunProjectile::HitTarget(std::vector<Enemy>& enemies){
-    int number = 0;
-    for(auto& enemy : enemies){
-				//Checks if enemy is close enough to projectile and projectile still exists.
-        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
-            if(!enemy.CheckDead()){
-								// if enemy is not dead, it gets hit. It drops bounty if it dies, otherwise returns zero.
-                number = enemy.getHit(DMG);
-            }
-            BlownUp = true;              //Projectile itself is "blown up" and doesn't exist anymore.
-            break;
-        }
-    }
-    return number;
-}
-
-
-// Flame projectile
-FlameProjectile::FlameProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
-    ProjectileSprite.setPosition(x,y);
-    ProjectileSprite.setOrigin(32.f, 32.f);
-}
-
-int FlameProjectile::HitTarget(std::vector<Enemy>& enemies){
-    int number = 0;
-    for(auto& enemy : enemies){
-        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
-            if(!enemy.CheckDead()){
-								//Same as machinegun's projectile. Additional features will be added here once the basic mechanism works.
-                number = enemy.getHit(DMG);
-            }
-            BlownUp = true;
-            break;
-        }
-    }
-    return number;
-}
-
-
 // Rocket projectile
 RocketProjectile::RocketProjectile(int dmg, float x, float y, Types::NPC, int targetId) : Projectile(dmg, x, y, type, targetId){
     ProjectileSprite.setPosition(x,y);
     ProjectileSprite.setOrigin(32.f, 32.f);
 }
-
 int RocketProjectile::HitTarget(std::vector<Enemy>& enemies){
     int number = 0;
     for(auto& enemy : enemies){
@@ -123,7 +70,45 @@ int RocketProjectile::HitTarget(std::vector<Enemy>& enemies){
 						ExplosionSound.play(); 	//Plays explosion sound.
             break;
         }
+    }	
+    return number;
+}
+// Flame projectile
+FlameProjectile::FlameProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
+    ProjectileSprite.setPosition(x,y);
+    ProjectileSprite.setOrigin(32.f, 32.f);
+}
+int FlameProjectile::HitTarget(std::vector<Enemy>& enemies){
+    int number = 0;
+    for(auto& enemy : enemies){
+        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+            if(!enemy.CheckDead()){
+								//Same as machinegun's projectile. Additional features will be added here once the basic mechanism works.
+                number = enemy.getHit(DMG);
+            }
+            BlownUp = true;
+            break;
+        }
     }
-		
+    return number;
+}
+// Machinegun projectile
+MachinegunProjectile::MachinegunProjectile(int dmg, float x, float y, Types::NPC type, int targetId) : Projectile(dmg, x, y, type, targetId){
+    ProjectileSprite.setPosition(x,y);
+    ProjectileSprite.setOrigin(32.f, 32.f);
+}
+int MachinegunProjectile::HitTarget(std::vector<Enemy>& enemies){
+    int number = 0;
+    for(auto& enemy : enemies){
+				//Checks if enemy is close enough to projectile and projectile still exists.
+        if(enemy.getIdNum() == TargetID && abs(ProjectileSprite.getPosition().x - enemy.enemy.getPosition().x) <= 10 && abs(ProjectileSprite.getPosition().y-enemy.enemy.getPosition().y) <= 10 && BlownUp == false){
+            if(!enemy.CheckDead()){
+								// if enemy is not dead, it gets hit. It drops bounty if it dies, otherwise returns zero.
+                number = enemy.getHit(DMG);
+            }
+            BlownUp = true;              //Projectile itself is "blown up" and doesn't exist anymore.
+            break;
+        }
+    }
     return number;
 }
